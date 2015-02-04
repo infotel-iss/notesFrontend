@@ -1,0 +1,25 @@
+body{
+    background-color: lightgreen;
+}
+#main{
+    margin-top: 5px;
+}
+
+footer{
+   font-size: smaller;
+   text-align: center;
+}
+header{
+   height: 150px;
+   background-image: url("../img/logo.png");
+   background-repeat: no-repeat;
+   background-position: center 0px;
+}
+
+.error {
+	color: red;
+}
+
+input.ng-dirty.ng-invalid {
+	border-color: red;
+}
