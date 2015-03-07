@@ -1,9 +1,9 @@
 <div class="panel panel-primary">
 	<div class="panel-heading" ng-hide="element.id">
-		Ajout d'un nouveau departement
+		Ajout d'un nouveau semestre
 	</div>
 	<div class="panel-heading" ng-show="element.id">
-		Modification du departement
+		Modification du semestre
 	</div>
 	<div class="panel-body">
 		<form name="form" method="post" role="form" class="form-horizontal" novalidate>
@@ -23,13 +23,13 @@
 			</div>
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-default" ng-show="element.id" ng-click="form.$valid && valider()">
+					<button type="submit" class="btn btn-primary" ng-show="element.id" ng-click="form.$valid && valider()">
 						Modifier
 					</button>
-					<button type="submit" class="btn btn-default" ng-hide="element.id" ng-click="form.$valid && valider()">
+					<button type="submit" class="btn btn-primary" ng-hide="element.id" ng-click="form.$valid && valider()">
 						Enregistrer
 					</button>
-					<button type="button" class="btn btn-default" ng-click="cancel()">
+					<button type="button" class="btn btn-danger pull-right" ng-click="cancel()">
 						Annuler
 					</button>
 				</div>
