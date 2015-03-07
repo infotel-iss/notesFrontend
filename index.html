@@ -1,154 +1,165 @@
 <!DOCTYPE html>
 <html ng-app="notesApp">
-	<head>
-		<title>Gestion des notes</title>
-		<link href="css/bootstrap.css" rel="stylesheet">
-		<link href="css/notes.css" rel="stylesheet">
-	</head>
-	<body>
-		<div class="row-fluid" id="main">
-			<div class="col-xs-10 col-md-offset-1">
-				<header></header>
-				<div id="container">					
-					<nav role="navigation">
-						<ul class="nav nav-pills">
-							<li class="dropdown" dropdown on-toggle="toggled(open)">
-								<a class="dropdown-toggle" dropdown-toggle>Donn&eacute;es<b class="caret"></b></a>
-								<ul class="dropdown-menu" role="menu">
-									<li>
-										<a ui-sref="cycles">Cycle</a>
-									</li>
-									<li>
-										<a ui-sref="niveaux">Niveau</a>
-									</li>
-									<li>
-										<a ui-sref="departements">D&eacute;partement</a>
-									</li>
-									<li>
-										<a ui-sref="options">Option</a>
-									</li>
-									<li>
-										<a ui-sref="semestres">Semestre</a>
-									</li>
-									<li>
-										<a ui-sref="annees">Ann&eacute;e Acad&eacute;mique</a>
-									</li>
-								</ul>
-							</li>
-							<li class="dropdown" dropdown on-toggle="toggled(open)">
-								<a class="dropdown-toggle" dropdown-toggle>Enseignement<b class="caret"></b></a>
-								<ul class="dropdown-menu">
-									<li>
-										<a ui-sref="cours">Cours</a>
-									</li>
-									<li>
-										<a ui-sref="type_cours">Type Cours</a>
-									</li>
-									<li>
-										<a ui-sref="unites">Unit&eacute; Enseignement</a>
-									</li>
-									<li>
-										<a ui-sref="programmes">Programme Enseignement</a>
-									</li>
-									<li>
-										<a ui-sref="enseignants">Enseignant</a>
-									</li>
-								</ul>
-							</li>
-							<li class="dropdown" dropdown on-toggle="toggled(open)">
-								<a class="dropdown-toggle" dropdown-toggle>Etudiant<b class="caret"></b></a>
-								<ul class="dropdown-menu">
-									<li>
-										<a ui-sref="eimportation">Importation</a>
-									</li>
-									<li>
-										<a ui-sref="inscription">Inscription</a>
-									</li>
-									<li>
-										<a ui-sref="iliste">Liste</a>
-									</li>
-								</ul>
-							</li>
-							<li class="dropdown" dropdown on-toggle="toggled(open)">
-								<a class="dropdown-toggle" dropdown-toggle>Notes<b class="caret"></b></a>
-								<ul class="dropdown-menu">
-									<li>
-										<a ui-sref="evaluations">Evaluation</a>
-									</li>
-									<li>
-										<a ui-sref="nimportation">Importation</a>
-									</li>
-									<li>
-										<a ui-sref="nexportation">Exportation</a>
-									</li>
-								</ul>
-							</li>
-							<li class="dropdown" dropdown on-toggle="toggled(open)">
-								<a class="dropdown-toggle" dropdown-toggle>Rapports<b class="caret"></b></a>
-								<ul class="dropdown-menu">
-									<li>
-										<a ui-sref="pv">Proc&eacute;s Verbal</a>
-									</li>
-									<li>
-										<a ui-sref="synthese">Synth&eacute;se</a>
-									</li>
-									<li>
-										<a ui-sref="releves">Relev&eacute;s de Notes</a>
-									</li>
-								</ul>
-							</li>
-							<li>
-								<a ui-sref="statistiques">Statistiques</a>
-							</li>
-							<li>
-								<a ui-sref="passage">Passage Niveau</a>
-							</li>
-						</ul>
-					</nav>
-					<div id="content">
-						<div ui-view></div>						
-					</div>
-				</div>
-				<footer>
-					&copy; Tous droits reserv&eacute;s
-				</footer>
-			</div>
-		</div>
-		<script src="lib/angular.js"></script>
-		<script src="lib/angular-route.js"></script>
-		<script src="lib/angular-resource.js"></script>
-		<script src="lib/angular-ui-router.js"></script>
-		<script src="lib/angular-resource.js"></script>
-		<script src="lib/ui-bootstrap.js"></script>
-		<script src="js/app.js"></script>
-		<script src="js/filters.js"></script>
-		<script src="js/controllers.js"></script>
-		<script src="js/directives.js"></script>
-		<script src="js/services.js"></script>
-		<script src="modules/departement/departementModule.js"></script>
-		<script src="modules/departement/js/controllers.js"></script>
-		<script src="modules/departement/js/services.js"></script>
-		<script src="modules/cours/coursModule.js"></script>
-		<script src="modules/cours/js/controllers.js"></script>
-		<script src="modules/cours/js/services.js"></script>
-		<script src="modules/cycle/cycleModule.js"></script>
-		<script src="modules/cycle/js/controllers.js"></script>
-		<script src="modules/cycle/js/services.js"></script>
-		<script src="modules/enseignant/enseignantModule.js"></script>
-		<script src="modules/enseignant/js/controllers.js"></script>
-		<script src="modules/enseignant/js/services.js"></script>
-		<script src="modules/evaluation/evaluationModule.js"></script>
-		<script src="modules/evaluation/js/controllers.js"></script>
-		<script src="modules/evaluation/js/services.js"></script>
-		<script src="modules/niveau/niveauModule.js"></script>
-		<script src="modules/niveau/js/controllers.js"></script>
-		<script src="modules/niveau/js/services.js"></script>
-		<script src="modules/option/optionModule.js"></script>
-		<script src="modules/option/js/controllers.js"></script>
-		<script src="modules/option/js/services.js"></script>
-		<script src="modules/semestre/semestreModule.js"></script>
-		<script src="modules/semestre/js/controllers.js"></script>
-		<script src="modules/semestre/js/services.js"></script>
-	</body>
-	
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8" />
+        <title>Gestion des notes</title>
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/notes.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="row-fluid" id="main">
+            <div class="col-xs-10 col-md-offset-1">
+                <header></header>
+                <div id="container">					
+                    <nav role="navigation" class="navbar" >
+                        <ul class="nav nav-pills">
+                            <li class="dropdown" dropdown on-toggle="toggled(open)">
+                                <a class="dropdown-toggle" dropdown-toggle>Donn&eacute;es<b class="caret"></b></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a ui-sref="cycles">Cycle</a>
+                                    </li>
+                                    <li>
+                                        <a ui-sref="niveaux">Niveau</a>
+                                    </li>
+                                    <li>
+                                        <a ui-sref="departements">D&eacute;partement</a>
+                                    </li>
+                                    <li>
+                                        <a ui-sref="options">Option</a>
+                                    </li>
+                                    <li>
+                                        <a ui-sref="semestres">Semestre</a>
+                                    </li>
+                                    <li>
+                                        <a ui-sref="annees">Ann&eacute;e Acad&eacute;mique</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown" dropdown on-toggle="toggled(open)">
+                                <a class="dropdown-toggle" dropdown-toggle>Enseignements<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a ui-sref="cours">Cours</a>
+                                    </li>
+                                    <li>
+                                        <a ui-sref="typecours">Type Cours</a>
+                                    </li>
+                                    <li>
+                                        <a ui-sref="unites">Unit&eacute; Enseignement</a>
+                                    </li>
+                                    <li>
+                                        <a ui-sref="programmes">Programme Enseignement</a>
+                                    </li>
+                                    <li>
+                                        <a ui-sref="enseignants">Enseignant</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown" dropdown on-toggle="toggled(open)">
+                                <a class="dropdown-toggle" dropdown-toggle>Etudiant<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a ui-sref="eimportation">Importation</a>
+                                    </li>
+                                    <li>
+                                        <a ui-sref="inscription">Inscription</a>
+                                    </li>
+                                    <li>
+                                        <a ui-sref="iliste">Liste</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown" dropdown on-toggle="toggled(open)">
+                                <a class="dropdown-toggle" dropdown-toggle>Notes<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a ui-sref="evaluations">Evaluation</a>
+                                    </li>
+                                    <li>
+                                        <a ui-sref="nimportation">Importation</a>
+                                    </li>
+                                    <li>
+                                        <a ui-sref="nexportation">Exportation</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown" dropdown on-toggle="toggled(open)">
+                                <a class="dropdown-toggle" dropdown-toggle>Rapports<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a ui-sref="pv">Proc&eacute;s Verbal</a>
+                                    </li>
+                                    <li>
+                                        <a ui-sref="synthese">Synth&eacute;se</a>
+                                    </li>
+                                    <li>
+                                        <a ui-sref="releves">Relev&eacute;s de Notes</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a ui-sref="statistiques">Statistiques</a>
+                            </li>
+                            <li>
+                                <a ui-sref="passage">Passage Niveau</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div id="content">
+                        <div ui-view></div>						
+                    </div>
+                </div>
+                <footer>
+                    &copy; Tous droits reserv&eacute;s
+                </footer>
+            </div>
+        </div>
+        <script src="lib/angular.js"></script>
+        <script src="lib/angular-route.js"></script>
+        <script src="lib/angular-resource.js"></script>
+        <script src="lib/angular-ui-router.js"></script>
+        <script src="lib/angular-resource.js"></script>
+        <script src="lib/ui-bootstrap.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/filters.js"></script>
+        <script src="js/controllers.js"></script>
+        <script src="js/directives.js"></script>
+        <script src="js/services.js"></script>
+        
+        <script src="modules/annee/anneeModule.js"></script>
+        <script src="modules/annee/js/controllers.js"></script>
+        <script src="modules/annee/js/services.js"></script>
+        
+        <script src="modules/typecours/typecoursModule.js"></script>
+        <script src="modules/typecours/js/controllers.js"></script>
+        <script src="modules/typecours/js/services.js"></script>
+        
+        <script src="modules/departement/departementModule.js"></script>
+        <script src="modules/departement/js/controllers.js"></script>
+        <script src="modules/departement/js/services.js"></script>
+        <script src="modules/cours/coursModule.js"></script>
+        <script src="modules/cours/js/controllers.js"></script>
+        <script src="modules/cours/js/services.js"></script>
+        <script src="modules/cycle/cycleModule.js"></script>
+        <script src="modules/cycle/js/controllers.js"></script>
+        <script src="modules/cycle/js/services.js"></script>
+        <script src="modules/enseignant/enseignantModule.js"></script>
+        <script src="modules/enseignant/js/controllers.js"></script>
+        <script src="modules/enseignant/js/services.js"></script>
+        <script src="modules/evaluation/evaluationModule.js"></script>
+        <script src="modules/evaluation/js/controllers.js"></script>
+        <script src="modules/evaluation/js/services.js"></script>
+        <script src="modules/niveau/niveauModule.js"></script>
+        <script src="modules/niveau/js/controllers.js"></script>
+        <script src="modules/niveau/js/services.js"></script>
+        <script src="modules/option/optionModule.js"></script>
+        <script src="modules/option/js/controllers.js"></script>
+        <script src="modules/option/js/services.js"></script>
+        <script src="modules/semestre/semestreModule.js"></script>
+        <script src="modules/semestre/js/controllers.js"></script>
+        <script src="modules/semestre/js/services.js"></script>
+    </body>
+
 </html>

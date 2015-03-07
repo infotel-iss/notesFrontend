@@ -1,24 +1,26 @@
 <div>
-	<h2>LA LISTE DES DEPARTEMENTS</h2>
-	<table class="table table-bordered table-hover">
-		<thead>
-			<tr>
-				<th>Numero</th>
-				<th>Code</th>
-				<th>Intitule</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="depart in departements">
-				<td>{{$index + 1}}</td>
-				<td>{{depart.code}}</td>
-				<td>{{depart.description}}</td>
-				<td><a ng-click="afficherFenetre(depart)">Modifier</a> | <a ng-click="supprimerDepartement(depart)">Supprimer</a></td>
-			</tr>
-		</tbody>
-	</table>
-	<form>
-		 <button class="btn btn-default" ng-click="afficherFenetre(undefined)">Ajouter D&eacute;partement</button>
-	</form>
+    <h3 class ="titre">LA LISTE DES OPTIONS</h3><br/>
+    <table class="table table-bordered table-hover table-condensed table-striped">
+        <thead>
+            <tr class="success">
+                <th>Numero</th>
+                <th>Code</th>
+                <th>Description</th>
+                <th>Departement</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="opt in optionss" class="inverse">
+                <td>{{$index + 1}}</td>
+                <td>{{opt.code}}</td>
+                <td>{{opt.description}}</td>
+                <td>{{opt.departement.code}}</td>
+                <td><a ng-click="afficherFenetre(opt)">Modifier</a> | <a ng-click="supprimerOption(opt)">Supprimer</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <form>
+        <button class="btn btn-primary" ng-click="afficherFenetre(undefined)"><i class="icon-user"></i>Ajouter</button>
+    </form>
 </div>
