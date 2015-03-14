@@ -1,4 +1,4 @@
-angular.module("notesApp.annees.services", []).factory('Annees', function ($resource) {
+angular.module("notesApp.annees.services", []).factory('Annee', function ($resource) {
     return $resource("/api/annees/:id", {
         id: '@id'
     }, {

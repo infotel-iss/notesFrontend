@@ -1,4 +1,4 @@
-angular.module("notesApp.options.services", []).factory('Options', function($resource) {
+angular.module("notesApp.options.services", []).factory('Option', function($resource) {
 	return $resource("/api/options/:id", {
 		id : '@id'
 	}, {

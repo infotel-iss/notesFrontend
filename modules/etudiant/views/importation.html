@@ -1,0 +1,30 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        IMPORTATION DE NOUVEAUX ETUDIANTS
+    </div>
+    <div class="panel-body">
+        <form name="form" method="post" role="form" class="form-horizontal" novalidate>
+            <div class="form-group">
+                <label for="code" class="col-sm-2 control-label">Code</label>
+                <div class="col-sm-6">
+                    <input type="file" name="code" id="code" class="form-control" ng-model="element.code" ng-required="true"/>
+                    <span class="error" ng-show="form.code.$dirty && form.code.$error.required">Le fichier est obligatoire</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="code" class="col-sm-2 control-label">Année Académique</label>
+                <div class="col-sm-6">
+                    <select name="annee" class="form-control" ng-model="element.cycle" ng-required="true" ng-options="annee as annee  for annee in annees"></select>
+                    <span class="error" ng-show="form.cycle.$dirty && form.cycle.$error.required">Le cycle est obligatoire</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default" ng-click="form.$valid && valider()">
+                        Charger
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>    
+</div>

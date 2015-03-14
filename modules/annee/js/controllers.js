@@ -1,6 +1,6 @@
-angular.module("notesApp.annees.controllers", []).controller("AnneeController", ["$scope", "$modal", "$log", "Annees",
-    function ($scope, $modal, $log, Annees) {
-        var deps = Annees.query(function () {
+angular.module("notesApp.annees.controllers", []).controller("AnneeController", ["$scope", "$modal", "$log", "Annee",
+    function ($scope, $modal, $log, Annee) {
+        var deps = Annee.query(function () {
             $scope.annees = deps;
         });
         $scope.afficherFenetre = function (item) {
