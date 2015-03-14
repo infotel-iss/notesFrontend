@@ -16,13 +16,16 @@
                     <nav role="navigation" class="navbar" >
                         <ul class="nav nav-pills">
                             <li class="dropdown" dropdown on-toggle="toggled(open)">
-                                <a class="dropdown-toggle" dropdown-toggle><i class="glyphicon-user icon-white"></i>Donn&eacute;es<b class="caret"></b></a>
+                                <a class="dropdown-toggle" dropdown-toggle> <i class="glyphicon glyphicon-folder-open"></i>  Donn&eacute;es<b class="caret"></b></a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a ui-sref="cycles"><i class="icon-user icon-white"></i>Cycle</a>
+                                        <a ui-sref="cycles">Cycle</a>
                                     </li>
                                     <li>
                                         <a ui-sref="niveaux">Niveau</a>
+                                    </li>
+                                    <li>
+                                        <a ui-sref="parcours">Parcours</a>
                                     </li>
                                     <li>
                                         <a ui-sref="departements">D&eacute;partement</a>
@@ -39,7 +42,7 @@
                                 </ul>
                             </li>
                             <li class="dropdown" dropdown on-toggle="toggled(open)">
-                                <a class="dropdown-toggle" dropdown-toggle>Enseignements<b class="caret"></b></a>
+                                <a class="dropdown-toggle" dropdown-toggle> <i class="glyphicon glyphicon-book"></i> Enseignements<b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a ui-sref="cours">Cours</a>
@@ -48,7 +51,7 @@
                                         <a ui-sref="typecours">Type Cours</a>
                                     </li>
                                     <li>
-                                        <a ui-sref="unites">Unit&eacute; Enseignement</a>
+                                        <a ui-sref="uniteEns">Unit&eacute; Enseignement</a>
                                     </li>
                                     <li>
                                         <a ui-sref="programmes">Programme Enseignement</a>
@@ -59,7 +62,7 @@
                                 </ul>
                             </li>
                             <li class="dropdown" dropdown on-toggle="toggled(open)">
-                                <a class="dropdown-toggle" dropdown-toggle>Etudiant<b class="caret"></b></a>
+                                <a class="dropdown-toggle" dropdown-toggle><i class="glyphicon glyphicon-user"></i> Etudiant<b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a ui-sref="eimportation">Importation</a>
@@ -73,7 +76,7 @@
                                 </ul>
                             </li>
                             <li class="dropdown" dropdown on-toggle="toggled(open)">
-                                <a class="dropdown-toggle" dropdown-toggle>Notes<b class="caret"></b></a>
+                                <a class="dropdown-toggle" dropdown-toggle><i class="glyphicon glyphicon-check"></i> Notes<b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a ui-sref="evaluations">Evaluation</a>
@@ -87,7 +90,7 @@
                                 </ul>
                             </li>
                             <li class="dropdown" dropdown on-toggle="toggled(open)">
-                                <a class="dropdown-toggle" dropdown-toggle>Rapports<b class="caret"></b></a>
+                                <a class="dropdown-toggle" dropdown-toggle><i class="glyphicon glyphicon-list-alt"></i> Rapports<b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a ui-sref="pv">Proc&eacute;s Verbal</a>
@@ -101,10 +104,10 @@
                                 </ul>
                             </li>
                             <li>
-                                <a ui-sref="statistiques">Statistiques</a>
+                                <a ui-sref="statistiques"> <i class="glyphicon glyphicon-picture"></i> Statistiques</a>
                             </li>
                             <li>
-                                <a ui-sref="passage">Passage Niveau</a>
+                                <a ui-sref="passage"><i class="glyphicon glyphicon-retweet"></i> Passage Niveau</a>
                             </li>
                         </ul>
                     </nav>
@@ -130,7 +133,6 @@
         <script src="js/controllers.js"></script>
         <script src="js/directives.js"></script>
         <script src="js/services.js"></script>
-        
         <script src="modules/annee/anneeModule.js"></script>
         <script src="modules/annee/js/controllers.js"></script>
         <script src="modules/annee/js/services.js"></script>
@@ -138,7 +140,6 @@
         <script src="modules/typecours/typecoursModule.js"></script>
         <script src="modules/typecours/js/controllers.js"></script>
         <script src="modules/typecours/js/services.js"></script>
-        
         <script src="modules/departement/departementModule.js"></script>
         <script src="modules/departement/js/controllers.js"></script>
         <script src="modules/departement/js/services.js"></script>
@@ -174,6 +175,13 @@
         <script src="modules/etudiant/etudiantModule.js"></script>
         <script src="modules/etudiant/js/controllers.js"></script>
         <script src="modules/etudiant/js/services.js"></script>
+        
+        <script src="modules/uniteEnseignement/uniteenseignementModule.js"></script>
+        <script src="modules/uniteEnseignement/js/controllers.js"></script>
+        <script src="modules/uniteEnseignement/js/services.js"></script>
+        <script src="modules/parcours/parcoursModule.js"></script>
+        <script src="modules/parcours/js/controllers.js"></script>
+        <script src="modules/parcours/js/services.js"></script>
     </body>
 
 </html>

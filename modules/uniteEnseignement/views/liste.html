@@ -1,5 +1,5 @@
 <div>
-    <h4 class="titre">LA LISTE DES DEPARTEMENTS</h4>
+    <h4 class="titre">LA LISTE DES UNITES</h4>
     <table class="table table-bordered table-hover table-condensed table-striped">
         <thead>
             <tr>
@@ -9,10 +9,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat=" enseignant in enseignants">
+            <tr ng-repeat=" unite in unites">
                 <td>{{$index + 1}}</td>
-                <td>{{enseignant.nom}}</td>
-                <td><a ng-click="afficherFenetre(enseignant)"><i class="glyphicon glyphicon-edit"></i> Modifier</a> | <a ng-click="supprimerEnseignant(enseignant)"><i class="glyphicon glyphicon-remove"></i> Supprimer</a></td>
+                <td>{{unite.code}}</td>
+                <td>{{unite.intitule}}</td>
+                <td><a ng-click="afficherFenetre(unite)"><i class="glyphicon glyphicon-edit"></i> Modifier</a> | <a ng-click="supprimerUniteEns(unite)"><i class="glyphicon glyphicon-remove"></i> Supprimer</a></td>
             </tr>
         </tbody>
     </table>

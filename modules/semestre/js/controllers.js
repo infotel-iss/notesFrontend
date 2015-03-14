@@ -27,7 +27,7 @@ angular.module("notesApp.semestres.controllers", []).controller("SemestreControl
                     item.$update(function () {
                         var id;
                         for (var i = 0; i < $scope.semestres.length; i++) {
-                            if ($scope.semestres[i].id == item.id) {
+                            if ($scope.semestres[i].id === item.id) {
                                 id = i;
                                 break;
                             }
@@ -37,7 +37,7 @@ angular.module("notesApp.semestres.controllers", []).controller("SemestreControl
                         }
                     });
                 } else {
-                    Departement.save(item, function () {
+                    Semestre.save(item, function () {
                         $scope.semestres.push(item);
                     });
                 }
@@ -45,15 +45,15 @@ angular.module("notesApp.semestres.controllers", []).controller("SemestreControl
 
             });
 
-        }
+        };
         $scope.supprimerSemestre = function (item) {
-            if (confirm("Voulez vous vraiment supprimer ce departement?")) {
-                Departement.remove({
+            if (confirm("Voulez vous vraiment supprimer ce semestre?")) {
+                Semestre.remove({
                     id: item.id
                 }, function () {
                     var id;
                     for (var i = 0; i < $scope.semestres.length; i++) {
-                        if ($scope.semestres[i].id == item.id) {
+                        if ($scope.semestres[i].id === item.id) {
                             id = i;
                             break;
                         }
@@ -62,12 +62,15 @@ angular.module("notesApp.semestres.controllers", []).controller("SemestreControl
                     if (id) {
                         $scope.semestres.splice(id, 1);
                     }
-                })
+                });
             }
-        }
-    }]).controller("SemestreFenetreController", ["$log", "$scope", "$modalInstance", "element",
-    function ($log, $scope, $modalInstance, element) {
+        };
+    }]).controller("SemestreFenetreController", ["$log", "$scope", "$modalInstance", "element","Niveau",
+    function ($log, $scope, $modalInstance, element,Niveau) {
         $scope.element = element;
+        var niveau = Niveau.query(function () {
+            $scope.niveaux = niveau;
+        });
         $log.log(element);
         $scope.valider = function () {
             $log.log("version ok");

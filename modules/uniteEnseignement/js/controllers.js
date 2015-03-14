@@ -1,13 +1,13 @@
-angular.module("notesApp.enseignants.controllers", []).controller("EnseignantController", ["$scope", "$modal", "$log", "Enseignant",
-    function ($scope, $modal, $log, Enseignant) {
-        var deps = Enseignant.query(function () {
-            $scope.enseignants = deps;
+angular.module("notesApp.uniteenseignements.controllers", []).controller("UniteEnseignementController", ["$scope", "$modal", "$log", "UniteEns",
+    function ($scope, $modal, $log, UniteEns) {
+        var deps = UniteEns.query(function () {
+            $scope.unites = deps;
         });
         $scope.afficherFenetre = function (item) {
             var modelInstance = $modal.open({
-                templateUrl: '/modules/enseignant/views/nouveau.html',
-                controller: 'EnseignantFenetreController',
-                controllerAs: 'enseignant',
+                templateUrl: '/modules/uniteEnseignement/views/nouveau.html',
+                controller: 'UniteEnsFenetreController',
+                controllerAs: 'unite',
                 keyboard: true,
                 backdrop: false,
                 resolve: {
@@ -16,7 +16,7 @@ angular.module("notesApp.enseignants.controllers", []).controller("EnseignantCon
                         if (item)
                             tt = item;
                         else
-                            tt = new Enseignant();
+                            tt = new UniteEns();
                         $log.log(tt);
                         return tt;
                     }
@@ -26,19 +26,19 @@ angular.module("notesApp.enseignants.controllers", []).controller("EnseignantCon
                 if (item.id) {
                     item.$update(function () {
                         var id;
-                        for (var i = 0; i < $scope.enseignants.length; i++) {
-                            if ($scope.enseignants[i].id === item.id) {
+                        for (var i = 0; i < $scope.unites.length; i++) {
+                            if ($scope.unites[i].id === item.id) {
                                 id = i;
                                 break;
                             }
                         }
                         if (id) {
-                            $scope.enseignants.splice(id, 1, item);
+                            $scope.unites.splice(id, 1, item);
                         }
                     });
                 } else {
-                    Enseignant.save(item, function () {
-                        $scope.enseignants.push(item);
+                    UniteEns.save(item, function () {
+                        $scope.unites.push(item);
                     });
                 }
             }, function () {
@@ -46,26 +46,26 @@ angular.module("notesApp.enseignants.controllers", []).controller("EnseignantCon
             });
 
         };
-        $scope.supprimerEnseignant = function (item) {
+        $scope.supprimerUniteEns = function (item) {
             if (confirm("Voulez vous vraiment supprimer cet enseinant ?")) {
-                Enseignant.remove({
+                UniteEns.remove({
                     id: item.id
                 }, function () {
                     var id;
-                    for (var i = 0; i < $scope.enseignants.length; i++) {
-                        if ($scope.enseignants[i].id === item.id) {
+                    for (var i = 0; i < $scope.unites.length; i++) {
+                        if ($scope.unites[i].id === item.id) {
                             id = i;
                             break;
                         }
 
                     }
                     if (id) {
-                        $scope.enseignants.splice(id, 1);
+                        $scope.unites.splice(id, 1);
                     }
                 });
             }
         };
-    }]).controller("EnseignantFenetreController", ["$log", "$scope", "$modalInstance", "element",
+    }]).controller("UniteEnsFenetreController", ["$log", "$scope", "$modalInstance", "element",
     function ($log, $scope, $modalInstance, element) {
         $scope.element = element;
         $log.log(element);

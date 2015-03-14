@@ -1,6 +1,6 @@
-angular.module("notesApp.options.controllers", []).controller("OptionController", ["$scope", "$modal", "$log", "Options",
-    function ($scope, $modal, $log, Options) {
-        var op = Options.query(function () {
+angular.module("notesApp.options.controllers", []).controller("OptionController", ["$scope", "$modal", "$log", "Option",
+    function ($scope, $modal, $log, Option) {
+        var op = Option.query(function () {
             $scope.optionss = op;
         });
 
@@ -28,7 +28,7 @@ angular.module("notesApp.options.controllers", []).controller("OptionController"
                     item.$update(function () {
                         var id;
                         for (var i = 0; i < $scope.optionss.length; i++) {
-                            if ($scope.optionss[i].id == item.id) {
+                            if ($scope.optionss[i].id === item.id) {
                                 id = i;
                                 break;
                             }
@@ -46,15 +46,15 @@ angular.module("notesApp.options.controllers", []).controller("OptionController"
 
             });
 
-        }
+        };
         $scope.supprimerOption = function (item) {
             if (confirm("Voulez vous vraiment supprimer cette option ?")) {
-                Options.remove({
+                Option.remove({
                     id: item.id
                 }, function () {
                     var id;
                     for (var i = 0; i < $scope.optionss.length; i++) {
-                        if ($scope.optionss[i].id == item.id) {
+                        if ($scope.optionss[i].id === item.id) {
                             id = i;
                             break;
                         }
@@ -65,9 +65,9 @@ angular.module("notesApp.options.controllers", []).controller("OptionController"
                         $scope.optionss.splice(id, 1);
 
                     }
-                })
+                });
             }
-        }
+        };
     }]).controller("OptionFenetreController", ["$log", "$scope", "$modalInstance", "element", "Departement",
     function ($log, $scope, $modalInstance, element, Departement) {
         $scope.element = element;
