@@ -12,11 +12,11 @@
             <tr ng-repeat="type in typecours" class="inverse">
                 <td>{{$index + 1}}</td>
                 <td>{{type.nom}}</td>
-                <td><a ng-click="afficherFenetre(type)">Modifier</a> | <a ng-click="supprimerTypecours(type)">Supprimer</a></td>
+                <td><a ng-click="afficherFenetre(type)"><i class="glyphicon glyphicon-edit"></i>  Modifier</a> | <a ng-click="supprimerTypecours(type)"><i class="glyphicon glyphicon-remove"></i> Supprimer</a></td>
             </tr>
         </tbody>
     </table>
     <form>
-        <button class="btn btn-primary" ng-click="afficherFenetre(undefined)"><i class="icon-user"></i>Ajouter</button>
+        <button class="btn btn-primary" ng-click="afficherFenetre(undefined)"><i class="icon-user"></i><i class="glyphicon glyphicon-save"></i> Ajouter</button>
     </form>
 </div>

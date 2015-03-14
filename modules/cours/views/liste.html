@@ -11,16 +11,16 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="cour in cours" class="success">
+			<tr ng-repeat="cour in cours" class="inverse">
 				<td>{{$index + 1}}</td>
                                 <td>{{cour.credit}}</td>
                                 <td>{{cour.intitule}}</td>
 				<td>{{cour.typeCours.nom}}</td>
-				<td><a ng-click="afficherFenetre(cour)">Modifier</a> | <a ng-click="supprimerCours(cour)">Supprimer</a></td>
+				<td><a ng-click="afficherFenetre(cour)"><i class="glyphicon glyphicon-edit"></i>  Modifier</a> | <a ng-click="supprimerCours(cour)"> <i class="glyphicon glyphicon-remove"></i>  Supprimer</a></td>
 			</tr>
 		</tbody>
 	</table>
 	<form>
-		 <button class="btn btn-primary" ng-click="afficherFenetre(undefined)">Ajouter Cours</button>
+		 <button class="btn btn-primary" ng-click="afficherFenetre(undefined)"><i class="glyphicon glyphicon-save"></i>Ajouter Cours</button>
 	</form>
 </div>

@@ -1,13 +1,13 @@
-angular.module("notesApp.enseignants.controllers", []).controller("EnseignantController", ["$scope", "$modal", "$log", "Enseignant",
-    function ($scope, $modal, $log, Enseignant) {
-        var deps = Enseignant.query(function () {
-            $scope.enseignants = deps;
+angular.module("notesApp.parcours.controllers", []).controller("ParcoursController", ["$scope", "$modal", "$log", "Parcours",
+    function ($scope, $modal, $log, Parcours) {
+        var deps = Parcours.query(function () {
+            $scope.parcours = deps;
         });
         $scope.afficherFenetre = function (item) {
             var modelInstance = $modal.open({
-                templateUrl: '/modules/enseignant/views/nouveau.html',
-                controller: 'EnseignantFenetreController',
-                controllerAs: 'enseignant',
+                templateUrl: '/modules/parcours/views/nouveau.html',
+                controller: 'ParcoursFenetreController',
+                controllerAs: 'parcours',
                 keyboard: true,
                 backdrop: false,
                 resolve: {
@@ -16,7 +16,7 @@ angular.module("notesApp.enseignants.controllers", []).controller("EnseignantCon
                         if (item)
                             tt = item;
                         else
-                            tt = new Enseignant();
+                            tt = new Parcours();
                         $log.log(tt);
                         return tt;
                     }
@@ -26,19 +26,19 @@ angular.module("notesApp.enseignants.controllers", []).controller("EnseignantCon
                 if (item.id) {
                     item.$update(function () {
                         var id;
-                        for (var i = 0; i < $scope.enseignants.length; i++) {
-                            if ($scope.enseignants[i].id === item.id) {
+                        for (var i = 0; i < $scope.parcours.length; i++) {
+                            if ($scope.parcours[i].id === item.id) {
                                 id = i;
                                 break;
                             }
                         }
                         if (id) {
-                            $scope.enseignants.splice(id, 1, item);
+                            $scope.parcours.splice(id, 1, item);
                         }
                     });
                 } else {
-                    Enseignant.save(item, function () {
-                        $scope.enseignants.push(item);
+                    Parcours.save(item, function () {
+                        $scope.parcours.push(item);
                     });
                 }
             }, function () {
@@ -46,28 +46,31 @@ angular.module("notesApp.enseignants.controllers", []).controller("EnseignantCon
             });
 
         };
-        $scope.supprimerEnseignant = function (item) {
-            if (confirm("Voulez vous vraiment supprimer cet enseinant ?")) {
-                Enseignant.remove({
+        $scope.supprimerParcours = function (item) {
+            if (confirm("Voulez vous vraiment supprimer ce parcours?")) {
+                Parcours.remove({
                     id: item.id
                 }, function () {
                     var id;
-                    for (var i = 0; i < $scope.enseignants.length; i++) {
-                        if ($scope.enseignants[i].id === item.id) {
+                    for (var i = 0; i < $scope.parcours.length; i++) {
+                        if ($scope.parcours[i].id === item.id) {
                             id = i;
                             break;
                         }
-
                     }
                     if (id) {
-                        $scope.enseignants.splice(id, 1);
+                        $scope.parcours.splice(id, 1);
                     }
                 });
             }
         };
-    }]).controller("EnseignantFenetreController", ["$log", "$scope", "$modalInstance", "element",
-    function ($log, $scope, $modalInstance, element) {
+    }]).controller("ParcoursFenetreController", ["$log","$scope", "$modalInstance", "element", "Options",
+    function ($log, $scope, $modalInstance, element, Options) {
+        var ops = Options.query(function () {
+            $scope.options = ops;
+        });
         $scope.element = element;
+        
         $log.log(element);
         $scope.valider = function () {
             $log.log("version ok");
