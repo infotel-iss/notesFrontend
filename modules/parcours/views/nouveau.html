@@ -17,7 +17,7 @@
             <div class="form-group">
                 <label for="option" class="col-sm-2 control-label">Option</label>
                 <div class="col-sm-8">
-                    <select  name="option"  class="form-control " id="option" ng-model="element.options" ng-required="true" ng-options="option as option.code  for option in options"></select>
+                    <select  name="option"  class="form-control " id="option" ng-model="element.option" ng-required="true" ng-options="option as option.code  for option in options"></select>
                     <span class="error" ng-show="form.option.code.$dirty && form.type.option.$error.required">Le departement est obligatoire</span>
                 </div>
             </div>

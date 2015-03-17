@@ -7,69 +7,47 @@
     </div>
     <div class="panel-body">
         <form name="form" method="post" role="form" class="form-horizontal" novalidate>
-            <div class="form-group">
-                <label for="code" class="col-sm-2 control-label">debut</label>
-                <div class="col-sm-8">
-                    <input type="text" name="code" id="code" class="form-control" ng-model="element.debut" ng-required="true"/>
-                    <span class="error" ng-show="form.code.$dirty && form.code.$error.required">La date debut est obligatoire</span>
+            <div ng-controller="DatepickerDemoCtrl">
+                <div class="form-group">
+                    <label for="debut" class="col-sm-2 control-label">Debut</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="debut" datepicker-popup="{{format}}" ng-model="element.debut" is-open="opened"   ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-primary" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                        <span class="error" ng-show="form.intitule.$dirty && form.intitule.$error.required">La date de debut est obligatoire</span>
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="designation" class="col-sm-2 control-label">Fin</label>
-                <div class="col-sm-8">
-                    <input type="text" datepicker-popup="dd/MM/yyyy"  is-open="opened"  datepicker-options="dateOptions" name="intitule" id="designation" class="form-control" ng-model="element.fin" ng-required="true"/>
-                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                    <span class="error" ng-show="form.intitule.$dirty && form.intitule.$error.required">La date de fin est obligatoire</span>
+            <div ng-controller="DatepickerDemoCtrl">
+                <div class="form-group">
+                    <label for="fin" class="col-sm-2 control-label">Fin</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="fin" datepicker-popup="{{format}}" ng-model="element.fin" is-open="opened" datepicker-options="dateOptions"  ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-primary" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                        <span class="error" ng-show="form.intitule.$dirty && form.intitule.$error.required">La date de fin est obligatoire</span>
+                    </div>
                 </div>
             </div>
+
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button type="submit" class="btn btn-primary" ng-show="element.id" ng-click="form.$valid && valider()">
-                        Modifier
+                        <i class="glyphicon glyphicon-edit"></i> Modifier
                     </button>
                     <button type="submit" class="btn btn-primary" ng-hide="element.id" ng-click="form.$valid && valider()">
-                        Enregistrer
+                        <i class="glyphicon glyphicon-saved"></i>  Enregistrer
                     </button>
                     <button type="button" class="btn btn-danger" ng-click="cancel()">
-                        Annuler
+                        <i class="glyphicon glyphicon-ban-circle"></i> Annuler
                     </button>
                 </div>
             </div>
-
         </form>
 
 
-        <div ng-controller="DatepickerDemoCtrl">
-            <pre>Selected date is: <em>{{dt| date:'fullDate' }}</em></pre>
-
-            <h4>Inline</h4>
-            <div style="display:inline-block; min-height:290px;">
-                <datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker>
-            </div>
-
-            <h4>Popup</h4>
-            <div class="row">
-                <div class="col-md-6">
-                    <p class="input-group">
-                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                        </span>
-                    </p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <label>Format:</label> <select class="form-control" ng-model="format" ng-options="f for f in formats"><option></option></select>
-                </div>
-            </div>
-
-            <hr />
-            <button type="button" class="btn btn-sm btn-info" ng-click="today()">Today</button>
-            <button type="button" class="btn btn-sm btn-default" ng-click="dt = '2009-08-24'">2009-08-24</button>
-            <button type="button" class="btn btn-sm btn-danger" ng-click="clear()">Clear</button>
-            <button type="button" class="btn btn-sm btn-default" ng-click="toggleMin()" tooltip="After today restriction">Min date</button>
-        </div>
 
 
     </div>

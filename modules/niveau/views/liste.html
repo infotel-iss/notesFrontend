@@ -1,8 +1,8 @@
 <div>
-    <h3 class="titre">LA LISTE DES NIVEAUX D'ETUDE</h3>
+    <h4 class="titre">LA LISTE DES NIVEAUX D'ETUDE</h4>
     <table class="table table-bordered table-hover table-condensed table-striped">
         <thead>
-            <tr>
+            <tr class="success">
                 <th>Numero</th>
                 <th>Code</th>
                 <th>Cycle</th>
@@ -14,11 +14,11 @@
                 <td>{{$index + 1}}</td>
                 <td>{{niveau.code}}</td>
                 <td>{{niveau.cycle.nom}}</td>
-                <td><a ng-click="afficherFenetre(niveau)">Modifier</a> | <a ng-click="supprimerNiveau(niveau)">Supprimer</a></td>
+                <td><a ng-click="afficherFenetre(niveau)"><i class="glyphicon glyphicon-edit"></i> Modifier</a> | <a ng-click="supprimerNiveau(niveau)"><i class="glyphicon glyphicon-remove"></i>  Supprimer</a></td>
             </tr>
         </tbody>
     </table>
     <form>
-        <button class="btn btn-primary" ng-click="afficherFenetre(undefined)">Ajouter Niveau</button>
+        <button class="btn btn-primary" ng-click="afficherFenetre(undefined)"> <i class="glyphicon glyphicon-save"></i> Ajouter Niveau</button>
     </form>
 </div>

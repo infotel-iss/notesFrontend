@@ -1,0 +1,46 @@
+<div class="panel panel-primary">
+    <div class="panel-heading" ng-hide="element.id">
+        Ajout d'un nouvel programme
+    </div>
+    <div class="panel-heading" ng-show="element.id">
+        Modification du programme
+    </div>
+    <div class="panel-body">
+        <form name="form" method="post" role="form" class="form-horizontal" novalidate>
+            <div class="form-group">
+                <label for="annee" class="col-sm-2 control-label">Annees</label>
+                <div class="col-sm-8">
+                    <select  name="annee"  class="form-control " id="annee" ng-model="element.annee" ng-required="true" ng-options="annee as annee.debut  for annee in annees"></select>
+                    <span class="error" ng-show="form.annee.debut.$dirty && form.annee.debut.$error.required">L'annee est obligatoire</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="unite" class="col-sm-2 control-label">Unite</label>
+                <div class="col-sm-8">
+                    <select  name="unite"  class="form-control " id="unite" ng-model="element.unite" ng-required="true" ng-options="unite as unite.code  for unite in unites"></select>
+                    <span class="error" ng-show="form.unite.code.$dirty && form.unite.code.$error.required">L'unite d'enseignement est obligatoire</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="unite" class="col-sm-2 control-label">Parcours</label>
+                <div class="col-sm-8">
+                    <select  name="unite"  class="form-control " id="unite" ng-model="element.unite" ng-required="true" ng-options="parcour as parcour  for parcour in parcours"></select>
+                    <span class="error" ng-show="form.unite.code.$dirty && form.unite.code.$error.required">L'unite d'enseignement est obligatoire</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary" ng-show="element.id" ng-click="form.$valid && valider()">
+                       <i class="glyphicon glyphicon-edit"></i> Modifier
+                    </button>
+                    <button type="submit" class="btn btn-primary" ng-hide="element.id" ng-click="form.$valid && valider()">
+                        <i class="glyphicon glyphicon-saved"></i> Enregistrer
+                    </button>
+                    <button type="button" class="btn btn-danger pull-right" ng-click="cancel()">
+                        <i class="glyphicon glyphicon-ban-circle"></i> Annuler
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

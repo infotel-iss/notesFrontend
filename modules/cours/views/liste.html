@@ -1,26 +1,26 @@
 <div>
-    <h3 class="titre">LA LISTE DES COURS</h3>
-	<table class="table table-bordered table-hover table-condensed table-striped">
-		<thead>
-			<tr>
-				<th>Numero</th>
-				<th>Credit</th>
-				<th>Intitule</th>
-                                <th>Type de cours</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="cour in cours" class="inverse">
-				<td>{{$index + 1}}</td>
-                                <td>{{cour.credit}}</td>
-                                <td>{{cour.intitule}}</td>
-				<td>{{cour.typeCours.nom}}</td>
-				<td><a ng-click="afficherFenetre(cour)"><i class="glyphicon glyphicon-edit"></i>  Modifier</a> | <a ng-click="supprimerCours(cour)"> <i class="glyphicon glyphicon-remove"></i>  Supprimer</a></td>
-			</tr>
-		</tbody>
-	</table>
-	<form>
-		 <button class="btn btn-primary" ng-click="afficherFenetre(undefined)"><i class="glyphicon glyphicon-save"></i>Ajouter Cours</button>
-	</form>
+    <h4 class="titre">LA LISTE DES COURS</h4>
+    <table class="table table-bordered table-hover table-condensed table-striped">
+        <thead>
+            <tr class="success">
+                <th>Numero</th>
+                <th>Credit</th>
+                <th>Intitule</th>
+                <th>Type de cours</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="cour in cours" class="inverse">
+                <td>{{$index + 1}}</td>
+                <td>{{cour.credit}}</td>
+                <td>{{cour.intitule}}</td>
+                <td>{{cour.typeCours.nom}}</td>
+                <td><a ng-click="afficherFenetre(cour)"><i class="glyphicon glyphicon-edit"></i>  Modifier</a> | <a ng-click="supprimerCours(cour)"> <i class="glyphicon glyphicon-remove"></i>  Supprimer</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <form>
+        <button class="btn btn-primary" ng-click="afficherFenetre(undefined)"><i class="glyphicon glyphicon-save"></i>Ajouter Cours</button>
+    </form>
 </div>

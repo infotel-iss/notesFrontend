@@ -3,18 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/notes/modules/option/js/controllers.js</file>
-            <file>file:/var/www/notes/modules/parcours/parcoursModule.js</file>
-            <file>file:/var/www/notes/modules/cours/js/controllers.js</file>
-            <file>file:/var/www/notes/js/app.js</file>
-            <file>file:/var/www/notes/modules/parcours/js/services.js</file>
-            <file>file:/var/www/notes/modules/uniteEnseignement/views/liste.html</file>
-            <file>file:/var/www/notes/modules/uniteEnseignement/js/services.js</file>
-            <file>file:/var/www/notes/modules/parcours/views/liste.html</file>
-            <file>file:/var/www/notes/modules/parcours/js/controllers.js</file>
-            <file>file:/var/www/notes/modules/option/js/services.js</file>
-            <file>file:/var/www/notes/modules/parcours/views/nouveau.html</file>
+            <file>file:/var/www/notes/modules/departement/views/liste.html</file>
             <file>file:/var/www/notes/index.html</file>
+            <file>file:/var/www/notes/modules/option/views/liste.html</file>
         </group>
     </open-files>
 </project-private>

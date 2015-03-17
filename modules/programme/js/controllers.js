@@ -1,13 +1,13 @@
-angular.module("notesApp.parcours.controllers", []).controller("ParcoursController", ["$scope", "$modal", "$log", "Parcours",
-    function ($scope, $modal, $log, Parcours) {
-        var deps = Parcours.query(function () {
-            $scope.parcours = deps;
+angular.module("notesApp.programme.controllers", []).controller("ProgrammeController", ["$scope", "$modal", "$log", "Programme",
+    function ($scope, $modal, $log, Programme) {
+        var deps = Programme.query(function () {
+            $scope.programmes = deps;
         });
         $scope.afficherFenetre = function (item) {
             var modelInstance = $modal.open({
-                templateUrl: '/modules/parcours/views/nouveau.html',
-                controller: 'ParcoursFenetreController',
-                controllerAs: 'parcours',
+                templateUrl: '/modules/programme/views/nouveau.html',
+                controller: 'ProrammeFenetreController',
+                controllerAs: 'programme',
                 keyboard: true,
                 backdrop: false,
                 resolve: {
@@ -16,7 +16,7 @@ angular.module("notesApp.parcours.controllers", []).controller("ParcoursControll
                         if (item)
                             tt = item;
                         else
-                            tt = new Parcours();
+                            tt = new Programme();
                         $log.log(tt);
                         return tt;
                     }
@@ -26,19 +26,19 @@ angular.module("notesApp.parcours.controllers", []).controller("ParcoursControll
                 if (item.id) {
                     item.$update(function () {
                         var id;
-                        for (var i = 0; i < $scope.parcours.length; i++) {
-                            if ($scope.parcours[i].id === item.id) {
+                        for (var i = 0; i < $scope.programmes.length; i++) {
+                            if ($scope.programmes[i].id === item.id) {
                                 id = i;
                                 break;
                             }
                         }
                         if (id) {
-                            $scope.parcours.splice(id, 1, item);
+                            $scope.programmes.splice(id, 1, item);
                         }
                     });
                 } else {
-                    Parcours.save(item, function () {
-                        $scope.parcours.push(item);
+                    Programme.save(item, function () {
+                        $scope.programmes.push(item);
                     });
                 }
             }, function () {
@@ -46,31 +46,34 @@ angular.module("notesApp.parcours.controllers", []).controller("ParcoursControll
             });
 
         };
-        $scope.supprimerParcours = function (item) {
-            if (confirm("Voulez vous vraiment supprimer ce parcours?")) {
-                Parcours.remove({
+        $scope.supprimerProgramme = function (item) {
+            if (confirm("Voulez vous vraiment supprimer ce programme?")) {
+                Programme.remove({
                     id: item.id
                 }, function () {
                     var id;
-                    for (var i = 0; i < $scope.parcours.length; i++) {
-                        if ($scope.parcours[i].id === item.id) {
+                    for (var i = 0; i < $scope.programmes.length; i++) {
+                        if ($scope.programmes[i].id === item.id) {
                             id = i;
                             break;
                         }
                     }
                     if (id) {
-                        $scope.parcours.splice(id, 1);
+                        $scope.programmes.splice(id, 1);
                     }
                 });
             }
         };
-    }]).controller("ParcoursFenetreController", ["$log","$scope", "$modalInstance", "element", "Option", "Niveau",
-    function ($log, $scope, $modalInstance, element, Option, Niveau) {
-        var ops = Option.query(function () {
-            $scope.options = ops;
+    }]).controller("ProrammeFenetreController", ["$log","$scope", "$modalInstance", "element", "Parcours", "Annee", "UniteEns",
+    function ($log, $scope, $modalInstance, element, Parcours, Annee, UniteEns) {
+        var prs = Parcours.query(function () {
+            $scope.parcours = prs;
         });
-        var nivs = Niveau.query(function () {
-            $scope.niveaux = nivs;
+        var ans = Annee.query(function () {
+            $scope.annees = ans;
+        });
+        var deps = UniteEns.query(function () {
+            $scope.unites = deps;
         });
         $scope.element = element;
         
