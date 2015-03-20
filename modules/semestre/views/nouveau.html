@@ -17,7 +17,7 @@
             <div class="form-group">
                 <label for="niveauid" class="col-sm-2 control-label">Niveau</label>
                 <div class="col-sm-8">
-                    <select  name="niveau"  class="form-control" id="niveauid" ng-model="element.niveau" ng-required="true" ng-options="niveau as niveau.code  for niveau in niveaux"></select>
+                    <select  name="niveau"  class="form-control" id="niveauid" ng-model="element.niveau" ng-required="true" ng-options="niveau as niveau.code  for niveau in niveaux track by niveau.id"></select>
                     <span class="error" ng-show="form.niveau.code.$dirty && form.niveau.code.$error.required">Le niveau est obligatoire</span>
                 </div>
             </div>

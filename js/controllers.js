@@ -1,12 +1,4 @@
-angular.module("notesApp.controllers", []).controller('FinanceController', ["$scope",
-function($scope) {
-	this.salary = 0;
-	this.percentage = 0;
-	this.result = function() {
-		return this.salary * this.percentage * 0.01;
-	};
-
-}]).controller("MenuController", ["$scope", "$log",
+angular.module("notesApp.controllers", []).controller("MenuController", ["$scope", "$log",
 function($scope, $log) {
 
 }]).controller("AnneeController", ["$scope",

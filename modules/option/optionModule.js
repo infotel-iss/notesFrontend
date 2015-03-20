@@ -1,4 +1,4 @@
-angular.module("notesApp.options", ['notesApp.options.controllers', 'notesApp.options.services']);
+angular.module("notesApp.options", ['notesApp.options.controllers', 'notesApp.options.services','ngAnimate']);
 angular.module("notesApp.options").config(function ($stateProvider, $locationProvider) {
     $stateProvider.state("options", {
         url: '/options',

@@ -17,7 +17,7 @@
             <div class="form-group">
                 <label for="cycle" class="col-sm-2 control-label">Cycle</label>
                 <div class="col-sm-8">
-                    <select name="cycle" class="form-control" ng-model="element.cycle" ng-required="true" ng-options="cycle as cycle.nom  for cycle in cycles"></select>
+                    <select name="cycle" class="form-control" ng-model="element.cycle" ng-required="true" ng-options="cycle as cycle.nom for cycle in cycles track by cycle.id"></select>
                     <span class="error" ng-show="form.cycle.$dirty && form.cycle.$error.required">Le cycle est obligatoire</span>
                 </div>
             </div>

@@ -24,7 +24,7 @@
             <div class="form-group">
                 <label for="typecours" class="col-sm-2 control-label">Type</label>
                 <div class="col-sm-8">
-                    <select  name="type"  class="form-control " id="typecours" ng-model="element.typeCours" ng-required="true" ng-options="type as type.nom  for type in types"></select>
+                    <select  name="type"  class="form-control " id="typecours" ng-model="element.typeCours" ng-required="true" ng-options="type as type.nom  for type in types track by type.id"></select>
                     <span class="error" ng-show="form.type.code.$dirty && form.type.code.$error.required">Le departement est obligatoire</span>
                 </div>
             </div>

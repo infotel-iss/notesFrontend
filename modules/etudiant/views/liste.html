@@ -4,28 +4,28 @@
         <div class="form-group">
             <label for="departement" class="col-sm-1 control-label">Departement</label>
             <div class="col-sm-2">
-                <select id="departement" class="form-control" ng-model="element.departement" ng-options="departement.id as departement.code  for departement in departements"></select>
+                <select id="departement" class="form-control" ng-model="departement" ng-change="updateOptions()" ng-options="departement.id as departement.code  for departement in departements | orderBy:'code'"></select>
             </div>
             <label for="annee" class="col-sm-1 control-label">Ann&eacute;e</label>
             <div class="col-sm-2">
-                <select id="annee" class="form-control" ng-model="element.annee" ng-options="annee as annee  for annee in annees"></select>
-            </div>
+                <select id="annee" class="form-control" ng-model="annee" ng-options="annee.id as ((annee.debut|date:'yyyy') +'-' + (annee.fin|date:'yyyy'))  for annee in annees"></select>
+            </div>            
             <label for="niveau" class="col-sm-1 control-label">Niveau</label>
             <div class="col-sm-2">
-                <select id="niveau" class="form-control" ng-model="element.niveau" ng-options="niveau.id as niveau.code  for niveau in niveaux"></select>
+                <select id="niveau" class="form-control" ng-model="niveau" ng-change="updateOptions()" ng-options="niveau.id as niveau.code  for niveau in niveaux | orderBy:'code'"></select>
             </div>
             <label for="options" class="col-sm-1 control-label">Option</label>
             <div class="col-sm-2">
-                <select id="options" class="form-control" ng-model="element.option" ng-options="option.id as option.code  for option in options"></select>
+                <select id="options" class="form-control" ng-model="option" ng-options="option.id as option.code  for option in options | orderBy: 'code'"></select>
             </div>
             <div class="col-sm-1">
-                <button class="btn btn-default" ng-click="afficherFenetre(undefined)">Filtrer</button>
+                <button class="btn btn-default" ng-click="filtrer()">Filtrer</button>
             </div>
         </div>
     </form>
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover table-condensed table-striped">
         <thead>
-            <tr>
+            <tr class="success">
                 <th>Matricule</th>
                 <th>Nom</th>
                 <th>Date de Naissance</th>
@@ -37,10 +37,10 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="etudiant in etudiants">
+            <tr ng-repeat="etudiant in etudiants | startFrom: ((currentPage - 1) * 10)| limitTo: 10">
                 <td>{{etudiant.matricule}}</td>
                 <td>{{etudiant.nom}}</td>
-                <td>{{etudiant.dateDeNaissance}}</td>
+                <td>{{etudiant.dateDeNaissance | date:'dd/MM/yyyy'}}</td>
                 <td>{{etudiant.lieuDeNaissance}}</td>
                 <td>{{etudiant.email}}</td>
                 <td>{{etudiant.numeroTelephone}}</td>
@@ -49,6 +49,7 @@
             </tr>
         </tbody>
     </table>
+    <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" ng-if="totalItems > 10"></pagination>
     <!--    <form>
             <button class="btn btn-default" ng-click="afficherFenetre(undefined)">Ajouter D&eacute;partement</button>
         </form>-->

@@ -10,15 +10,22 @@
             <div class="form-group">
                 <label for="niveau" class="col-sm-2 control-label">Niveau</label>
                 <div class="col-sm-8">
-                    <select  name="niveau"  class="form-control " id="niveau" ng-model="element.niveau" ng-required="true" ng-options="niveau as niveau.code  for niveau in niveaux"></select>
+                    <select  name="niveau"  class="form-control " id="niveau" ng-model="element.niveau" ng-required="true" ng-options="niveau as niveau.code  for niveau in niveaux track by niveau.id"></select>
                     <span class="error" ng-show="form.type.code.$dirty && form.niveau.code.$error.required">Le niveau est obligatoire</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="option" class="col-sm-2 control-label">Département</label>
+                <div class="col-sm-8">
+                    <select  name="option"  class="form-control " id="option" ng-model="departement" ng-change="updateOptions()" ng-required="true" ng-options="departement as departement.code  for departement in departements track by departement.id"></select>
+                    <span class="error" ng-show="form.option.code.$dirty && form.type.option.$error.required">Le departement est obligatoire</span>
                 </div>
             </div>
             <div class="form-group">
                 <label for="option" class="col-sm-2 control-label">Option</label>
                 <div class="col-sm-8">
-                    <select  name="option"  class="form-control " id="option" ng-model="element.options" ng-required="true" ng-options="option as option.code  for option in options"></select>
-                    <span class="error" ng-show="form.option.code.$dirty && form.type.option.$error.required">Le departement est obligatoire</span>
+                    <select  name="option"  class="form-control " id="option" ng-model="element.option" ng-required="true" ng-options="option as option.code  for option in options track by option.id"></select>
+                    <span class="error" ng-show="form.option.code.$dirty && form.type.option.$error.required">L'option est obligatoire</span>
                 </div>
             </div>
             <div class="form-group">

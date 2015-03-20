@@ -1,8 +1,34 @@
-angular.module("notesApp.parcours.controllers", []).controller("ParcoursController", ["$scope", "$modal", "$log", "Parcours",
-    function ($scope, $modal, $log, Parcours) {
+angular.module("notesApp.parcours.controllers", []).controller("ParcoursController", ["$scope", "$modal", "Parcours", "Departement","$log",
+    function ($scope, $modal, Parcours,Departement,$log) {
         var deps = Parcours.query(function () {
-            $scope.parcours = deps;
+            $scope.parcours_initiale = deps;
+            $scope.parcours_initiale = deps.sort(function(a,b){
+               if(a.niveau.code === b.niveau.code){
+                   if(a.option.departement.code === b.option.departement.code){
+                       if (a.option.code === b.option.code){
+                           return 0;
+                       }else if(a.option.code < b.option.code){
+                           return -1;
+                       }else{
+                           return 1;
+                       }
+                   }else if (a.option.departement.code < b.option.departement.code){
+                       return -1;
+                   }else{
+                       return 1;
+                   }
+               }else if(a.niveau.code < b.niveau.code){
+                   return -1;
+               }else{
+                   return 1;
+               }
+            });
+            $scope.parcours = $scope.parcours_initiale;
         });
+        var dd = Departement.query(function(){
+           $scope.departements = _.sortBy(dd,'code'); 
+        });
+        $scope.departement = null;
         $scope.afficherFenetre = function (item) {
             var modelInstance = $modal.open({
                 templateUrl: '/modules/parcours/views/nouveau.html',
@@ -17,7 +43,6 @@ angular.module("notesApp.parcours.controllers", []).controller("ParcoursControll
                             tt = item;
                         else
                             tt = new Parcours();
-                        $log.log(tt);
                         return tt;
                     }
                 }
@@ -64,22 +89,44 @@ angular.module("notesApp.parcours.controllers", []).controller("ParcoursControll
                 });
             }
         };
-    }]).controller("ParcoursFenetreController", ["$log","$scope", "$modalInstance", "element", "Option",
-    function ($log, $scope, $modalInstance, element, Option) {
+        $scope.filtrer = function(){
+            $log.log($scope.departement);
+            if ($scope.departement !== null){
+                $scope.parcours = _.filter($scope.parcours_initiale, function(p){
+                    return p.option.departement.code === $scope.departement.code;
+                });
+            }
+        }
+    }]).controller("ParcoursFenetreController", ["$scope", "$modalInstance", "element", "Option","Niveau","Departement","$log",
+    function ($scope, $modalInstance, element, Option,Niveau,Departement,$log) {
+        $log.log(element);
         var ops = Option.query(function () {
-            $scope.options = ops;
+            $scope.option_initiale = _.sortBy(ops, 'code');
+            $scope.options = $scope.option_initiale;
+        });
+        var nivs = Niveau.query(function(){
+            $scope.niveaux = _.sortBy(nivs, 'code');
+        });
+        var deps = Departement.query(function(){
+            $scope.departements = _.sortBy(deps, 'code');
         });
         $scope.element = element;
-        
-        $log.log(element);
+        if(element.id)
+            $scope.departement = element.option.departement;
+        else
+            $scope.departement = null;
         $scope.valider = function () {
-            $log.log("version ok");
             $modalInstance.close($scope.element);
         };
 
         $scope.cancel = function () {
-            $log.log("version cancel");
             $modalInstance.dismiss("Cancel");
+        };
+        
+        $scope.updateOptions = function(){
+            $scope.options = _.filter($scope.option_initiale, function(n){
+                return n.departement.code === $scope.departement.code;
+            });
         };
 
     }]);

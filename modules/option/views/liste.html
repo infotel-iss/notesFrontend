@@ -1,5 +1,13 @@
 <div>
     <h3 class ="titre">LA LISTE DES OPTIONS</h3><br/>
+    <form name="form" method="post" role="form" class="form-horizontal" novalidate>
+        <div class="form-group">
+            <label for="departement" class="col-sm-1 control-label">Departement</label>
+            <div class="col-sm-3">
+                <select id="departement" class="form-control" ng-model="department"  ng-options="departement.code  for departement in departements |orderBy: 'code'"></select>
+            </div>        
+        </div>
+    </form>
     <table class="table table-bordered table-hover table-condensed table-striped">
         <thead>
             <tr class="success">
@@ -11,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="opt in optionss" class="inverse">
+            <tr ng-repeat="opt in optionss | filter : {departement.code : department.code} | orderBy : 'code'" class="inverse single-comment">
                 <td>{{$index + 1}}</td>
                 <td>{{opt.code}}</td>
                 <td>{{opt.description}}</td>

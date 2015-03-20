@@ -1,8 +1,12 @@
-angular.module("notesApp.departements.controllers", []).controller("DepartementController", ["$scope", "$modal", "$log", "Departement",
-    function ($scope, $modal, $log, Departement) {
+angular.module("notesApp.departements.controllers", []).controller("DepartementController", ["$timeout","$scope", "$modal", "$log", "Departement",
+    function ($timeout, $scope, $modal, $log, Departement) {
+        $timeout(function(){
         var deps = Departement.query(function () {
-            $scope.departements = deps;
-        });
+            
+                $scope.departements = _.sortBy(deps, 'code');
+            });
+            
+        },1000);
         $scope.afficherFenetre = function (item) {
             var modelInstance = $modal.open({
                 templateUrl: '/modules/departement/views/nouveau.html',
@@ -25,58 +29,42 @@ angular.module("notesApp.departements.controllers", []).controller("DepartementC
             modelInstance.result.then(function (item) {
                 if (item.id) {
                     item.$update(function () {
-                        var id;
-                        for (var i = 0; i < $scope.departements.length; i++) {
-                            if ($scope.departements[i].id == item.id) {
-                                id = i;
-                                break;
-                            }
-                        }
-                        if (id) {
+                        var id = _.sortedIndex($scope.departements, item, 'code');
+                        if (id !== -1) {
                             $scope.departements.splice(id, 1, item);
                         }
                     });
                 } else {
-                    var tt = Departement.save(item, function () {
-                        $scope.departements.push(tt);
+                    Departement.save(item, function () {
+                        var tt = _.sortedIndex($scope.departements, item, 'code');
+                        if (tt !== -1) {
+                            $scope.departements.splice(tt, 0, item);
+                        }
                     });
                 }
             }, function () {
 
             });
-
         }
         $scope.supprimerDepartement = function (item) {
             if (confirm("Voulez vous vraiment supprimer ce departement?")) {
                 Departement.remove({
                     id: item.id
                 }, function () {
-                    var id;
-                    for (var i = 0; i < $scope.departements.length; i++) {
-                        if ($scope.departements[i].id == item.id) {
-                            id = i;
-                            break;
-                        }
-
-                    }
-                    if (id) {
+                    var id = _.sortedIndex($scope.departements, item, 'code');
+                    if (id !== -1) {
                         $scope.departements.splice(id, 1);
                     }
                 })
             }
         }
-    }]).controller("DepartementFenetreController", ["$log", "$scope", "$modalInstance", "element",
-    function ($log, $scope, $modalInstance, element) {
+    }]).controller("DepartementFenetreController", ["$scope", "$modalInstance", "element",
+    function ($scope, $modalInstance, element) {
         $scope.element = element;
-        $log.log(element);
         $scope.valider = function () {
-            $log.log("version ok");
             $modalInstance.close($scope.element);
         };
-
         $scope.cancel = function () {
-            $log.log("version cancel");
             $modalInstance.dismiss("Cancel");
         };
-
     }]);

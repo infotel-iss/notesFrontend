@@ -1,8 +1,17 @@
-angular.module("notesApp.options.controllers", []).controller("OptionController", ["$scope", "$modal", "$log", "Option",
-    function ($scope, $modal, $log, Option) {
+angular.module("notesApp.options.controllers", []).controller("OptionController", ["$scope", "$modal", "$log", "Option","Departement",
+    function ($scope, $modal, $log, Option, Departement) {
         var op = Option.query(function () {
+            //$scope.option_initiale = _.sortBy(op,'code');
+            //$scope.optionss = $scope.option_initiale;
             $scope.optionss = op;
         });
+        
+        var deps = Departement.query(function(){
+           //$scope.departements = _.sortBy(deps,'code'); 
+           $scope.departements = deps;
+        });
+        
+        $scope.department = null;
 
         $scope.afficherFenetre = function (item) {
             var modelInstance = $modal.open({
@@ -17,8 +26,8 @@ angular.module("notesApp.options.controllers", []).controller("OptionController"
                         if (item)
                             tt = item;
                         else
-                            tt = new Options();
-                        $log.log(tt);
+                            tt = new Option();
+                        tt.departement = $scope.department;
                         return tt;
                     }
                 }
@@ -38,7 +47,7 @@ angular.module("notesApp.options.controllers", []).controller("OptionController"
                         }
                     });
                 } else {
-                    Options.save(item, function () {
+                    Option.save(item, function () {
                         $scope.optionss.push(item);
                     });
                 }
@@ -47,6 +56,8 @@ angular.module("notesApp.options.controllers", []).controller("OptionController"
             });
 
         };
+        
+        
         $scope.supprimerOption = function (item) {
             if (confirm("Voulez vous vraiment supprimer cette option ?")) {
                 Option.remove({
@@ -72,7 +83,7 @@ angular.module("notesApp.options.controllers", []).controller("OptionController"
     function ($log, $scope, $modalInstance, element, Departement) {
         $scope.element = element;
         var dep = Departement.query(function () {
-            $scope.departements = dep;
+            $scope.departements = _.sortBy(dep,'code');
         });
         $log.log(element);
         $scope.valider = function () {

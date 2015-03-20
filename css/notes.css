@@ -27,3 +27,22 @@ header{
 input.ng-dirty.ng-invalid {
     border-color: red;
 }
+
+.single-comment.ng-enter{
+    -webkit-transition: 1s linear all;
+    -o-transition: 1s linear all;
+    -moz-transition: 1s linear all;
+    opacity: 0;
+}
+.single-comment.ng-enter.ng-enter-active{
+    opacity:1;
+}
+
+#loading{
+    background-image: url("../img/ajax-loader.gif");
+    background-repeat: no-repeat;
+    background-position: center 0px;
+    height: 100px;
+    width: 100%;
+    margin-bottom: 20px;
+}
