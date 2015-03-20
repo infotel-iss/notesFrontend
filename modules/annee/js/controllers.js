@@ -27,7 +27,7 @@ angular.module("notesApp.annees.controllers", []).controller("AnneeController", 
                     item.$update(function () {
                         var id;
                         for (var i = 0; i < $scope.annees.length; i++) {
-                            if ($scope.annees[i].id == item.id) {
+                            if ($scope.annees[i].id === item.id) {
                                 id = i;
                                 break;
                             }
@@ -45,7 +45,7 @@ angular.module("notesApp.annees.controllers", []).controller("AnneeController", 
 
             });
 
-        }
+        };
         $scope.supprimerAnnee = function (item) {
             if (confirm("Voulez vous vraiment supprimer cette annee?")) {
                 Annee.remove({
@@ -53,7 +53,7 @@ angular.module("notesApp.annees.controllers", []).controller("AnneeController", 
                 }, function () {
                     var id;
                     for (var i = 0; i < $scope.annees.length; i++) {
-                        if ($scope.annees[i].id == item.id) {
+                        if ($scope.annees[i].id === item.id) {
                             id = i;
                             break;
                         }
@@ -62,9 +62,9 @@ angular.module("notesApp.annees.controllers", []).controller("AnneeController", 
                     if (id) {
                         $scope.annees.splice(id, 1);
                     }
-                })
+                });
             }
-        }
+        };
     }]).controller("AnneeFenetreController", ["$log", "$scope", "$modalInstance", "element",
     function ($log, $scope, $modalInstance, element) {
         $scope.element = element;
@@ -80,19 +80,11 @@ angular.module("notesApp.annees.controllers", []).controller("AnneeController", 
         };
 
     }]).controller('DatepickerDemoCtrl', function ($scope) {
-    $scope.today = function () {
-        $scope.dt = new Date();
-    };
-    $scope.today();
-
-    $scope.clear = function () {
-        $scope.dt = null;
-    };
 
     // Disable weekend selection
-    $scope.disabled = function (date, mode) {
-        return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
-    };
+   // $scope.disabled = function (date, mode) {
+     //   return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
+    //};
 
     $scope.toggleMin = function () {
         $scope.minDate = $scope.minDate ? null : new Date();
@@ -111,7 +103,7 @@ angular.module("notesApp.annees.controllers", []).controller("AnneeController", 
         startingDay: 1
     };
 
-    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-    $scope.format = $scope.formats[0];
+    $scope.formats = ['dd-MMMM-yyyy', 'dd/MM/yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+    $scope.format = $scope.formats[1];
 });
 ;

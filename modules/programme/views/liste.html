@@ -1,0 +1,26 @@
+<div>
+    <h4 class ="titre">LA LISTE DES PROGRMMES ENSEIGNEMENTS</h4><br/>
+    <table class="table table-bordered table-hover table-condensed table-striped">
+        <thead>
+            <tr class="inverse">
+                <th>Numero</th>
+                <th>Annees</th>
+                <th>Unite</th>
+                <th>Parcours</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="programme in programmes" class="inverse">
+                <td>{{$index + 1}}</td>
+                <td>{{programme.annee.code}}</td>
+                <td>{{programme.uniteEns.code}}</td>
+                <td>{{programme.parcours.code}}</td>
+                <td><a ng-click="afficherFenetre(programme)"><i class="glyphicon glyphicon-edit"></i>  Modifier</a> | <a ng-click="supprimerProgramme(programme)"><i class="glyphicon glyphicon-remove"></i> Supprimer</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <form>
+        <button class="btn btn-primary" ng-click="afficherFenetre(undefined)"><i class="icon-user"></i><i class="glyphicon glyphicon-save"></i> Ajouter</button>
+    </form>
+</div>

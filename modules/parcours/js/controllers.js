@@ -96,7 +96,7 @@ angular.module("notesApp.parcours.controllers", []).controller("ParcoursControll
                     return p.option.departement.code === $scope.departement.code;
                 });
             }
-        }
+        };
     }]).controller("ParcoursFenetreController", ["$scope", "$modalInstance", "element", "Option","Niveau","Departement","$log",
     function ($scope, $modalInstance, element, Option,Niveau,Departement,$log) {
         $log.log(element);
@@ -109,6 +109,9 @@ angular.module("notesApp.parcours.controllers", []).controller("ParcoursControll
         });
         var deps = Departement.query(function(){
             $scope.departements = _.sortBy(deps, 'code');
+        });
+        var nivs = Niveau.query(function () {
+            $scope.niveaux = nivs;
         });
         $scope.element = element;
         if(element.id)

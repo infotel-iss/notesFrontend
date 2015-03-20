@@ -14,7 +14,6 @@
                 <th>Numero</th>
                 <th>Code</th>
                 <th>Description</th>
-                <th>Departement</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -23,12 +22,11 @@
                 <td>{{$index + 1}}</td>
                 <td>{{opt.code}}</td>
                 <td>{{opt.description}}</td>
-                <td>{{opt.departement.code}}</td>
-                <td><a ng-click="afficherFenetre(opt)">Modifier</a> | <a ng-click="supprimerOption(opt)">Supprimer</a></td>
+                <td><a ng-click="afficherFenetre(opt)"><i class="glyphicon glyphicon-edit"></i> Modifier</a> | <a ng-click="supprimerOption(opt)"><i class="glyphicon glyphicon-remove"></i> Supprimer</a></td>
             </tr>
         </tbody>
     </table>
     <form>
-        <button class="btn btn-primary" ng-click="afficherFenetre(undefined)"><i class="icon-user"></i>Ajouter</button>
+        <button class="btn btn-primary" ng-click="afficherFenetre(undefined)"><i class="glyphicon glyphicon-save"></i> Ajouter</button>
     </form>
 </div>
