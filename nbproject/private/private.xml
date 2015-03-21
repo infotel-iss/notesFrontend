@@ -2,16 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/home/vincent/tmp/frontend/index.html</file>
-            <file>file:/home/vincent/tmp/frontend/js/app.js</file>
-            <file>file:/home/vincent/tmp/frontend/js/controllers.js</file>
-            <file>file:/home/vincent/tmp/frontend/modules/uniteEnseignement/uniteenseignementModule.js</file>
-            <file>file:/home/vincent/tmp/frontend/modules/uniteEnseignement/js/services.js</file>
-            <file>file:/home/vincent/tmp/frontend/modules/etudiant/views/importation.html</file>
-            <file>file:/var/www/notes/modules/departement/views/liste.html</file>
-            <file>file:/var/www/notes/index.html</file>
-            <file>file:/var/www/notes/modules/option/views/liste.html</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
