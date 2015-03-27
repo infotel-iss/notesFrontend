@@ -37,8 +37,8 @@ angular.module("notesApp.programme.controllers", []).controller("ProgrammeContro
                         }
                     });
                 } else {
-                    Programme.save(item, function () {
-                        $scope.programmes.push(item);
+                    var toto = Programme.save(item, function () {
+                        $scope.programmes.push(toto);
                     });
                 }
             }, function () {
@@ -84,7 +84,6 @@ angular.module("notesApp.programme.controllers", []).controller("ProgrammeContro
         
         $log.log(element);
         $scope.valider = function () {
-            $log.log("version ok");
             $modalInstance.close($scope.element);
         };
 
