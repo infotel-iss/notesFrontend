@@ -16,7 +16,7 @@ function($scope, $modal, $log, Evaluation) {
 					if(item)
 					   tt = item;
 					else
-					   tt = new Departement();
+					   tt = new Evaluation();
 					$log.log(tt);
 					return tt;
 				}
@@ -37,7 +37,7 @@ function($scope, $modal, $log, Evaluation) {
 					}
 				});
 			} else {
-				Departement.save(item, function() {
+				Evaluation.save(item, function() {
 					$scope.departements.push(item);
 				});
 			}
@@ -46,9 +46,9 @@ function($scope, $modal, $log, Evaluation) {
 		});
 
 	}
-	$scope.supprimerDepartement = function(item) {
+	$scope.supprimerEvaluation = function(item) {
 		if (confirm("Voulez vous vraiment supprimer ce departement?")) {
-			Departement.remove({
+			Evaluation.remove({
 				id : item.id
 			}, function() {
 				var id;

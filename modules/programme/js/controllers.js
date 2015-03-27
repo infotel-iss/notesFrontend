@@ -64,10 +64,14 @@ angular.module("notesApp.programme.controllers", []).controller("ProgrammeContro
                 });
             }
         };
-    }]).controller("ProrammeFenetreController", ["$log","$scope", "$modalInstance", "element", "Parcours", "Annee", "UniteEns",
-    function ($log, $scope, $modalInstance, element, Parcours, Annee, UniteEns) {
-        var prs = Parcours.query(function () {
-            $scope.parcours = prs;
+    }]).controller("ProrammeFenetreController", ["$log","$scope", "$modalInstance", "element", "Option", "Niveau", "Annee", "UniteEns",
+    function ($log, $scope, $modalInstance, element, Option, Niveau, Annee, UniteEns) {
+        
+        var nivs = Niveau.query(function () {
+            $scope.niveaux = nivs;
+        });
+        var opts = Option.query(function () {
+            $scope.options = opts;
         });
         var ans = Annee.query(function () {
             $scope.annees = ans;
@@ -75,6 +79,7 @@ angular.module("notesApp.programme.controllers", []).controller("ProgrammeContro
         var deps = UniteEns.query(function () {
             $scope.unites = deps;
         });
+        
         $scope.element = element;
         
         $log.log(element);

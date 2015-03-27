@@ -10,8 +10,8 @@
             <div class="form-group">
                 <label for="annee" class="col-sm-2 control-label">Annees</label>
                 <div class="col-sm-8">
-                    <select  name="annee"  class="form-control " id="annee" ng-model="element.annee" ng-required="true" ng-options="annee as annee.debut  for annee in annees"></select>
-                    <span class="error" ng-show="form.annee.debut.$dirty && form.annee.debut.$error.required">L'annee est obligatoire</span>
+                    <select  name="annee"  class="form-control " id="annee" ng-model="element.annee" ng-required="true" ng-options="annee as ((annee.debut|date:'yyyy') +'-' + (annee.fin|date:'yyyy'))  for annee in annees"></select>
+                    <span class="error" ng-show="form.annee.$dirty && form.annee.$error.required">L'annee est obligatoire</span>
                 </div>
             </div>
             <div class="form-group">
@@ -22,16 +22,23 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="unite" class="col-sm-2 control-label">Parcours</label>
+                <label for="option" class="col-sm-2 control-label">Option</label>
                 <div class="col-sm-8">
-                    <select  name="unite"  class="form-control " id="unite" ng-model="element.unite" ng-required="true" ng-options="parcour as parcour  for parcour in parcours"></select>
-                    <span class="error" ng-show="form.unite.code.$dirty && form.unite.code.$error.required">L'unite d'enseignement est obligatoire</span>
+                    <select  name="option"  class="form-control " id="option" ng-model="element.option" ng-required="true" ng-options="option as option.code  for option in options"></select>
+                    <span class="error" ng-show="form.unite.code.$dirty && form.unite.code.$error.required">L'option est obligatoire</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="niveau" class="col-sm-2 control-label">Niveau</label>
+                <div class="col-sm-8">
+                    <select  name="niveau"  class="form-control " id="niveau" ng-model="element.niveau" ng-required="true" ng-options="niveau as niveau.code  for niveau in niveaux"></select>
+                    <span class="error" ng-show="form.niveau.code.$dirty && form.niveau.code.$error.required">Le niveau est obligatoire</span>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button type="submit" class="btn btn-primary" ng-show="element.id" ng-click="form.$valid && valider()">
-                       <i class="glyphicon glyphicon-edit"></i> Modifier
+                        <i class="glyphicon glyphicon-edit"></i> Modifier
                     </button>
                     <button type="submit" class="btn btn-primary" ng-hide="element.id" ng-click="form.$valid && valider()">
                         <i class="glyphicon glyphicon-saved"></i> Enregistrer

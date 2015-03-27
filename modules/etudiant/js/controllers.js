@@ -9,6 +9,9 @@ angular.module("notesApp.etudiants.controllers", []).controller("EtudiantControl
         var niveaux = Niveau.query(function () {
             $scope.niveaux = niveaux;
         });
+        var options = Option.query(function () {
+            $scope.options = options;
+        });
         $scope.annee = null;
         $scope.departement = null;
         $scope.niveau = null;

@@ -37,10 +37,10 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="etudiant in etudiants | startFrom: ((currentPage - 1) * 10)| limitTo: 10">
+            <tr ng-repeat="etudiant in etudiants| startFrom: ((currentPage - 1) * 10)| limitTo: 10">
                 <td>{{etudiant.matricule}}</td>
                 <td>{{etudiant.nom}}</td>
-                <td>{{etudiant.dateDeNaissance | date:'dd/MM/yyyy'}}</td>
+                <td>{{etudiant.dateDeNaissance| date:'dd/MM/yyyy'}}</td>
                 <td>{{etudiant.lieuDeNaissance}}</td>
                 <td>{{etudiant.email}}</td>
                 <td>{{etudiant.numeroTelephone}}</td>

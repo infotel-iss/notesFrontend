@@ -13,7 +13,7 @@
         <tbody>
             <tr ng-repeat="programme in programmes" class="inverse">
                 <td>{{$index + 1}}</td>
-                <td>{{programme.annee.code}}</td>
+                <td>{{programme.annee.debut | date:'yyyy'}} -{{programme.annee.fin | date:'yyyy'}} </td>
                 <td>{{programme.uniteEns.code}}</td>
                 <td>{{programme.parcours.code}}</td>
                 <td><a ng-click="afficherFenetre(programme)"><i class="glyphicon glyphicon-edit"></i>  Modifier</a> | <a ng-click="supprimerProgramme(programme)"><i class="glyphicon glyphicon-remove"></i> Supprimer</a></td>
