@@ -1,12 +1,10 @@
-angular.module("notesApp.departements.controllers", []).controller("DepartementController", ["$timeout","$scope", "$modal", "$log", "Departement",
-    function ($timeout, $scope, $modal, $log, Departement) {
-        $timeout(function(){
+angular.module("notesApp.departements.controllers", []).controller("DepartementController", ["$scope", "$modal", "$log", "Departement",
+    function ($scope, $modal, $log, Departement) {
+
         var deps = Departement.query(function () {
-            
-                $scope.departements = _.sortBy(deps, 'code');
-            });
-            
-        },1000);
+
+            $scope.departements = _.sortBy(deps, 'code');
+        });
         $scope.afficherFenetre = function (item) {
             var modelInstance = $modal.open({
                 templateUrl: '/modules/departement/views/nouveau.html',
@@ -35,10 +33,10 @@ angular.module("notesApp.departements.controllers", []).controller("DepartementC
                         }
                     });
                 } else {
-                    Departement.save(item, function () {
-                        var tt = _.sortedIndex($scope.departements, item, 'code');
+                    var toto = Departement.save(item, function () {
+                        var tt = _.sortedIndex($scope.departements, toto, 'code');
                         if (tt !== -1) {
-                            $scope.departements.splice(tt, 0, item);
+                            $scope.departements.splice(tt, 0, toto);
                         }
                     });
                 }
