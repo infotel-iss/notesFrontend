@@ -18,7 +18,7 @@ angular.module("notesApp.programme.controllers", []).controller("ProgrammeContro
                 $http.get('/api/options/' + $scope.departement + '/' + $scope.niveau).success(function (data, status, config, headers) {
                     $scope.options = data;
                 });
-                $http.get('/api/semestres/'+ $scope.niveau).success(function (data, status, config, headers) {
+                $http.get('/api/niveaux/'+ $scope.niveau+"/semestres").success(function (data, status, config, headers) {
                     $scope.semestres = data;
                 });
             }
