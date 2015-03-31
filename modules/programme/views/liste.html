@@ -1,8 +1,35 @@
 <div>
-    <h4 class ="titre">LA LISTE DES PROGRMMES ENSEIGNEMENTS</h4><br/>
+    <h4 class ="titre">LA LISTE DES PROGRAMMES ENSEIGNEMENTS</h4><br/>
+    <form name="form" method="post" role="form" class="form-horizontal" novalidate>
+        <div class="form-group">
+            <label for="annee" class="col-sm-1 control-label">Ann&eacute;e</label>
+            <div class="col-sm-1">
+                <select id="annee" class="form-control" ng-model="annee" ng-options="annee.id as ((annee.debut|date:'yyyy') +'-' + (annee.fin|date:'yyyy'))  for annee in annees"></select>
+            </div>
+            <label for="departement" class="col-sm-1 control-label">Departement</label>
+            <div class="col-sm-2">
+                <select id="departement" class="form-control" ng-model="departement" ng-change="updateOptionsSemestre()" ng-options="departement.id as departement.code  for departement in departements | orderBy:'code'"></select>
+            </div>            
+            <label for="niveau" class="col-sm-1 control-label">Niveau</label>
+            <div class="col-sm-1">
+                <select id="niveau" class="form-control" ng-model="niveau" ng-change="updateOptionsSemestre()" ng-options="niveau.id as niveau.code  for niveau in niveaux | orderBy:'code'"></select>
+            </div>
+            <label for="semestre" class="col-sm-1 control-label">Semestre</label>
+            <div class="col-sm-1">
+                <select id="semestre" class="form-control" ng-model="semestre" ng-options="semestre as semestre.intitule  for semestre in semestres | orderBy:'intitule'"></select>
+            </div>
+            <label for="options" class="col-sm-1 control-label">Option</label>
+            <div class="col-sm-2">
+                <select id="options" class="form-control" ng-model="option" ng-options="option.id as option.code  for option in options | orderBy: 'code'"></select>
+            </div>
+            <div class="col-sm-1">
+                <button class="btn btn-success" ng-click="filtrer()">Filtrer</button>
+            </div>
+        </div>
+    </form>
     <table class="table table-bordered table-hover table-condensed table-striped">
         <thead>
-            <tr class="inverse">
+            <tr class="success">
                 <th>Numero</th>
                 <th>Annees</th>
                 <th>Unite</th>

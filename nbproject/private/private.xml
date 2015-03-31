@@ -5,7 +5,9 @@
         <group>
             <file>file:/var/www/notes/modules/etudiant/views/liste.html</file>
             <file>file:/var/www/notes/modules/programme/views/nouveau.html</file>
-            <file>file:/var/www/notes/modules/etudiant/views/nouveau.html</file>
+            <file>file:/var/www/notes/modules/programme/views/liste.html</file>
+            <file>file:/var/www/notes/modules/programme/js/controllers.js</file>
+            <file>file:/var/www/notes/modules/etudiant/js/controllers.js</file>
         </group>
     </open-files>
 </project-private>

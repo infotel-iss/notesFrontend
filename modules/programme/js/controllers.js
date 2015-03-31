@@ -1,8 +1,29 @@
-angular.module("notesApp.programme.controllers", []).controller("ProgrammeController", ["$scope", "$modal", "$log", "Programme",
-    function ($scope, $modal, $log, Programme) {
-        var deps = Programme.query(function () {
-            $scope.programmes = deps;
+angular.module("notesApp.programme.controllers", []).controller("ProgrammeController", ["$scope", "$modal", "$log", "Programme", "Annee", "Departement", "Niveau", "$http",
+    function ($scope, $modal, $log, Programme, Annee, Departement, Niveau, $http) {
+        var programmes = Programme.query(function () {
+            $scope.programmes = programmes;
         });
+        var ans = Annee.query(function () {
+            $scope.annees = ans;
+        });
+        var deps = Departement.query(function () {
+            $scope.departements = deps;
+        });
+        var niveaux = Niveau.query(function () {
+            $scope.niveaux = niveaux;
+        });
+        
+        $scope.updateOptionsSemestre = function () {
+            if (($scope.departement !== null) && ($scope.niveau !== null)) {
+                $http.get('/api/options/' + $scope.departement + '/' + $scope.niveau).success(function (data, status, config, headers) {
+                    $scope.options = data;
+                });
+                $http.get('/api/semestres/'+ $scope.niveau).success(function (data, status, config, headers) {
+                    $scope.semestres = data;
+                });
+            }
+        };
+        
         $scope.afficherFenetre = function (item) {
             var modelInstance = $modal.open({
                 templateUrl: '/modules/programme/views/nouveau.html',
@@ -64,23 +85,28 @@ angular.module("notesApp.programme.controllers", []).controller("ProgrammeContro
                 });
             }
         };
-    }]).controller("ProrammeFenetreController", ["$log","$scope", "$modalInstance", "element", "Option", "Niveau", "Annee", "UniteEns",
-    function ($log, $scope, $modalInstance, element, Option, Niveau, Annee, UniteEns) {
+    }]).controller("ProrammeFenetreController", ["$log","$scope", "$modalInstance", "element", "Option", "Niveau", "Annee", "UniteEns", "Departement",
+    function ($log, $scope, $modalInstance, element, Option, Niveau, Annee, UniteEns, Departement) {
         
-        var nivs = Niveau.query(function () {
-            $scope.niveaux = nivs;
-        });
+        $scope.element = element;
+        
         var opts = Option.query(function () {
             $scope.options = opts;
         });
+        var nivs = Niveau.query(function () {
+            $scope.niveaux = nivs;
+        });
+        
         var ans = Annee.query(function () {
             $scope.annees = ans;
         });
-        var deps = UniteEns.query(function () {
-            $scope.unites = deps;
+        var units = UniteEns.query(function () {
+            $scope.unites = units;
         });
         
-        $scope.element = element;
+        var deps = Departement.query(function () {
+            $scope.departements = deps;
+        });
         
         $log.log(element);
         $scope.valider = function () {

@@ -1,5 +1,8 @@
 angular.module("notesApp.etudiants.controllers", []).controller("EtudiantController", ["$log", "$http", "$scope", "Etudiant", "Annee", "Departement", "Niveau", "Option",
     function ($log, $http, $scope, Etudiant, Annee, Departement, Niveau, Option) {
+        var etds = Etudiant.query(function () {
+            $scope.etudiants = etds;
+        });
         var ans = Annee.query(function () {
             $scope.annees = ans;
         });
@@ -8,9 +11,6 @@ angular.module("notesApp.etudiants.controllers", []).controller("EtudiantControl
         });
         var niveaux = Niveau.query(function () {
             $scope.niveaux = niveaux;
-        });
-        var options = Option.query(function () {
-            $scope.options = options;
         });
         $scope.annee = null;
         $scope.departement = null;
@@ -46,6 +46,6 @@ angular.module("notesApp.etudiants.controllers", []).controller("EtudiantControl
                 $scope.etudiants = data;
                 $scope.totalItems = data.length;
             });
-        }
+        };
 
     }]);
