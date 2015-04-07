@@ -12,8 +12,8 @@
         <tbody>
             <tr ng-repeat="annee in annees" class="inverse">
                 <td>{{$index + 1}}</td>
-                <td>{{annee.debut}}</td>
-                <td>{{annee.fin}}</td>
+                <td>{{annee.debut| date:'dd/MM/yyyy'}}</td>
+                <td>{{annee.fin| date:'dd/MM/yyyy'}}</td>
                 <td><a ng-click="afficherFenetre(annee)"> <i class="glyphicon glyphicon-edit"></i> Modifier</a> | <a ng-click="supprimerAnnee(annee)"><i class="glyphicon glyphicon-remove"></i> Supprimer </a></td>
             </tr>
         </tbody>

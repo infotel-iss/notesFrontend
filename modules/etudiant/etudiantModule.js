@@ -6,7 +6,7 @@ angular.module("notesApp.etudiants").config(function($stateProvider,$locationPro
 		templateUrl:'modules/etudiant/views/liste.html'
 	}).state("eimportation", {
 		url:'/etudiants/importation',
-		controller:'EtudiantController',
+		controller:'EtudiantImportController',
 		templateUrl:'modules/etudiant/views/importation.html'
 	}).state("inscription", {
 		url:'/etudiants',

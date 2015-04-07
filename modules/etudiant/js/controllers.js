@@ -48,4 +48,31 @@ angular.module("notesApp.etudiants.controllers", []).controller("EtudiantControl
             });
         };
 
+    }]).controller('EtudiantImportController', ["$scope", "$http", "Annee", "$log", function ($scope, $http, Annee, $log) {
+        $scope.fichier = null;
+        $scope.annee = null;
+        $scope.files = null;
+        $scope.uploadFile = function (fs) {
+            $scope.files = fs;
+        };
+        var ans = Annee.query(function () {
+            $scope.annees = ans;
+        });
+        $scope.valider = function () {
+            $log.log("Toto est un vrai toto");
+            $log.log("Le code de l'annee " + $scope.annee);
+            var fd = new FormData();
+            //Take the first selected file
+            fd.append("fichier", $scope.files[0]);
+            fd.append("annee", $scope.annee);
+            $http.post('/api/etudiants/import', fd, {
+                withCredentials: true,
+                headers: {'Content-Type': undefined},
+                transformRequest: angular.identity
+            }).success(function () {
+                $log.log("Importation reussie");
+            }).error(function () {
+                $log.log("Erreur lors de l'importation");
+            });
+        };
     }]);
