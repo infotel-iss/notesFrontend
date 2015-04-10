@@ -71,12 +71,10 @@ angular.module("notesApp.typecours.controllers", []).controller("TypecoursContro
         $scope.element = element;
         $log.log(element);
         $scope.valider = function () {
-            $log.log("version ok");
             $modalInstance.close($scope.element);
         };
 
         $scope.cancel = function () {
-            $log.log("version cancel");
             $modalInstance.dismiss("Cancel");
         };
 

@@ -1,22 +1,31 @@
 <div>
-    <h3 class ="titre">LA LISTE DES TYPES DE COURS</h3><br/>
-    <table class="table table-bordered table-hover table-condensed table-striped">
-        <thead>
-            <tr class="success">
-                <th>Numero</th>
-                <th>nom</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="type in typecours" class="inverse">
-                <td>{{$index + 1}}</td>
-                <td>{{type.nom}}</td>
-                <td><a ng-click="afficherFenetre(type)"><i class="glyphicon glyphicon-edit"></i>  Modifier</a> | <a ng-click="supprimerTypecours(type)"><i class="glyphicon glyphicon-remove"></i> Supprimer</a></td>
-            </tr>
-        </tbody>
-    </table>
-    <form>
-        <button class="btn btn-primary" ng-click="afficherFenetre(undefined)"><i class="icon-user"></i><i class="glyphicon glyphicon-save"></i> Ajouter</button>
-    </form>
+    <h3 class ="titre">LES TYPES DE COURS</h3><br/>
+    <div class="container-fluid">
+        <div class="col-md-6" ng-repeat="type in typecours">
+            <div class=" panel panel-default">
+                <div class="panel-heading">{{type.nom}}<span class="pull-right"><a href="#" ng-click="afficherFenetre(type)"><i class="glyphicon glyphicon-edit"></i></a>|<a href="#" ng-click="supprimerTypecours(type)"><i class="glyphicon glyphicon-remove"></i></a></span></div>
+                <div class="panel-body">
+                    <div ng-show="!type.evaluations.length" class="label label-info">Aucune evaluation definie</div>
+                    <table class="table table-bordered" ng-show="type.evaluations.length">
+                        <thead>
+                            <tr class="success">
+                                <th>Evaluation</th>
+                                <th>Pourcentage</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="eva in type.evaluations">
+                                <td>{{eva.evaluation.code}}</td>
+                                <td>{{eva.pourcentage}} %</td>
+                                <td><a href="#" ng-click="modifierEvaluation(type,eva)"><i class="glyphicon glyphicon-edit"></i></a>|<a href="#" ng-click="supprimerEvaluation(type,eva)"><i class="glyphicon glyphicon-remove"></i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="#" ng-click="ajouterEvaluation()">Ajouter Evaluation</a>
+                </div>
+            </div>
+        </div>
+        <a href="#" ng-click="afficherFenetre()">Ajouter Type Cours</a>
+    </div>
 </div>
