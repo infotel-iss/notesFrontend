@@ -12,7 +12,7 @@ angular.module("notesApp.notes.controllers", []).controller("NoteController", ["
         });
         
         var cours = Cours.query(function () {
-            $scope.cours = cours;
+            $scope.courss = cours;
         });
 
         $scope.department = null;

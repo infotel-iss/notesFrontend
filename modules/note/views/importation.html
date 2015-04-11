@@ -1,32 +1,48 @@
-<div>
-    <h4 class ="titre">IMPORTATION DES NOTES</h4><br/>
-    <form name="form" method="post" role="form" class="form-horizontal" novalidate>
-        <div class="form-group">
-            <label for="departement" class="col-sm-1 control-label">Departement</label>
-            <div class="col-sm-3">
-                <select id="departement" class="form-control" ng-model="department"  ng-options="departement.code  for departement in departements |orderBy: 'code'"></select>
-            </div>        
-        </div>
-    </form>
-    <table class="table table-bordered table-hover table-condensed table-striped">
-        <thead>
-            <tr class="success">
-                <th>Numero</th>
-                <th>Code</th>
-                <th>Description</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="opt in optionss | filter : {departement.code : department.code} | orderBy : 'code'" class="inverse single-comment">
-                <td>{{$index + 1}}</td>
-                <td>{{opt.code}}</td>
-                <td>{{opt.description}}</td>
-                <td><a ng-click="afficherFenetre(opt)"><i class="glyphicon glyphicon-edit"></i> Modifier</a> | <a ng-click="supprimerOption(opt)"><i class="glyphicon glyphicon-remove"></i> Supprimer</a></td>
-            </tr>
-        </tbody>
-    </table>
+<div class="panel panel-primary">
+    <div class="panel-heading" >
+       Importation Des Notes
+    </div>
+    <div class="panel-body">
+        <form name="form" method="post" role="form" class="form-horizontal" novalidate>
+            <div class="form-group">
+                <label for="annee" class="col-sm-2 control-label">Annees</label>
+                <div class="col-sm-8">
+                    <select  name="annee"  class="form-control " id="annee" ng-model="element.anneeAcademique" ng-required="true" ng-options="annee as ((annee.debut|date:'yyyy') +'-' + (annee.fin|date:'yyyy'))  for annee in annees"></select>
+                    <span class="error" ng-show="form.annee.$dirty && form.annee.$error.required">L'annee est obligatoire</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="unite" class="col-sm-2 control-label">Cours</label>
+                <div class="col-sm-8">
+                    <input type="text" ng-model="element.uniteEnseignement" id="unite" typeahead="cours as cours.code  for cours in courss | filter:$viewValue | limitTo:6" class="form-control">
+                    <span class="error" ng-show="form.unite.code.$dirty && form.unite.code.$error.required">Le cours est obligatoire</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="niveau" class="col-sm-2 control-label">Nom de l'Evaluation</label>
+                <div class="col-sm-8">
+                    <select  name="niveau"  class="form-control " id="niveau" ng-model="element.parcours.niveau" ng-required="true" ng-change = "niveauSemestre()" ng-options="niveau as niveau.code  for niveau in niveaux"></select>
+                    <span class="error" ng-show="form.niveau.code.$dirty && form.niveau.code.$error.required">Le niveau est obligatoire</span>
+                </div>  
+            </div>
+            <div class="form-group" ng-show ="session">
+                <label for="niveau" class="col-sm-2 control-label">La Session</label>
+                <div class="col-sm-8">
+                    <select  name="niveau"  class="form-control " id="niveau" ng-model="element.parcours.niveau" ng-required="true" ng-change = "niveauSemestre()" ng-options="niveau as niveau.code  for niveau in niveaux"></select>
+                    <span class="error" ng-show="form.niveau.code.$dirty && form.niveau.code.$error.required">La session est obligatoire</span>
+                </div>  
+            </div>
+            <div class="form-group">
+                <label for="niveau" class="col-sm-2 control-label">Fichier</label>
+                <div class="col-sm-8">
+                    <input  name="file" type ="file" class="form-control " id="niveau" ng-model="element.parcours.niveau" ng-required="true" />
+                    <span class="error" ng-show="form.niveau.code.$dirty && form.niveau.code.$error.required">La session est obligatoire</span>
+                </div>  
+            </div>
+        </form>
+    </div>
+</div>
     <form>
-        <button class="btn btn-primary" ng-click="afficherFenetre(undefined)"><i class="glyphicon glyphicon-save"></i> Ajouter</button>
+        <button class="btn btn-primary" ng-click="afficherFenetre(undefined)"><i class="glyphicon glyphicon-save"></i> Impoorter</button>
     </form>
 </div>
