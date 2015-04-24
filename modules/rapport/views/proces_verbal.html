@@ -1,0 +1,56 @@
+<div>
+    <h3 class="titre">PROCES VERBAL</h3><br/>
+    <div class="panel-body">
+        <form name="form" method="post" role="form" class="form-horizontal" novalidate>
+            <div class="form-group">
+                <label for="departement" class="col-sm-2 control-label">Departement</label>
+                <div class="col-sm-6">
+                    <select id="departement" name="departement"  ng-options="departement.code for departement in departements" class="form-control" ng-required="true"></select>
+                    <span class="error" ng-show="form.code.$dirty && form.code.$error.required">Le fichier est obligatoire</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="niveau" class="col-sm-2 control-label">Niveau</label>
+                <div class="col-sm-6">
+                    <select id="niveau" name="niveau"  ng-options="departement.code for departement in departements" class="form-control" ng-required="true"></select>
+                    <span class="error" ng-show="form.code.$dirty && form.code.$error.required">Le fichier est obligatoire</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="option" class="col-sm-2 control-label">Option</label>
+                <div class="col-sm-6">
+                    <select id="option" name="option"  ng-options="departement.code for departement in departements" class="form-control" ng-required="true"></select>
+                    <span class="error" ng-show="form.code.$dirty && form.code.$error.required">Le fichier est obligatoire</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cours" class="col-sm-2 control-label">Cours</label>
+                <div class="col-sm-6">
+                    <select id="cours" name="cours"  ng-options="departement.code for departement in departements" class="form-control" ng-required="true"></select>
+                    <span class="error" ng-show="form.code.$dirty && form.code.$error.required">Le fichier est obligatoire</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="annee" class="col-sm-2 control-label">Annee</label>
+                <div class="col-sm-6">
+                    <select id="annee" name="annee"  ng-options="departement.code for departement in departements" class="form-control" ng-required="true"></select>
+                    <span class="error" ng-show="form.code.$dirty && form.code.$error.required">Le fichier est obligatoire</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="session" class="col-sm-2 control-label">Session</label>
+                <div class="col-sm-6">
+                    <select id="session" name="session"  ng-options="departement.code for departement in departements" class="form-control" ng-required="true"></select>
+                    <span class="error" ng-show="form.code.$dirty && form.code.$error.required">Le fichier est obligatoire</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success btn-s" ng-click="form.$valid && valider()">
+                        <span class="glyphicon glyphicon-upload"></span> Générer
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

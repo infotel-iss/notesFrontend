@@ -2,7 +2,7 @@ angular.module("notesApp.notes", ['notesApp.notes.controllers', 'notesApp.notes.
 angular.module("notesApp.options").config(function ($stateProvider, $locationProvider) {
     $stateProvider.state("nimportation", {
         url: '/importation',
-        controller: 'NoteController',
+        controller: 'NoteImportationController',
         templateUrl: 'modules/note/views/importation.html'
     }).state("nexportation", {
         url: '/exportation',

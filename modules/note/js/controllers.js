@@ -17,4 +17,17 @@ angular.module("notesApp.notes.controllers", []).controller("NoteController", ["
 
         $scope.department = null;
 
+    }]).controller("NoteImportationController",["$scope", "Annee","Cours", "Evaluation", function($scope,Annee, Cours, Evaluation){
+        var ans = Annee.query(function(){
+            $scope.annees = ans;
+        });
+        var cos = Cours.query(function(){
+           $scope.cours = cos; 
+        });
+        var evals = Evaluation.query(function(){
+           $scope.evaluations = evals; 
+        });
+        $scope.cour = {};
+        $scope.evaluation = {};
+        $scope.annee = {};
     }]);
