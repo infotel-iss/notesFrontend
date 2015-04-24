@@ -1,7 +1,7 @@
-angular.module("notesApp.notes.controllers", []).controller("NoteController", ["$scope", "$modal", "$log", "Option", "Departement",
+angular.module("notesApp.notes.controllers", []).controller("NoteController", ["$scope", "$modal", "$log", "Cours", "Evaluation","Annee",
     function ($scope, Option, Departement, Niveau,Cours) {
-        var op = Option.query(function () {
-            $scope.optionss = op;
+        var cours = Cours.query(function () {
+            $scope.courss = cours;
         }); 
 
         var deps = Departement.query(function () {
@@ -11,13 +11,12 @@ angular.module("notesApp.notes.controllers", []).controller("NoteController", ["
             $scope.niveaux = nivs;
         });
         
-        var cours = Cours.query(function () {
-            $scope.courss = cours;
-        });
+        
 
         $scope.department = null;
 
-    }]).controller("NoteImportationController",["$scope", "Annee","Cours", "Evaluation", function($scope,Annee, Cours, Evaluation){
+    }]).controller("NoteImportationController",["Annee","Cours", "Evaluation", "$scope", 
+    function(Annee, Cours, Evaluation, $scope){
         var ans = Annee.query(function(){
             $scope.annees = ans;
         });
@@ -27,6 +26,9 @@ angular.module("notesApp.notes.controllers", []).controller("NoteController", ["
         var evals = Evaluation.query(function(){
            $scope.evaluations = evals; 
         });
+        $scope.uploadFile = function (fs) {
+            $scope.files = fs;
+        };
         $scope.cour = {};
         $scope.evaluation = {};
         $scope.annee = {};
