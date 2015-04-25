@@ -1,7 +1,7 @@
-angular.module("notesApp.evaluations.controllers",[]).controller("EvaluationController", ["$scope", "$modal", "$log", "Evaluation",
-function($scope, $modal, $log, Evaluation) {
+angular.module("notesApp.evaluations.controllers",[]).controller("EvaluationController", ["$scope", "$modal", "Evaluation",
+function($scope, $modal, Evaluation) {
 	var deps = Evaluation.query(function() {
-		$scope.departements = deps;
+		$scope.evaluations = deps;
 	});
 	$scope.afficherFenetre = function(item) {
 		var modelInstance = $modal.open({
@@ -16,66 +16,62 @@ function($scope, $modal, $log, Evaluation) {
 					if(item)
 					   tt = item;
 					else
-					   tt = new Evaluation();
-					$log.log(tt);
+					   tt = {};
 					return tt;
 				}
 			}
 		});
 		modelInstance.result.then(function(item) {
 			if (item.id) {
-				item.$update(function() {
+				item.$update(function(toto) {
 					var id;
-					for (var i = 0; i < $scope.departements.length; i++) {
-						if ($scope.departements[i].id == item.id) {
+					for (var i = 0; i < $scope.evaluations.length; i++) {
+						if ($scope.evaluations[i].id === item.id) {
 							id = i;
 							break;
 						}
 					}
 					if (id) {
-						$scope.departements.splice(id, 1,item);
+						$scope.evaluations.splice(id, 1,toto);
 					}
 				});
 			} else {
-				Evaluation.save(item, function() {
-					$scope.departements.push(item);
+				var toto = Evaluation.save(item, function() {
+					$scope.evaluations.push(toto);
 				});
 			}
 		}, function() {
 
 		});
 
-	}
+	};
 	$scope.supprimerEvaluation = function(item) {
-		if (confirm("Voulez vous vraiment supprimer ce departement?")) {
+		if (confirm("Voulez vous vraiment supprimer cette évaluation?")) {
 			Evaluation.remove({
 				id : item.id
 			}, function() {
 				var id;
-				for (var i = 0; i < $scope.departements.length; i++) {
-					if ($scope.departements[i].id == item.id) {
+				for (var i = 0; i < $scope.evaluations.length; i++) {
+					if ($scope.evaluations[i].id === item.id) {
 						id = i;
 						break;
 					}
 
 				}
 				if (id) {
-					$scope.departements.splice(id, 1);
+					$scope.evaluations.splice(id, 1);
 				}
-			})
-		}
-	}
-}]).controller("EvaluationFenetreController", ["$log","$scope", "$modalInstance", "element",
-function($log,$scope, $modalInstance, element) {
+			});
+		};
+	};
+}]).controller("EvaluationFenetreController", ["$scope", "$modalInstance", "element",
+function($scope, $modalInstance, element) {
 	$scope.element = element;
-	$log.log(element);
 	$scope.valider = function() {
-		$log.log("version ok");
 		$modalInstance.close($scope.element);
 	};
 
 	$scope.cancel = function() {
-		$log.log("version cancel");
 		$modalInstance.dismiss("Cancel");
 	};
 

@@ -1,5 +1,5 @@
-angular.module("notesApp.typecours.controllers", []).controller("TypecoursController", ["$scope", "$modal", "$log", "TypeCours",
-    function ($scope, $modal, $log, TypeCours) {
+angular.module("notesApp.typecours.controllers", []).controller("TypecoursController", ["$scope", "$modal", "TypeCours",
+    function ($scope, $modal,TypeCours) {
         var deps = TypeCours.query(function () {
             $scope.typecours = deps;
         });
@@ -13,16 +13,25 @@ angular.module("notesApp.typecours.controllers", []).controller("TypecoursContro
                 resolve: {
                     element: function () {
                         var tt;
-                        if (eva)
+                        if (eva){
                             tt = eva;
-                        else
+                            tt.typecours = typ;
+                        }
+                        else{
                             tt = {};
+                            tt.typecours = typ;
+                        }
                         return tt;
                     }
                 }
             });
             modelInstance.result.then(function(item){
-                
+                if(item.id){
+                    // I'm updating
+                }else{
+                    // I'm creating a new value
+                    $http.post()
+                }
             }, function(){
                 
             });
@@ -46,14 +55,14 @@ angular.module("notesApp.typecours.controllers", []).controller("TypecoursContro
                         if (item)
                             tt = item;
                         else
-                            tt = new TypeCours();
+                            tt ={};
                         return tt;
                     }
                 }
             });
             modelInstance.result.then(function (item) {
                 if (item.id) {
-                    item.$update(function () {
+                    item.$update(function (toto) {
                         var id;
                         for (var i = 0; i < $scope.typecours.length; i++) {
                             if ($scope.typecours[i].id === item.id) {
@@ -62,7 +71,7 @@ angular.module("notesApp.typecours.controllers", []).controller("TypecoursContro
                             }
                         }
                         if (id) {
-                            $scope.typecours.splice(id, 1, item);
+                            $scope.typecours.splice(id, 1, toto);
                         }
                     });
                 } else {
@@ -77,13 +86,12 @@ angular.module("notesApp.typecours.controllers", []).controller("TypecoursContro
         };
         $scope.supprimerTypecours = function (item) {
             if (confirm("Voulez vous vraiment supprimer ce type de cours?")) {
-                $log.log("l'element a pour id ="+ item.id);
                 TypeCours.remove({
                     id: item.id
                 }, function () {
                     var id;
                     for (var i = 0; i < $scope.typecours.length; i++) {
-                        if ($scope.typecours[i].id == item.id) {
+                        if ($scope.typecours[i].id === item.id) {
                             id = i;
                             break;
                         }
@@ -92,9 +100,9 @@ angular.module("notesApp.typecours.controllers", []).controller("TypecoursContro
                     if (id) {
                         $scope.typecours.splice(id, 1);
                     }
-                })
-            }
-        }
+                });
+            };
+        };
     }]).controller("TypecoursFenetreController", ["$scope", "$modalInstance", "element",
     function ($scope, $modalInstance, element) {
         $scope.element = element;
