@@ -1,9 +1,9 @@
-angular.module("notesApp.typecours.controllers", []).controller("TypecoursController", ["$scope", "$modal", "TypeCours",
-    function ($scope, $modal,TypeCours) {
+angular.module("notesApp.typecours.controllers", []).controller("TypecoursController", ["$log", "$scope", "$modal", "TypeCours", "EvaluationDetailService",
+    function ($log, $scope, $modal, TypeCours, EvaluationDetailService) {
         var deps = TypeCours.query(function () {
             $scope.typecours = deps;
         });
-        $scope.ajouterEvaluation = function(typ,eva){
+        $scope.ajouterEvaluation = function (typ, eva) {
             var modelInstance = $modal.open({
                 templateUrl: '/modules/typecours/views/nouveau_evaluation.html',
                 controller: 'EvaluationDetailController',
@@ -13,34 +13,63 @@ angular.module("notesApp.typecours.controllers", []).controller("TypecoursContro
                 resolve: {
                     element: function () {
                         var tt;
-                        if (eva){
+                        $scope.typeCours = typ;
+                        if (eva) {
                             tt = eva;
-                            tt.typecours = typ;
+                            tt.typeCours = Object.create(typ);
+                            tt.typeCours.evaluations = null;
                         }
-                        else{
+                        else {
                             tt = {};
-                            tt.typecours = typ;
+                            tt.typeCours = typ;
                         }
                         return tt;
                     }
                 }
             });
-            modelInstance.result.then(function(item){
-                if(item.id){
+            modelInstance.result.then(function (item) {
+                if (item.id) {
                     // I'm updating
-                }else{
+                    $log.log("I'm updating an evaluation");
+                    EvaluationDetailService.modifierEvaluation(item.typeCours, item).then(function () {
+
+                    }, function () {
+
+                    });
+                } else {
                     // I'm creating a new value
-                    $http.post()
+                    $log.log("I'm adding a new evaluation to a typeCours");
+                    $log.log("The value of item " + JSON.stringify(item));
+                    $log.log("The value of typeCours " + item.typeCours);
+                    EvaluationDetailService.addEvaluation(item.typeCours, item).then(function (data) {
+                        $scope.typeCours.evaluations.push(data.data);
+                    }, function () {
+
+                    });
                 }
-            }, function(){
-                
+            }, function () {
+
             });
         };
-        $scope.modifierEvaluation = function(){
-            
-        };
-        $scope.supprimerEvaluation = function(){
-            
+
+        $scope.supprimerEvaluation = function (typ, eva) {
+            if (confirm("Voulez vous vraiment supprimer cette evaluation du cours ?")) {
+                EvaluationDetailService.supprimerEvaluation(typ, eva).then(function () {
+                    $log.log("I'm deleting an evaluation from typeCours");
+                    var id;
+                    for (var i = 0; i < typ.evaluations.length; i++) {
+                        if (typ.evaluations[i].id === eva.id) {
+                            id = i;
+                            break;
+                        }
+                    }
+                    if (id) {
+                        typ.evaluations.splice(id, 1);
+                    }
+                }, function () {
+
+                });
+            }
         };
         $scope.afficherFenetre = function (item) {
             var modelInstance = $modal.open({
@@ -55,7 +84,7 @@ angular.module("notesApp.typecours.controllers", []).controller("TypecoursContro
                         if (item)
                             tt = item;
                         else
-                            tt ={};
+                            tt = {};
                         return tt;
                     }
                 }
@@ -101,7 +130,8 @@ angular.module("notesApp.typecours.controllers", []).controller("TypecoursContro
                         $scope.typecours.splice(id, 1);
                     }
                 });
-            };
+            }
+            ;
         };
     }]).controller("TypecoursFenetreController", ["$scope", "$modalInstance", "element",
     function ($scope, $modalInstance, element) {
@@ -114,8 +144,8 @@ angular.module("notesApp.typecours.controllers", []).controller("TypecoursContro
             $modalInstance.dismiss("Cancel");
         };
 
-    }]).controller("EvaluationDetailController", ["$scope", "Evaluation","$modalInstance","element", function($scope, Evaluation,$modalInstance,element){
-        var ops = Evaluation.query(function(){
+    }]).controller("EvaluationDetailController", ["$scope", "Evaluation", "$modalInstance", "element", function ($scope, Evaluation, $modalInstance, element) {
+        var ops = Evaluation.query(function () {
             $scope.evaluations = ops;
         });
         $scope.element = element;

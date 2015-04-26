@@ -1,8 +1,8 @@
-angular.module("notesApp.notes.controllers", []).controller("NoteController", ["$scope", "$modal", "$log", "Cours", "Evaluation","Annee",
-    function ($scope, Option, Departement, Niveau,Cours) {
+angular.module("notesApp.notes.controllers", []).controller("NoteController", ["$scope", "$modal", "$log", "Cours", "Evaluation", "Annee",
+    function ($scope, Option, Departement, Niveau, Cours) {
         var cours = Cours.query(function () {
             $scope.courss = cours;
-        }); 
+        });
 
         var deps = Departement.query(function () {
             $scope.departements = deps;
@@ -10,21 +10,21 @@ angular.module("notesApp.notes.controllers", []).controller("NoteController", ["
         var nivs = Niveau.query(function () {
             $scope.niveaux = nivs;
         });
-        
-        
+
+
 
         $scope.department = null;
 
-    }]).controller("NoteImportationController",["Annee","Cours", "Evaluation", "$scope", "$http","$log",
-    function(Annee, Cours, Evaluation, $scope, $http, $log){
-        var ans = Annee.query(function(){
+    }]).controller("NoteImportationController", ["Annee", "Cours", "Evaluation", "$scope", "$http", "$log",
+    function (Annee, Cours, Evaluation, $scope, $http, $log) {
+        var ans = Annee.query(function () {
             $scope.annees = ans;
         });
-        var cos = Cours.query(function(){
-           $scope.cours = cos; 
+        var cos = Cours.query(function () {
+            $scope.cours = cos;
         });
-        var evals = Evaluation.query(function(){
-           $scope.evaluations = evals; 
+        var evals = Evaluation.query(function () {
+            $scope.evaluations = evals;
         });
         $scope.uploadFile = function (fs) {
             $scope.files = fs;
@@ -39,7 +39,8 @@ angular.module("notesApp.notes.controllers", []).controller("NoteController", ["
             fd.append("courId", $scope.cour.id);
             fd.append("evaluationId", $scope.evaluation.id);
             fd.append("anneeId", $scope.annee);
-            fd.append("session", $scope.session);
+            if ($scope.session)
+                fd.append("session", $scope.session);
             $http.post('/api/notes/import', fd, {
                 withCredentials: true,
                 headers: {'Content-Type': undefined},

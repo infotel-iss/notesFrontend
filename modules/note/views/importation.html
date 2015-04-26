@@ -48,7 +48,7 @@
             <div class="form-group" ng-show="evaluation.isExam">
                 <label for="session" class="col-sm-2 control-label">Session</label>
                 <div class="col-sm-6">
-                    <select name="session"  id="session" class="form-control" ng-model="session" ng-required="true">
+                    <select name="session"  id="session" class="form-control" ng-model="session" ng-required="evaluation.isExam">
                         <option value="">Select one</option>
                         <option value="0">Normale</option>
                         <option value="1">Rattrapage</option>
