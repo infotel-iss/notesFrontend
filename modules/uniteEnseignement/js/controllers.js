@@ -59,10 +59,7 @@ angular.module("notesApp.uniteenseignements.controllers", []).controller("UniteE
                 resolve: {
                     element: function () {
                         var tt;
-                        if (item)
-                            tt = item;
-                        else
-                            tt = new UniteEns();
+                        tt = item;
                         $log.log(tt);
                         return tt;
                     }
@@ -70,22 +67,9 @@ angular.module("notesApp.uniteenseignements.controllers", []).controller("UniteE
             });
             modelInstance.result.then(function (item) {
                 if (item.id) {
-                    item.$update(function () {
-                        var id;
-                        for (var i = 0; i < $scope.unites.length; i++) {
-                            if ($scope.unites[i].id === item.id) {
-                                id = i;
-                                break;
-                            }
-                        }
-                        if (id) {
-                            $scope.unites.splice(id, 1, item);
-                        }
-                    });
+                    $log.log("UE ok");
                 } else {
-                    UniteEns.save(item, function () {
-                        $scope.unites.push(item);
-                    });
+                    $log.log("probleme avec UE");
                 }
             }, function () {
 
@@ -113,9 +97,14 @@ angular.module("notesApp.uniteenseignements.controllers", []).controller("UniteE
                 });
             }
         };
-    }]).controller("UniteEnsFenetreController", ["$log", "$scope", "$modalInstance", "element",
-    function ($log, $scope, $modalInstance, element) {
+    }]).controller("UniteEnsFenetreController", ["$log", "$scope", "$modalInstance", "element", "ListeCours",
+    function ($log, $scope, $modalInstance, element, ListeCours) {
         $scope.element = element;
+
+        ListeCours.getCoursUe($scope.element.id).then(function (data) {
+            $scope.cours = data;
+        });
+
         $log.log(element);
         $scope.valider = function () {
             $log.log("version ok");
