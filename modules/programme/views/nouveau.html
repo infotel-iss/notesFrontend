@@ -24,14 +24,14 @@
             <div class="form-group">
                 <label for="departement" class="col-sm-2 control-label">Departement</label>
                 <div class="col-sm-8">
-                    <select id="departement" class="form-control" ng-model="departement" ng-change="niveauOptions()" ng-options="departement.id as departement.code  for departement in departements | orderBy:'code'"></select>
+                    <select id="departement" class="form-control" ng-model="departement" ng-change="updateOptionsSemestreNiveaux()" ng-options="departement.id as departement.code  for departement in departements | orderBy:'code'"></select>
                     <span class="error" ng-show="form.niveau.code.$dirty && form.departemen.code.$error.required">Le departement est obligatoire</span>
                 </div>
             </div>
             <div class="form-group">
                 <label for="niveau" class="col-sm-2 control-label">Niveau</label>
                 <div class="col-sm-8">
-                    <select  name="niveau"  class="form-control " id="niveau" ng-model="element.parcours.niveau" ng-required="true" ng-change = "niveauSemestre()" ng-options="niveau as niveau.code  for niveau in niveaux"></select>
+                    <select  name="niveau"  class="form-control " id="niveau" ng-model="element.parcours.niveau" ng-required="true" ng-change = "updateOptionsSemestreNiveaux()" ng-options="niveau as niveau.code  for niveau in niveaux"></select>
                     <span class="error" ng-show="form.niveau.code.$dirty && form.niveau.code.$error.required">Le niveau est obligatoire</span>
                 </div>
             </div>

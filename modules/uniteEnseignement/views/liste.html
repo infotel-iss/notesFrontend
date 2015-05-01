@@ -2,7 +2,7 @@
     <h4 class="titre">LA LISTE DES UNITES</h4>
     <table class="table table-bordered table-hover table-condensed table-striped">
         <thead>
-            <tr>
+            <tr class="success">
                 <th>Numero</th>
                 <th>Nom</th>
                 <th>Intitule</th>
@@ -14,11 +14,23 @@
                 <td>{{$index + 1}}</td>
                 <td>{{unite.code}}</td>
                 <td>{{unite.intitule}}</td>
-                <td><a ng-click="afficherFenetre(unite)"><i class="glyphicon glyphicon-edit"></i> Modifier</a> | <a ng-click="supprimerUniteEns(unite)"><i class="glyphicon glyphicon-remove"></i> Supprimer</a></td>
+                <td>
+                    <a ng-click="afficherFenetre(unite)">
+                        <i class="glyphicon glyphicon-edit"></i> Modifier
+                    </a> | 
+                    <a ng-click="supprimerUniteEns(unite)">
+                        <i class="glyphicon glyphicon-remove"></i> Supprimer
+                    </a> |
+                    <a ng-click="listerCoursUe(unite)">
+                        <i class="glyphicon glyphicon-list-alt"></i> cours
+                    </a>
+                </td>
             </tr>
         </tbody>
     </table>
     <form>
-        <button class="btn btn-primary" ng-click="afficherFenetre(undefined)"><i class="glyphicon glyphicon-save"></i> Ajouter Enseigant</button>
+        <button class="btn btn-primary" ng-click="afficherFenetre(undefined)">
+            <i class="glyphicon glyphicon-save"></i> Ajouter Enseigant
+        </button>
     </form>
 </div>

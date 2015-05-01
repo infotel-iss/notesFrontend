@@ -3,6 +3,7 @@ angular.module("notesApp.uniteenseignements.controllers", []).controller("UniteE
         var deps = UniteEns.query(function () {
             $scope.unites = deps;
         });
+
         $scope.afficherFenetre = function (item) {
             var modelInstance = $modal.open({
                 templateUrl: '/modules/uniteEnseignement/views/nouveau.html',
@@ -46,6 +47,53 @@ angular.module("notesApp.uniteenseignements.controllers", []).controller("UniteE
             });
 
         };
+        // la boite modal qui s'occupe de la liste de des cours
+
+        $scope.listerCoursUe = function (item) {
+            var modelInstance = $modal.open({
+                templateUrl: '/modules/uniteEnseignement/views/listeCours.html',
+                controller: 'UniteEnsFenetreController',
+                controllerAs: 'unite',
+                keyboard: true,
+                backdrop: false,
+                resolve: {
+                    element: function () {
+                        var tt;
+                        if (item)
+                            tt = item;
+                        else
+                            tt = new UniteEns();
+                        $log.log(tt);
+                        return tt;
+                    }
+                }
+            });
+            modelInstance.result.then(function (item) {
+                if (item.id) {
+                    item.$update(function () {
+                        var id;
+                        for (var i = 0; i < $scope.unites.length; i++) {
+                            if ($scope.unites[i].id === item.id) {
+                                id = i;
+                                break;
+                            }
+                        }
+                        if (id) {
+                            $scope.unites.splice(id, 1, item);
+                        }
+                    });
+                } else {
+                    UniteEns.save(item, function () {
+                        $scope.unites.push(item);
+                    });
+                }
+            }, function () {
+
+            });
+
+        };
+
+
         $scope.supprimerUniteEns = function (item) {
             if (confirm("Voulez vous vraiment supprimer cet enseinant ?")) {
                 UniteEns.remove({
