@@ -108,13 +108,13 @@ angular.module("notesApp.programme.controllers", []).controller("ProgrammeContro
             NiveauxSemestre.getSemestreNiveaux($scope.element.parcours.niveau.id).then(function(data) {
                 $scope.semestres = data;
             });
-        }
+        };
 
         $scope.niveauOptions = function() {
             NiveauxOptions.getOptionsNiveau($scope.departement, $scope.element.parcours.niveau.id).then(function(data) {
                 $scope.options = data;
             });
-        }
+        };
 
         $scope.valider = function () {
             $modalInstance.close($scope.element);
