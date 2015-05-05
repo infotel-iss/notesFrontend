@@ -104,6 +104,17 @@ angular.module("notesApp.programme.controllers", []).controller("ProgrammeContro
         var deps = Departement.query(function () {
             $scope.departements = deps;
         });
+        $scope.niveauSemestre = function() {
+            NiveauxSemestre.getSemestreNiveaux($scope.element.parcours.niveau.id).then(function(data) {
+                $scope.semestres = data;
+            });
+        };
+
+        $scope.niveauOptions = function() {
+            NiveauxOptions.getOptionsNiveau($scope.departement, $scope.element.parcours.niveau.id).then(function(data) {
+                $scope.options = data;
+            });
+        };
 
         $scope.updateOptionsSemestreNiveaux = function () {
             if (($scope.departement !== null) && ($scope.niveau !== null)) {

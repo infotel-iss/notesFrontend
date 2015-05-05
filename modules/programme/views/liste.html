@@ -43,7 +43,7 @@
         <tbody>
             <tr ng-repeat="programme in programmes" class="inverse">
                 <td>{{$index + 1}}</td>
-                <td>{{programme.anneeAcademique.debut | date:'yyyy'}} -{{programme.anneeAcademique.fin | date:'yyyy'}} </td>
+                <td>{{programme.anneeAcademique.debut | date:'yyyy'}}-{{programme.anneeAcademique.fin | date:'yyyy'}}</td>
                 <td>{{programme.uniteEnseignement.code}}</td>
                 <td>{{programme.parcours.option.departement.code}}</td>
                 <td>{{programme.parcours.niveau.code}}</td>

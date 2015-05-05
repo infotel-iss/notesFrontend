@@ -45,7 +45,7 @@
             <div class="form-group">
                 <label for="semestre" class="col-sm-2 control-label">Semestre</label>
                 <div class="col-sm-8">
-                    <select id="semestre" class="form-control" ng-model="semestre" ng-options="semestre as semestre.intitule  for semestre in semestres | orderBy:'intitule'"></select>
+                    <select id="semestre" class="form-control" ng-model="element.semestre" ng-options="semestre as semestre.intitule  for semestre in semestres | orderBy:'intitule'"></select>
                     <span class="error" ng-show="form.unite.code.$dirty && form.unite.code.$error.required">L'option est obligatoire</span>
                 </div>
             </div>
