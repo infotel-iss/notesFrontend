@@ -106,9 +106,10 @@ angular.module("notesApp.typecours.controllers", []).controller("TypecoursContro
             $modalInstance.dismiss("Cancel");
         };
 
-    }]).controller("EvaluationDetailController", ["$scope", "Evaluation","$modalInstance","element", function($scope, Evaluation,$modalInstance,element){
-        var ops = Evaluation.query(function(){
-            $scope.evaluations = ops;
+    }]).controller("EvaluationDetailController", ["$scope", "Evaluation","$modalInstance","element", 
+        function($scope, Evaluation,$modalInstance, element){
+            var ops = Evaluation.query(function(){
+                $scope.evaluations = ops;
         });
         $scope.element = element;
         $scope.valider = function () {
