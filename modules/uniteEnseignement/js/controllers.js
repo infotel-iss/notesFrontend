@@ -3,6 +3,7 @@ angular.module("notesApp.uniteenseignements.controllers", []).controller("UniteE
         var deps = UniteEns.query(function () {
             $scope.unites = deps;
         });
+
         $scope.afficherFenetre = function (item) {
             var modelInstance = $modal.open({
                 templateUrl: '/modules/uniteEnseignement/views/nouveau.html',
@@ -46,6 +47,37 @@ angular.module("notesApp.uniteenseignements.controllers", []).controller("UniteE
             });
 
         };
+        // la boite modal qui s'occupe de la liste de des cours
+
+        $scope.listerCoursUe = function (item) {
+            var modelInstance = $modal.open({
+                templateUrl: '/modules/uniteEnseignement/views/listeCours.html',
+                controller: 'UniteEnsFenetreController',
+                controllerAs: 'unite',
+                keyboard: true,
+                backdrop: false,
+                resolve: {
+                    element: function () {
+                        var tt;
+                        tt = item;
+                        $log.log(tt);
+                        return tt;
+                    }
+                }
+            });
+            modelInstance.result.then(function (item) {
+                if (item.id) {
+                    $log.log("UE ok");
+                } else {
+                    $log.log("probleme avec UE");
+                }
+            }, function () {
+
+            });
+
+        };
+
+
         $scope.supprimerUniteEns = function (item) {
             if (confirm("Voulez vous vraiment supprimer cet enseinant ?")) {
                 UniteEns.remove({
@@ -65,9 +97,14 @@ angular.module("notesApp.uniteenseignements.controllers", []).controller("UniteE
                 });
             }
         };
-    }]).controller("UniteEnsFenetreController", ["$log", "$scope", "$modalInstance", "element",
-    function ($log, $scope, $modalInstance, element) {
+    }]).controller("UniteEnsFenetreController", ["$log", "$scope", "$modalInstance", "element", "ListeCours",
+    function ($log, $scope, $modalInstance, element, ListeCours) {
         $scope.element = element;
+
+        ListeCours.getCoursUe($scope.element.id).then(function (data) {
+            $scope.cours = data;
+        });
+
         $log.log(element);
         $scope.valider = function () {
             $log.log("version ok");

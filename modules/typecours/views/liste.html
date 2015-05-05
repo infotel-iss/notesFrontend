@@ -18,13 +18,11 @@
                             <tr ng-repeat="eva in type.evaluations">
                                 <td>{{eva.evaluation.code}}</td>
                                 <td>{{eva.pourcentage}} %</td>
-                                <td><a href="#" ng-click="ajouterEvaluation(type, eva)"><i class="glyphicon glyphicon-edit"></i></a>|<a href="#" ng-click="supprimerEvaluation(type, eva)"><i class="glyphicon glyphicon-remove"></i></a></td>
+                                <td><a href="#" ng-click="modifierEvaluation(type, eva)"><i class="glyphicon glyphicon-edit"></i></a>|<a href="#" ng-click="supprimerEvaluation(type, eva)"><i class="glyphicon glyphicon-remove"></i></a></td>
                             </tr>
                         </tbody>
                     </table>
-                    <div>
-                        <a href="#" ng-click="ajouterEvaluation(type)">Ajouter Evaluation</a>
-                    </div>
+                    <a href="#" ng-click="ajouterEvaluation(type)">Ajouter Evaluation</a>
                 </div>
             </div>
         </div>

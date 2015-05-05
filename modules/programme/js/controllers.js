@@ -116,6 +116,18 @@ angular.module("notesApp.programme.controllers", []).controller("ProgrammeContro
             });
         };
 
+        $scope.updateOptionsSemestreNiveaux = function () {
+            if (($scope.departement !== null) && ($scope.niveau !== null)) {
+               NiveauxOptions.getOptionsNiveau($scope.departement, $scope.element.parcours.niveau.id).then(function(data) {
+                    $scope.options = data;
+               });
+               NiveauxSemestre.getSemestreNiveaux($scope.element.parcours.niveau.id).then(function(data) {
+                    $scope.semestres = data;
+                });
+
+            }
+        }
+
         $scope.valider = function () {
             $modalInstance.close($scope.element);
         };

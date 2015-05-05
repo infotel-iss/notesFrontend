@@ -59,6 +59,8 @@ angular.module("notesApp.etudiants.controllers", []).controller("EtudiantControl
             $scope.annees = ans;
         });
         $scope.valider = function () {
+            $log.log("Toto est un vrai toto");
+            $log.log("Le code de l'annee " + $scope.annee);
             var fd = new FormData();
             //Take the first selected file
             fd.append("fichier", $scope.files[0]);

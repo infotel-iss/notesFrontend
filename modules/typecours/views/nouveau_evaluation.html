@@ -10,7 +10,7 @@
             <div class="form-group">
                 <label for="evaluation" class="col-sm-2 control-label">Evaluation</label>
                 <div class="col-sm-8">
-                    <select name="evaluation" id="evaluation" class="form-control" ng-model="element.evaluation" ng-options="evaluation as evaluation.code  for evaluation in evaluations track by evaluation.id |orderBy: 'code'" ng-required="true"></select>
+                    <select name="evaluation" id="evaluation" class="form-control" ng-model="element.evaluation" ng-options="evaluation.code  for evaluation in evaluations |orderBy: 'code'" ng-required="true"></select>
                     <span class="error" ng-show="form.nom.$dirty && form.nom.$error.required">L'évaluation est obligatoire</span>
                 </div>
             </div>
