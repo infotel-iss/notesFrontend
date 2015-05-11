@@ -1,6 +1,26 @@
-
-<div class="row-fluid">
-    <div class="col-md-12">
-        <a href="#" ng-click="afficherFenetre()">Ajouter Type Cours</a>
-    </div>
+<div>
+    <h4 class ="titre">LA LISTE DES ENSEIGNEMENTS</h4><br/>
+    <table class="table table-bordered table-hover table-condensed table-striped">
+        <thead>
+            <tr class="success">
+                <th>Numero</th>
+                <th>Annees</th>
+                <th>Cours</th>
+                <th>Ensignant(s)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="enseignement in enseignements" class="inverse">
+                <td>{{$index + 1}}</td>
+                <td>{{enseignement.anneeAcademique.debut | date:'yyyy'}}-{{enseignement.anneeAcademique.fin | date:'yyyy'}}</td>
+                <td>{{enseignement.cours.intitule}}</td>
+                <td>{{enseignement.enseignants}}</td>
+                <td><a ng-click="afficherFenetre(enseignement)"><i class="glyphicon glyphicon-edit"></i>  Modifier</a> | <a ng-click="supprimerProgramme(enseignement)"><i class="glyphicon glyphicon-remove"></i> Supprimer</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <form>
+        <button class="btn btn-primary" ng-click="afficherFenetre(undefined)"><i class="glyphicon glyphicon-save"></i> Ajouter Enseignement</button>
+    </form>
 </div>

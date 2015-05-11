@@ -1,9 +1,9 @@
-angular.module("notesApp.enseignements.controllers", []).controller("EnseignementController", ["$scope", "$modal", "$log", "Departement",
-    function ($scope, $modal, $log, Departement) {
+angular.module("notesApp.enseignements.controllers", []).controller("EnseignementController", ["$scope", "$modal", "$log", "Enseignement",
+    function ($scope, $modal, $log, Enseignement) {
 
-        var deps = Departement.query(function () {
+        var deps = Enseignement.query(function () {
 
-            $scope.departements = _.sortBy(deps, 'code');
+            $scope.enseignements = deps;
         });
         $scope.afficherFenetre = function (item) {
             var modelInstance = $modal.open({
@@ -18,7 +18,7 @@ angular.module("notesApp.enseignements.controllers", []).controller("Enseignemen
                         if (item)
                             tt = item;
                         else
-                            tt = new Departement();
+                            tt = new Enseignement();
                         $log.log(tt);
                         return tt;
                     }
@@ -27,16 +27,16 @@ angular.module("notesApp.enseignements.controllers", []).controller("Enseignemen
             modelInstance.result.then(function (item) {
                 if (item.id) {
                     item.$update(function () {
-                        var id = _.sortedIndex($scope.departements, item, 'code');
+                        var id = _.sortedIndex($scope.enseignants, item, 'code');
                         if (id !== -1) {
-                            $scope.departements.splice(id, 1, item);
+                            $scope.enseignants.splice(id, 1, item);
                         }
                     });
                 } else {
-                    var toto = Departement.save(item, function () {
-                        var tt = _.sortedIndex($scope.departements, toto, 'code');
+                    var toto = Enseignement.save(item, function () {
+                        var tt = _.sortedIndex($scope.enseignants, toto, 'code');
                         if (tt !== -1) {
-                            $scope.departements.splice(tt, 0, toto);
+                            $scope.enseignants.splice(tt, 0, toto);
                         }
                     });
                 }
@@ -44,14 +44,14 @@ angular.module("notesApp.enseignements.controllers", []).controller("Enseignemen
 
             });
         };
-        $scope.supprimerDepartement = function (item) {
-            if (confirm("Voulez vous vraiment supprimer ce departement?")) {
-                Departement.remove({
+        $scope.supprimerEnseignement = function (item) {
+            if (confirm("Voulez vous vraiment supprimer cet enseignant?")) {
+                Enseignement.remove({
                     id: item.id
                 }, function () {
-                    var id = _.sortedIndex($scope.departements, item, 'code');
+                    var id = _.sortedIndex($scope.enseignants, item, 'code');
                     if (id !== -1) {
-                        $scope.departements.splice(id, 1);
+                        $scope.enseignants.splice(id, 1);
                     }
                 });
             }

@@ -30,15 +30,21 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-primary" ng-show="element.id" ng-click="form.$valid && valider()">
-                        <i class="glyphicon glyphicon-edit"></i> Modifier
-                    </button>
-                    <button type="submit" class="btn btn-primary" ng-hide="element.id" ng-click="form.$valid && valider()">
-                        <i class="glyphicon glyphicon-saved"></i> Enregistrer
-                    </button>
-                    <button type="button" class="btn btn-danger pull-right" ng-click="cancel()">
-                        <i class="glyphicon glyphicon-ban-circle"></i> Annuler
-                    </button>
+                    <span class ="col-sm-1">
+                        <button type="submit" class="btn btn-primary" ng-show="element.id" ng-click="form.$valid && valider()">
+                            <i class="glyphicon glyphicon-edit"></i> Modifier
+                        </button>
+                    </span>
+                    <span class ="col-sm-1">
+                        <button type="submit" class="btn btn-primary" ng-hide="element.id" ng-click="form.$valid &&     valider()">
+                            <i class="glyphicon glyphicon-saved"></i> Enregistrer
+                        </button>
+                    </span>
+                    <span class ="col-sm-9">
+                        <button type="button" class="btn btn-danger pull-right" ng-click="cancel()">
+                            <i class="glyphicon glyphicon-ban-circle"></i> Annuler
+                        </button>
+                    </span>
                 </div>
             </div>
         </form>
