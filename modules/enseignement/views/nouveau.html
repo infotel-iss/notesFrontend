@@ -17,7 +17,7 @@
             <div class="form-group">
                 <label for="designation" class="col-sm-2 control-label">Cours</label>
                 <div class="col-sm-8">
-                    <input type="text" ng-model="element.cour" id="unite" typeahead="cour as cour.intitule  for cour in cours | filter:$viewValue | limitTo:6" class="form-control">
+                    <input type="text" ng-model="element.cours.intitule" id="unite" typeahead="cour as cour.intitule  for cour in cours | filter:$viewValue | limitTo:6" class="form-control">
                     <span class="error" ng-show="form.intitule.$dirty && form.intitule.$error.required">Le cours est obligatoire</span>
                 </div>
             </div>

@@ -1,17 +1,17 @@
-angular.module("notesApp.notes.controllers", []).controller("NoteController", ["$scope", "$modal", "$log", "Cours", "Evaluation","Annee",
-    function ($scope, Option, Departement, Niveau,Cours) {
-        var cours = Cours.query(function () {
-            $scope.courss = cours;
-        }); 
-
-        var deps = Departement.query(function () {
-            $scope.departements = deps;
+angular.module("notesApp.notes.controllers", []).controller("NoteController", ["Cours", "Evaluation","Annee", "$scope", 
+    function (Cours, Evaluation, Annee, $scope) {
+        var ans = Annee.query(function(){
+            $scope.annees = ans;
         });
-        var nivs = Niveau.query(function () {
-            $scope.niveaux = nivs;
+        var cos = Cours.query(function(){
+           $scope.cours = cos; 
         });
-        
-        
+        var evals = Evaluation.query(function(){
+           $scope.evaluations = evals; 
+        });
+        $scope.uploadFile = function (fs) {
+            $scope.files = fs;
+        };
 
         $scope.department = null;
 
