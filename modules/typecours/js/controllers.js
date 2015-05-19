@@ -31,6 +31,8 @@ angular.module("notesApp.typecours.controllers", []).controller("TypecoursContro
                 if (item.id) {
                     // I'm updating
                     $log.log("I'm updating an evaluation");
+                    $log.log("The value of item " + JSON.stringify(item));
+                    $log.log("The value of typeCours " + item.typeCours);
                     EvaluationDetailService.modifierEvaluation(item.typeCours, item).then(function () {
 
                     }, function () {
