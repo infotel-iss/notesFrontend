@@ -1,5 +1,5 @@
-angular.module("notesApp.notes.controllers", []).controller("NoteController", ["$scope", "$modal", "$log", "Cours", "Evaluation", "Annee",
-    function ($scope, Option, Departement, Niveau, Cours) {
+angular.module("notesApp.notes.controllers", []).controller("NoteController", ["$scope", "Departement", "Niveau", "Cours",
+    function ($scope, Departement, Niveau, Cours) {
         var cours = Cours.query(function () {
             $scope.courss = cours;
         });

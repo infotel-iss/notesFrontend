@@ -1,7 +1,7 @@
 angular.module("notesApp.annees.controllers", []).controller("AnneeController", ["$scope", "$modal", "$log", "Annee",
     function ($scope, $modal, $log, Annee) {
         var deps = Annee.query(function () {
-            $scope.annees = deps;
+            $scope.annees = _.sortBy(deps,'debut');
         });
         $scope.afficherFenetre = function (item) {
             var modelInstance = $modal.open({

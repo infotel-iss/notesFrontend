@@ -14,7 +14,7 @@ angular.module("notesApp.programme.controllers", []).controller("ProgrammeContro
         });
 
         $scope.updateOptionsSemestre = function () {
-            if (($scope.departement !== null) && ($scope.niveau !== null)) {
+            if (($scope.departement) && ($scope.niveau)) {
                 $http.get('/api/options/' + $scope.departement + '/' + $scope.niveau).success(function (data, status, config, headers) {
                     $scope.options = data;
                 });
