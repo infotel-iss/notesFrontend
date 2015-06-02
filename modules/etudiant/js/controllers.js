@@ -2,6 +2,7 @@ angular.module("notesApp.etudiants.controllers", []).controller("EtudiantControl
     function ($log, $http, $scope, Etudiant, Annee, Departement, Niveau, Option) {
         var etds = Etudiant.query(function () {
             $scope.etudiants = etds;
+            $scope.totalItems = $scope.etudiants.length;
         });
         var ans = Annee.query(function () {
             $scope.annees = ans;
@@ -12,6 +13,9 @@ angular.module("notesApp.etudiants.controllers", []).controller("EtudiantControl
         var niveaux = Niveau.query(function () {
             $scope.niveaux = niveaux;
         });
+        $scope.itemsPerPage = 10;
+        $scope.currentPage = 1;
+        
         $scope.annee = null;
         $scope.departement = null;
         $scope.niveau = null;

@@ -2,7 +2,17 @@ angular.module("notesApp.enseignants.controllers", []).controller("EnseignantCon
     function ($scope, $modal, $log, Enseignant) {
         var deps = Enseignant.query(function () {
             $scope.enseignants = deps;
+            $scope.totalItems = $scope.enseignants.length;
+            $log.log("version cancel"+$scope.totalItems);
         });
+        
+        //debut de la pagination
+        $scope.itemsPerPage = 10;
+        $scope.currentPage = 1;
+
+      
+
+        // fin de la pagination
         $scope.afficherFenetre = function (item) {
             var modelInstance = $modal.open({
                 templateUrl: '/modules/enseignant/views/nouveau.html',

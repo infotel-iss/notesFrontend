@@ -43,7 +43,7 @@ angular.module("notesApp.departements.controllers", []).controller("DepartementC
             }, function () {
 
             });
-        }
+        };
         $scope.supprimerDepartement = function (item) {
             if (confirm("Voulez vous vraiment supprimer ce departement?")) {
                 Departement.remove({
@@ -53,9 +53,9 @@ angular.module("notesApp.departements.controllers", []).controller("DepartementC
                     if (id !== -1) {
                         $scope.departements.splice(id, 1);
                     }
-                })
+                });
             }
-        }
+        };
     }]).controller("DepartementFenetreController", ["$scope", "$modalInstance", "element",
     function ($scope, $modalInstance, element) {
         $scope.element = element;
@@ -65,4 +65,40 @@ angular.module("notesApp.departements.controllers", []).controller("DepartementC
         $scope.cancel = function () {
             $modalInstance.dismiss("Cancel");
         };
+    }]).controller("PaginationDemoCtrl", ["$scope", "$log",
+    function ($scope, $log) {
+        $scope.totalItems = 180;
+        $scope.currentPage = 1;
+
+        $scope.setPage = function (pageNo) {
+            $scope.currentPage = pageNo;
+        };
+
+        $scope.pageChanged = function () {
+            $log.log('Page changed to: ' + $scope.currentPage);
+        };
+
+        $scope.maxSize = 5;
+        $scope.bigTotalItems = 175;
+        $scope.bigCurrentPage = 1;
     }]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

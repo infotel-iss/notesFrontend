@@ -6,5 +6,5 @@ angular.module("notesApp.departements.services", []).factory('Departement', func
             method: 'PUT'
         }
     });
-}); 
+});
 
