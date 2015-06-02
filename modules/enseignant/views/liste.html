@@ -9,13 +9,14 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat=" enseignant in enseignants">
+            <tr ng-repeat=" enseignant in enseignants| offset: (currentPage - 1) * itemsPerPage | limitTo: itemsPerPage">
                 <td>{{$index + 1}}</td>
                 <td>{{enseignant.nom}}</td>
                 <td><a ng-click="afficherFenetre(enseignant)"><i class="glyphicon glyphicon-edit"></i> Modifier</a> | <a ng-click="supprimerEnseignant(enseignant)"><i class="glyphicon glyphicon-remove"></i> Supprimer</a></td>
             </tr>
         </tbody>
-    </table>
+    </table> 
+    <pagination  boundary-links="true" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
     <form>
         <button class="btn btn-primary" ng-click="afficherFenetre(undefined)"><i class="glyphicon glyphicon-save"></i> Ajouter Enseigant</button>
     </form>

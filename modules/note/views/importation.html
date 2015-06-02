@@ -15,11 +15,11 @@
             <div class="form-group">
                 <label for="cours" class="col-sm-2 control-label">Cours</label>
                 <div class="col-sm-6">
-                    <select name="cours" id="cours" class="form-control" ng-model="cour" ng-options="cour.intitule for cour in cours" ng-required="true">
-                        <!--                        <option value="">Select one</option>
-                                                <option ng-repeat="cors in cours" value="cors.id">{{cors.intitule}}</option>-->
+                    <select name="cours" multiple ng-multiple = "true" id="cours" class="form-control" ng-model="cour" ng-required="true">
+                        <option value="">Select one</option>
+                        <option ng-repeat="cors in cours">{{cors.intitule}}</option>
 
-                    </select> 
+                    </select>
                     <span class="error" ng-show="form.cycle.$dirty && form.cycle.$error.required">Le cours est obligatoire</span>
                 </div>
             </div>
@@ -29,6 +29,9 @@
                     <select name="evaluation" id="evaluation" class="form-control" ng-model="evaluation" ng-options="evaluation.code for evaluation in evaluations" ng-required="true">
                         <!--                        <option value="">Select one</option>
                                                 <option ng-repeat="evaluation in evaluations" value="evaluation.id">{{ evaluation.code}}</option>-->
+                    <select name="evaluation" id="evaluation" class="form-control" ng-model="evaluation" ng-required="true">
+                        <option value="">Select one</option>
+                        <option ng-repeat="evaluation in evaluations">{{ evaluation.code}}</option>
 
                     </select>
                     <span class="error" ng-show="form.cycle.$dirty && form.cycle.$error.required">L'ann&eacute;e est obligatoire</span>
