@@ -4,23 +4,24 @@
         <thead>
             <tr class="success">
                 <th>Numero</th>
-                <th>Credit</th>
+<!--                <th>Credit</th>-->
                 <th>Intitule</th>
                 <th>Type de cours</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="cour in cours" class="inverse">
+            <tr ng-repeat="cour in cours | orderBy : 'intitule'" class="inverse">
                 <td>{{$index + 1}}</td>
-                <td>{{cour.credit}}</td>
+<!--                <td>{{cour.credit}}</td>-->
                 <td>{{cour.intitule}}</td>
                 <td>{{cour.typeCours.nom}}</td>
                 <td><a ng-click="afficherFenetre(cour)"><i class="glyphicon glyphicon-edit"></i>  Modifier</a> | <a ng-click="supprimerCours(cour)"> <i class="glyphicon glyphicon-remove"></i>  Supprimer</a></td>
             </tr>
         </tbody>
     </table>
+    <pagination  boundary-links="true" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
     <form>
-        <button class="btn btn-primary" ng-click="afficherFenetre(undefined)"><i class="glyphicon glyphicon-save"></i>Ajouter Cours</button>
+        <button class="btn btn-primary" ng-click="afficherFenetre(undefined)"><i class="glyphicon glyphicon-save"></i>Ajouter un Cours</button>
     </form>
 </div>

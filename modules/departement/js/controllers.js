@@ -3,9 +3,9 @@ angular.module("notesApp.departements.controllers", []).controller("DepartementC
 
         var deps = Departement.query(function () {
 
-            $scope.departements = _.sortBy(deps, 'code');
+            $scope.departements = deps;
         });
-        $scope.afficherFenetre = function (item) {
+        $scope.afficherFenetre = function (key,item) {
             var modelInstance = $modal.open({
                 templateUrl: '/modules/departement/views/nouveau.html',
                 controller: 'DepartementFenetreController',
@@ -13,54 +13,42 @@ angular.module("notesApp.departements.controllers", []).controller("DepartementC
                 keyboard: true,
                 backdrop: false,
                 resolve: {
-                    element: function () {
-                        var tt;
-                        if (item)
-                            tt = item;
-                        else
-                            tt = new Departement();
-                        $log.log(tt);
-                        return tt;
+                    departe: function () {
+                        var ret = {};
+                        ret.key = key;
+                        ret.element = item;
+                        return ret;
                     }
                 }
             });
-            modelInstance.result.then(function (item) {
-                if (item.id) {
-                    item.$update(function () {
-                        var id = _.sortedIndex($scope.departements, item, 'code');
-                        if (id !== -1) {
-                            $scope.departements.splice(id, 1, item);
-                        }
+            modelInstance.result.then(function (departe) {
+                if (departe.element && departe.element.id) {
+                    departe.element.$update(function () {
+                            $scope.departements.splice(departe.key, departe.element);
                     });
                 } else {
-                    var toto = Departement.save(item, function () {
-                        var tt = _.sortedIndex($scope.departements, toto, 'code');
-                        if (tt !== -1) {
-                            $scope.departements.splice(tt, 0, toto);
-                        }
+                    var toto = Departement.save(departe.element, function () {
+                            $scope.departements.push(toto);
                     });
                 }
             }, function () {
 
             });
         };
-        $scope.supprimerDepartement = function (item) {
+        $scope.supprimerDepartement = function (key, item) {
             if (confirm("Voulez vous vraiment supprimer ce departement?")) {
                 Departement.remove({
                     id: item.id
                 }, function () {
-                    var id = _.sortedIndex($scope.departements, item, 'code');
-                    if (id !== -1) {
-                        $scope.departements.splice(id, 1);
-                    }
+                      $scope.departements.splice(key, 1);                    
                 });
             }
         };
-    }]).controller("DepartementFenetreController", ["$scope", "$modalInstance", "element",
-    function ($scope, $modalInstance, element) {
-        $scope.element = element;
+    }]).controller("DepartementFenetreController", ["$scope", "$modalInstance", "departe",
+    function ($scope, $modalInstance, departe) {
+        $scope.departe = departe;
         $scope.valider = function () {
-            $modalInstance.close($scope.element);
+            $modalInstance.close($scope.departe);
         };
         $scope.cancel = function () {
             $modalInstance.dismiss("Cancel");

@@ -79,13 +79,12 @@ angular.module("notesApp.options.controllers", []).controller("OptionController"
                 });
             }
         };
-    }]).controller("OptionFenetreController", ["$log", "$scope", "$modalInstance", "element", "Departement",
-    function ($log, $scope, $modalInstance, element, Departement) {
+    }]).controller("OptionFenetreController", ["$scope", "$modalInstance", "element", "Departement",
+    function ($scope, $modalInstance, element, Departement) {
         $scope.element = element;
         var dep = Departement.query(function () {
             $scope.departements = _.sortBy(dep,'code');
         });
-        $log.log(element);
         $scope.valider = function () {
             $modalInstance.close($scope.element);
         };
