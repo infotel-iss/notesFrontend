@@ -1,8 +1,6 @@
-angular.module("notesApp.programme.controllers", []).controller("ProgrammeController", ["$scope", "$modal", "$log", "Programme", "Annee", "Departement", "Niveau", "$http",
-    function ($scope, $modal, $log, Programme, Annee, Departement, Niveau, $http) {
-        var programmes = Programme.query(function () {
-            $scope.programmes = programmes;
-        });
+angular.module("notesApp.programme.controllers", []).controller("ProgrammeController", ["$scope", "$modal", "Programme", "Annee", "Departement", "Niveau", "$http",
+    function ($scope, $modal, Programme, Annee, Departement, Niveau, $http) {
+
         var ans = Annee.query(function () {
             $scope.annees = ans;
         });
@@ -13,127 +11,97 @@ angular.module("notesApp.programme.controllers", []).controller("ProgrammeContro
             $scope.niveaux = niveaux;
         });
 
-        $scope.updateOptionsSemestre = function () {
-            if (($scope.departement) && ($scope.niveau)) {
-                $http.get('/api/options/' + $scope.departement + '/' + $scope.niveau).success(function (data, status, config, headers) {
-                    $scope.options = data;
+        $scope.filtrer = function () {
+            if (($scope.departement !== undefined) && ($scope.niveau !== undefined) && ($scope.annee !== undefined) && ($scope.semestre !== undefined) && ($scope.option !== undefined)) {
+                $http.get('/api/programmes/' + $scope.annee.id + '/' + $scope.niveau + '/' + $scope.option + '/' + $scope.semestre.id).success(function (data) {
+                    $scope.programmes = data;
                 });
-                $http.get('/api/niveaux/' + $scope.niveau + "/semestres").success(function (data, status, config, headers) {
+            }
+        }
+
+        $scope.updateOptionsSemestre = function () {
+            if ($scope.niveau !== undefined) {
+                $http.get('/api/niveaux/' + $scope.niveau + "/semestres").success(function (data) {
                     $scope.semestres = data;
                 });
+                $scope.semestre = undefined;
+                if ($scope.departement !== undefined) {
+                    $http.get('/api/options/' + $scope.departement + '/' + $scope.niveau).success(function (data) {
+                        $scope.options = data;
+                    });
+                    $scope.option = undefined;
+                }
+
             }
         };
 
-        $scope.afficherFenetre = function (item) {
-            var modelInstance = $modal.open({
-                templateUrl: '/modules/programme/views/nouveau.html',
-                controller: 'ProrammeFenetreController',
-                controllerAs: 'programme',
-                keyboard: true,
-                backdrop: false,
-                resolve: {
-                    element: function () {
-                        var tt;
-                        if (item)
-                            tt = item;
-                        else
-                            tt = new Programme();
-                        $log.log(tt);
-                        return tt;
+        $scope.afficherFenetre = function (cle, item) {
+            if (($scope.departement !== undefined) && ($scope.niveau !== undefined) && ($scope.annee !== undefined) && ($scope.semestre !== undefined) && ($scope.option !== undefined)) {
+                var modelInstance = $modal.open({
+                    templateUrl: '/modules/programme/views/nouveau.html',
+                    controller: 'ProrammeFenetreController',
+                    controllerAs: 'programme',
+                    keyboard: true,
+                    backdrop: false,
+                    resolve: {
+                        element: function () {
+                            var tt = {};
+                            tt.cle = cle;
+                            tt.element = item;
+                            tt.option = $scope.option;
+                            tt.niveau = $scope.niveau;
+                            return tt;
+                        }
                     }
-                }
-            });
-            modelInstance.result.then(function (item) {
-                if (item.id) {
-                    item.$update(function () {
-                        var id;
-                        for (var i = 0; i < $scope.programmes.length; i++) {
-                            if ($scope.programmes[i].id === item.id) {
-                                id = i;
-                                break;
-                            }
-                        }
-                        if (id) {
-                            $scope.programmes.splice(id, 1, item);
-                        }
-                    });
-                } else {
-                    var toto = Programme.save(item, function () {
-                        $scope.programmes.push(toto);
-                    });
-                }
-            }, function () {
+                });
+                modelInstance.result.then(function (resultat) {
+                    var item = resultat.item;
+                    var cle = resultat.cle;
+                    item.anneeAcademique = $scope.annee;
+                    item.semestre = $scope.semestre;
+                    if ((item.id !== undefined) && (cle !== null)) {
+                        $http.put('/api/programmes/' + $scope.niveau + '/' + $scope.option + '/' + item.id, item).success(function (data) {
+                            $scope.programmes.splice(cle, 1, item);
+                        });
+                    } else {
+                        $http.post('/api/programmes/' + $scope.niveau + '/' + $scope.option, item).success(function (data) {
+                            $scope.programmes.push(data);
+                        });
+                    }
+                }, function () {
 
-            });
-
+                });
+            }
         };
-        $scope.supprimerProgramme = function (item) {
+        $scope.supprimerProgramme = function (cle, item) {
             if (confirm("Voulez vous vraiment supprimer ce programme?")) {
                 Programme.remove({
                     id: item.id
                 }, function () {
-                    var id;
-                    for (var i = 0; i < $scope.programmes.length; i++) {
-                        if ($scope.programmes[i].id === item.id) {
-                            id = i;
-                            break;
-                        }
-                    }
-                    if (id) {
-                        $scope.programmes.splice(id, 1);
-                    }
+                    $scope.programmes.splice(cle, 1);
                 });
             }
         };
-    }]).controller("ProrammeFenetreController", ["$log", "$scope", "$modalInstance", "element", "Niveau", "Annee", "UniteEns", "Departement", "NiveauxSemestre", "NiveauxOptions",
-    function ($log, $scope, $modalInstance, element, Niveau, Annee, UniteEns, Departement, NiveauxSemestre, NiveauxOptions) {
+    }]).controller("ProrammeFenetreController", ["$scope", "$modalInstance", "element", "$http",
+    function ($scope, $modalInstance, element, $http) {
 
-        $scope.element = element;
+        $scope.element = element.item;
+        $scope.cle = element.cle;
+        $scope.niveau = element.niveau;
+        $scope.option = element.option;
 
-        var nivs = Niveau.query(function () {
-            $scope.niveaux = nivs;
+        $http.get('/api/uniteEns/' + $scope.niveau + '/' + $scope.option).success(function (data) {
+            $scope.unites = data;
         });
-
-        var ans = Annee.query(function () {
-            $scope.annees = ans;
-        });
-        var units = UniteEns.query(function () {
-            $scope.unites = units;
-        });
-
-        var deps = Departement.query(function () {
-            $scope.departements = deps;
-        });
-        $scope.niveauSemestre = function() {
-            NiveauxSemestre.getSemestreNiveaux($scope.element.parcours.niveau.id).then(function(data) {
-                $scope.semestres = data;
-            });
-        };
-
-        $scope.niveauOptions = function() {
-            NiveauxOptions.getOptionsNiveau($scope.departement, $scope.element.parcours.niveau.id).then(function(data) {
-                $scope.options = data;
-            });
-        };
-
-        $scope.updateOptionsSemestreNiveaux = function () {
-            if (($scope.departement !== null) && ($scope.niveau !== null)) {
-                NiveauxOptions.getOptionsNiveau($scope.departement, $scope.element.parcours.niveau.id).then(function (data) {
-                    $scope.options = data;
-                });
-                NiveauxSemestre.getSemestreNiveaux($scope.element.parcours.niveau.id).then(function (data) {
-                    $scope.semestres = data;
-                });
-
-            }
-        };
 
         $scope.valider = function () {
-            $modalInstance.close($scope.element);
+            var resultat = {};
+            resultat.item = $scope.element;
+            resultat.cle = $scope.cle;
+            $modalInstance.close(resultat);
         };
 
         $scope.cancel = function () {
-            $log.log("version cancel");
             $modalInstance.dismiss("Cancel");
         };
 

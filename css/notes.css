@@ -46,3 +46,39 @@ input.ng-dirty.ng-invalid {
     width: 100%;
     margin-bottom: 20px;
 }
+
+ul.inline-elements{
+    padding: 0px;
+    margin: 0px;
+}
+
+ul.inline-elements li{
+    display: inline-block;
+    list-style: none;
+    padding: 5px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    background-color: #dff0d8;
+    border: 1px solid #357ebd;
+}
+
+.selection.ng-hide-add{
+
+}
+
+.selection.ng-hide-add-active{
+
+}
+
+.no-selection.ng-hide-remove{
+    -webkit-transition: 0.5s linear all;
+    -o-transition: 0.5s linear all;
+    -moz-transition: 0.5s linear all;
+    opacity : 0;
+}
+
+.no-selection.ng-hide-remove-active{
+    opacity : 1;
+}
+

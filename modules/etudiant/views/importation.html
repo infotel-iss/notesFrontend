@@ -17,7 +17,7 @@
                 <div class="col-sm-6">
                     <select name="annee" class="form-control" ng-model="annee" ng-required="true">
                         <option value="">Select one</option>
-                        <option ng-repeat="annee in annees" value="{{annee.id}}">{{annee.debut.substring(0,4)}}-{{annee.fin.substring(0,4)}}</option>
+                        <option ng-repeat="annee in annees|orderBy:'-debut'" value="{{annee.id}}">{{annee.debut.substring(0,4)}}-{{annee.fin.substring(0,4)}}</option>
                         
                     </select>
                     <span class="error" ng-show="form.cycle.$dirty && form.cycle.$error.required">L'ann&eacute;e est obligatoire</span>

@@ -1,5 +1,5 @@
-angular.module("notesApp.etudiants.controllers", []).controller("EtudiantController", ["$log", "$http", "$scope", "Etudiant", "Annee", "Departement", "Niveau", "Option",
-    function ($log, $http, $scope, Etudiant, Annee, Departement, Niveau, Option) {
+angular.module("notesApp.etudiants.controllers", []).controller("EtudiantController", ["$http", "$scope", "Etudiant", "Annee", "Departement", "Niveau", "Option",
+    function ($http, $scope, Etudiant, Annee, Departement, Niveau, Option) {
         var etds = Etudiant.query(function () {
             $scope.etudiants = etds;
             $scope.totalItems = $scope.etudiants.length;
@@ -13,7 +13,7 @@ angular.module("notesApp.etudiants.controllers", []).controller("EtudiantControl
         var niveaux = Niveau.query(function () {
             $scope.niveaux = niveaux;
         });
-        $scope.itemsPerPage = 10;
+        $scope.itemsPerPage = 15;
         $scope.currentPage = 1;
         
         $scope.annee = null;

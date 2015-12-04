@@ -1,5 +1,5 @@
 angular.module("notesApp.notes", ['notesApp.notes.controllers', 'notesApp.notes.services', 'ngAnimate']);
-angular.module("notesApp.options").config(function ($stateProvider, $locationProvider) {
+angular.module("notesApp.notes").config(function ($stateProvider, $locationProvider) {
     $stateProvider.state("nimportation", {
         url: '/importation',
         controller: 'NoteImportationController',
@@ -8,5 +8,9 @@ angular.module("notesApp.options").config(function ($stateProvider, $locationPro
         url: '/exportation',
         controller: 'NoteController',
         templateUrl: 'modules/note/views/exportation.html'
+    }).state("nmodification", {
+        url: '/modification',
+        controller: 'NoteModificationController',
+        templateUrl: 'modules/note/views/modification.html'
     });
 });

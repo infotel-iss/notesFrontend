@@ -1,5 +1,5 @@
 <div>
-    <h4 class ="titre">LA LISTE DES PROGRAMMES ENSEIGNEMENTS</h4><br/>
+    <h4 class ="titre">LA LISTE CRÉDITS</h4>
     <form name="form" method="post" role="form" class="form-horizontal" novalidate>
         <div class="form-group">
             <div class="col-sm-2">
@@ -13,11 +13,7 @@
             <div class="col-sm-2">
             <label for="niveau" class="control-label">Niveau</label>            
                 <select id="niveau" class="form-control" ng-model="niveau" ng-change="updateOptionsSemestre()" ng-options="niveau.id as niveau.code  for niveau in niveaux | orderBy:'code'"></select>
-            </div>
-            <div class="col-sm-2">
-            <label for="semestre" class="control-label">Semestre</label>            
-                <select id="semestre" class="form-control" ng-change="filtrer()" ng-model="semestre" ng-options="semestre as semestre.intitule  for semestre in semestres | orderBy:'intitule'"></select>
-            </div>
+            </div>            
             <div class="col-sm-2">
             <label for="options" class="control-label">Option</label>            
             <select id="options" class="form-control" ng-change="filtrer()" ng-model="option" ng-options="option.id as option.code  for option in options | orderBy: 'code'"></select>
@@ -28,19 +24,17 @@
         <thead>
             <tr class="success">
                 <th>N<sup>o</sup></th>
-                <th>Code</th>
-                <th>Intitulé</th>
-                <th>Semestre</th>
+                <th>Cours</th>
+                <th>Nombre Crédits</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="(cle,programme) in programmes" class="inverse">
+            <tr ng-repeat="(cle,credit) in credits" class="inverse">
                 <td>{{$index + 1}}</td>
-                <td>{{programme.uniteEnseignement.code}}</td>
-                <td>{{programme.uniteEnseignement.intitule}}</td>
-                <td>{{programme.semestre.intitule}}</td>
-                <td><a ng-click="afficherFenetre(cle, programme)"><i class="glyphicon glyphicon-edit"></i>  Modifier</a> | <a ng-click="supprimerProgramme(cle,programme)"><i class="glyphicon glyphicon-remove"></i> Supprimer</a></td>
+                <td>{{credit.cours.intitule}}</td>
+                <td>{{credit.valeur}}</td>
+                <td><a ng-click="afficherFenetre(cle, credit)"><i class="glyphicon glyphicon-edit"></i>  Modifier</a> | <a ng-click="supprimerProgramme(cle,credit)"><i class="glyphicon glyphicon-remove"></i> Supprimer</a></td>
             </tr>
         </tbody>
     </table>

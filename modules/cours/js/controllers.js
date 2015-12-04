@@ -1,9 +1,12 @@
-angular.module("notesApp.cours.controllers", []).controller("CoursController", ["$scope", "$modal", "$log", "Cours",
-    function ($scope, $modal, $log, Cours) {
+angular.module("notesApp.cours.controllers", []).controller("CoursController", ["$scope", "$modal", "Cours",
+    function ($scope, $modal, Cours) {
         var cours = Cours.query(function () {
             $scope.cours = cours;
+            $scope.totalItems = cours.length;
         });
-        $scope.afficherFenetre = function (item) {
+        $scope.itemsPerPage = 15;
+        $scope.currentPage = 1;
+        $scope.afficherFenetre = function (cle, item) {
             var modelInstance = $modal.open({
                 templateUrl: '/modules/cours/views/nouveau.html',
                 controller: 'CoursFenetreController',
@@ -12,29 +15,19 @@ angular.module("notesApp.cours.controllers", []).controller("CoursController", [
                 backdrop: false,
                 resolve: {
                     element: function () {
-                        var tt;
-                        if (item)
-                            tt = item;
-                        else
-                            tt = new Cours();
-                        $log.log(tt);
+                        var tt = {};
+                        tt.cle = cle;
+                        tt.item = item;
                         return tt;
                     }
                 }
             });
-            modelInstance.result.then(function (item) {
-                if (item.id) {
+            modelInstance.result.then(function (resultat) {
+                var item = resultat.item;
+                var cle = resultat.cle;
+                if ((item.id !== undefined) && (cle !== undefined)) {
                     item.$update(function () {
-                        var id;
-                        for (var i = 0; i < $scope.cours.length; i++) {
-                            if ($scope.cours[i].id == item.id) {
-                                id = i;
-                                break;
-                            }
-                        }
-                        if (id) {
-                            $scope.cours.splice(id, 1, item);
-                        }
+                        $scope.cours.splice(cle, 1, item);
                     });
                 } else {
                     Cours.save(item, function () {
@@ -46,39 +39,33 @@ angular.module("notesApp.cours.controllers", []).controller("CoursController", [
             });
 
         }
-        $scope.supprimerCours = function (item) {
+        $scope.supprimerCours = function (cle, item) {
             if (confirm("Voulez vous vraiment supprimer ce cours?")) {
                 Cours.remove({
                     id: item.id
                 }, function () {
-                    var id;
-                    for (var i = 0; i < $scope.cours.length; i++) {
-                        if ($scope.cours[i].id == item.id) {
-                            id = i;
-                            break;
-                        }
-
-                    }
-                    if (id) {
-                        $scope.cours.splice(id, 1);
+                    
+                    if (cle !== undefined) {
+                        $scope.cours.splice(cle, 1);
                     }
                 })
             }
         }
-    }]).controller("CoursFenetreController", ["$log", "$scope", "$modalInstance", "element","TypeCours",
-    function ($log, $scope, $modalInstance, element, TypeCours) {
-        $scope.element = element;
+    }]).controller("CoursFenetreController", ["$scope", "$modalInstance", "element", "TypeCours",
+    function ($scope, $modalInstance, element, TypeCours) {
+        $scope.element = element.item;
+        $scope.cle = element.cle;
         var type = TypeCours.query(function () {
             $scope.types = type;
         });
-        $log.log(element);
         $scope.valider = function () {
-            $log.log("version ok");
-            $modalInstance.close($scope.element);
+            var resultat = {};
+            resultat.item = $scope.element;
+            resultat.cle = $scope.cle;
+            $modalInstance.close(resultat);
         };
 
         $scope.cancel = function () {
-            $log.log("version cancel");
             $modalInstance.dismiss("Cancel");
         };
 

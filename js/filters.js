@@ -5,6 +5,6 @@ angular.module("notesApp.filters", []).filter('startFrom', function () {
 }).filter('offset', function () {
     return function (input, start) {
         start = parseInt(start, 10);
-        return input.slice(start);
+        return (input === undefined) ? [] : input.slice(start);
     };
 });

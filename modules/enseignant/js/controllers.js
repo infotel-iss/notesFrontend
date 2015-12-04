@@ -3,17 +3,16 @@ angular.module("notesApp.enseignants.controllers", []).controller("EnseignantCon
         var deps = Enseignant.query(function () {
             $scope.enseignants = deps;
             $scope.totalItems = $scope.enseignants.length;
-            $log.log("version cancel"+$scope.totalItems);
         });
-        
+
         //debut de la pagination
-        $scope.itemsPerPage = 10;
+        $scope.itemsPerPage = 15;
         $scope.currentPage = 1;
 
-      
+
 
         // fin de la pagination
-        $scope.afficherFenetre = function (item) {
+        $scope.afficherFenetre = function (cle, item) {
             var modelInstance = $modal.open({
                 templateUrl: '/modules/enseignant/views/nouveau.html',
                 controller: 'EnseignantFenetreController',
@@ -22,29 +21,19 @@ angular.module("notesApp.enseignants.controllers", []).controller("EnseignantCon
                 backdrop: false,
                 resolve: {
                     element: function () {
-                        var tt;
-                        if (item)
-                            tt = item;
-                        else
-                            tt = new Enseignant();
-                        $log.log(tt);
+                        var tt = {};
+                        tt.item = item;
+                        tt.cle = cle;
                         return tt;
                     }
                 }
             });
-            modelInstance.result.then(function (item) {
-                if (item.id) {
+            modelInstance.result.then(function (resultat) {
+                var item = resultat.item;
+                var cle = resultat.cle;
+                if ((item.id !== undefined) && (cle !== undefined)) {
                     item.$update(function () {
-                        var id;
-                        for (var i = 0; i < $scope.enseignants.length; i++) {
-                            if ($scope.enseignants[i].id === item.id) {
-                                id = i;
-                                break;
-                            }
-                        }
-                        if (id) {
-                            $scope.enseignants.splice(id, 1, item);
-                        }
+                        $scope.enseignants.splice(cle, 1, item);
                     });
                 } else {
                     Enseignant.save(item, function () {
@@ -56,36 +45,29 @@ angular.module("notesApp.enseignants.controllers", []).controller("EnseignantCon
             });
 
         };
-        $scope.supprimerEnseignant = function (item) {
+        $scope.supprimerEnseignant = function (cle, item) {
             if (confirm("Voulez vous vraiment supprimer cet enseinant ?")) {
                 Enseignant.remove({
                     id: item.id
                 }, function () {
-                    var id;
-                    for (var i = 0; i < $scope.enseignants.length; i++) {
-                        if ($scope.enseignants[i].id === item.id) {
-                            id = i;
-                            break;
-                        }
-
-                    }
-                    if (id) {
-                        $scope.enseignants.splice(id, 1);
+                    if (cle !== undefined) {
+                        $scope.enseignants.splice(cle, 1);
                     }
                 });
             }
         };
-    }]).controller("EnseignantFenetreController", ["$log", "$scope", "$modalInstance", "element",
-    function ($log, $scope, $modalInstance, element) {
-        $scope.element = element;
-        $log.log(element);
+    }]).controller("EnseignantFenetreController", ["$scope", "$modalInstance", "element",
+    function ($scope, $modalInstance, element) {
+        $scope.element = element.item;
+        $scope.cle = element.cle;
         $scope.valider = function () {
-            $log.log("version ok");
-            $modalInstance.close($scope.element);
+            var resultat = {};
+            resultat.item = $scope.element;
+            resultat.cle = $scope.cle;
+            $modalInstance.close(resultat);
         };
 
         $scope.cancel = function () {
-            $log.log("version cancel");
             $modalInstance.dismiss("Cancel");
         };
 

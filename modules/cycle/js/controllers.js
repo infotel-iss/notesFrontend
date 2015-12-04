@@ -1,5 +1,5 @@
-angular.module("notesApp.cycles.controllers",[]).controller("CycleController", ["$scope", "$modal", "$log", "Cycle",
-function($scope, $modal, $log, Cycle) {
+angular.module("notesApp.cycles.controllers",[]).controller("CycleController", ["$scope", "$modal", "Cycle",
+function($scope, $modal, Cycle) {
 	var deps = Cycle.query(function() {
 		$scope.cycles = deps;
 	});
