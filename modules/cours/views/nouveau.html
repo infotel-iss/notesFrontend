@@ -28,6 +28,13 @@
                     <span class="error" ng-show="form.type.code.$dirty && form.type.code.$error.required">Le departement est obligatoire</span>
                 </div>
             </div>
+             <div class="form-group">
+                <label for="departement" class="col-sm-2 control-label">Departemen</label>
+                <div class="col-sm-8">
+                    <select  name="departement"  class="form-control" id="departement" ng-model="element.departement" ng-required="true" ng-options="departe as departe.code  for departe in departements track by departe.id"></select>
+                    <span class="error" ng-show="form.departement.code.$dirty && form.departement.code.$error.required">Le departement est obligatoire</span>
+                </div>
+            </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button type="submit" class="btn btn-primary" ng-show="element.id" ng-click="form.$valid && valider()">

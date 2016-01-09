@@ -1,9 +1,18 @@
-angular.module("notesApp.cours.controllers", []).controller("CoursController", ["$scope", "$modal", "Cours",
-    function ($scope, $modal, Cours) {
+angular.module("notesApp.cours.controllers", []).controller("CoursController", ["$scope", "$modal", "Cours","Departement",
+    function ($scope, $modal, Cours, Departement) {
         var cours = Cours.query(function () {
             $scope.cours = cours;
             $scope.totalItems = cours.length;
         });
+        
+    	var deps = Departement.query(function(){
+           //$scope.departements = _.sortBy(deps,'code'); 
+           $scope.departements = deps;
+        });
+        
+        $scope.department = null;
+
+        
         $scope.itemsPerPage = 15;
         $scope.currentPage = 1;
         $scope.afficherFenetre = function (cle, item) {
@@ -51,12 +60,15 @@ angular.module("notesApp.cours.controllers", []).controller("CoursController", [
                 })
             }
         }
-    }]).controller("CoursFenetreController", ["$scope", "$modalInstance", "element", "TypeCours",
-    function ($scope, $modalInstance, element, TypeCours) {
+    }]).controller("CoursFenetreController", ["$scope", "$modalInstance", "element", "TypeCours","Departement",
+    function ($scope, $modalInstance, element, TypeCours,Departement) {
         $scope.element = element.item;
         $scope.cle = element.cle;
         var type = TypeCours.query(function () {
             $scope.types = type;
+        });
+        var dep = Departement.query(function () {
+            $scope.departements = _.sortBy(dep,'code');
         });
         $scope.valider = function () {
             var resultat = {};
