@@ -23,6 +23,10 @@
             </div>
         </div>
     </form>
+    <label for="search" class="col-sm-1 control-label">Rechercher</label>
+    <div class="col-sm-4">
+        <input placeholder = "la recherche par nom" type="text" id="seach" class="form-control" ng-model="etudiant.nom" class="col-sm-4"></br>
+    </div>
     <table class="table table-bordered table-hover table-condensed table-striped">
         <thead>
             <tr class="success">
@@ -37,7 +41,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="etudiant in etudiants| offset: (currentPage - 1) * itemsPerPage | limitTo: itemsPerPage">
+            <tr ng-repeat="etudiant in etudiants| offset: (currentPage - 1) * itemsPerPage | limitTo: itemsPerPage | filter: etudiant.nom | orderBy:-
+startedOn">
                 <td>{{etudiant.matricule}}</td>
                 <td>{{etudiant.nom}}</td>
                 <td>{{etudiant.dateDeNaissance| date:'dd/MM/yyyy'}}</td>
