@@ -1,24 +1,38 @@
 <div class="panel panel-primary">
     <div class="panel-heading" ng-hide="element.id">
-        Ajout d'un nouveau departement
+        Ajout d'un nouveau etudiant
     </div>
     <div class="panel-heading" ng-show="element.id">
-        Modification du departement
+        Modification etudiant
     </div>
     <div class="panel-body">
         <form name="form" method="post" role="form" class="form-horizontal" novalidate>
             <div class="form-group">
-                <label for="code" class="col-sm-2 control-label">Code</label>
+                <label for="code" class="col-sm-2 control-label">Matricule</label>
                 <div class="col-sm-8">
-                    <input type="text" name="code" id="code" class="form-control" ng-model="element.code" ng-required="true"/>
-                    <span class="error" ng-show="form.code.$dirty && form.code.$error.required">Le code est obligatoire</span>
+                    <input type="text" name="code" id="matricule" class="form-control" ng-model="element.matricule" ng-required="true"/>
+                    <span class="error" ng-show="form.code.$dirty && form.code.$error.required">Le matricule est obligatoire</span>
                 </div>
             </div>
             <div class="form-group">
-                <label for="designation" class="col-sm-2 control-label">Intitule</label>
+                <label for="nom" class="col-sm-2 control-label">Nom</label>
                 <div class="col-sm-8">
-                    <input type="text" name="intitule" id="designation" class="form-control" ng-model="element.description" ng-required="true"/>
-                    <span class="error" ng-show="form.intitule.$dirty && form.intitule.$error.required">L'intitule est obligatoire</span>
+                    <input type="text" name="nom" id="nom" class="form-control" ng-model="element.nom" ng-required="true"/>
+                    <span class="error" ng-show="form.intitule.$dirty && form.intitule.$error.required">Le nom est obligatoire</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="dateDeNaissance" class="col-sm-2 control-label">Date de naissance</label>
+                <div class="col-sm-8">
+                    <input type="text" name="dateDeNaissance" id="dateDeNaissance" class="form-control" ng-model="element.dateDeNaissance" ng-required="true"/>
+                    <span class="error" ng-show="form.intitule.$dirty && form.intitule.$error.required">La date de Naissance est obligatoire</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lieuDeNaissance" class="col-sm-2 control-label">Date de naissance</label>
+                <div class="col-sm-8">
+                    <input type="text" name="lieuDeNaissance" id="lieuDeNaissance" class="form-control" ng-model="element.lieuDeNaissance" ng-required="true"/>
+                    <span class="error" ng-show="form.intitule.$dirty && form.intitule.$error.required">Le lieu de naissance est obligatoire</span>
                 </div>
             </div>
             <div class="form-group">
@@ -26,11 +40,11 @@
                     <button type="submit" class="btn btn-default" ng-show="element.id" ng-click="form.$valid && valider()">
                         Modifier
                     </button>
-                    <button type="submit" class="btn btn-default" ng-hide="element.id" ng-click="form.$valid && valider()">
-                        Enregistrer
+                    <button type="submit" class="btn btn-primary" ng-hide="element.id" ng-click="form.$valid && valider()">
+                        <i class="glyphicon glyphicon-saved"></i> Enregistrer
                     </button>
-                    <button type="button" class="btn btn-default" ng-click="cancel()">
-                        Annuler
+                    <button type="button" class="btn btn-danger pull-right" ng-click="cancel()">
+                        <i class="glyphicon glyphicon-ban-circle"></i> Annuler
                     </button>
                 </div>
             </div>
