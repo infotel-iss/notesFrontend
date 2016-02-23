@@ -56,7 +56,7 @@
                 <div class="col-sm-6">
                     <select name="cours"  id="cours" class="form-control" ng-model="cour" ng-required="true" ng-change="changerCours()">
                         <option value="">Select one</option>
-                        <option ng-repeat="cors in cours" value="{{cors.id}}">{{cors.intitule}}</option>
+                        <option ng-repeat="cors in cours" value="{{cors.id}}">{{cors.intitule}}-{{cors.departement.code}}</option>
 
                     </select>
                     <span class="error" ng-show="form.cycle.$dirty && form.cycle.$error.required">Le cours est obligatoire</span>
