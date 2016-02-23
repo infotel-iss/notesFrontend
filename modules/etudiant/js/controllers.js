@@ -1,12 +1,9 @@
-angular.module("notesApp.etudiants.controllers", []).controller("EtudiantController", ["$http", "$scope", "Etudiant", "Annee", "Departement", "Niveau", "Option",
-    function ($http, $scope, Etudiant, Annee, Departement, Niveau, Option) {
+angular.module("notesApp.etudiants.controllers", []).controller("EtudiantController", ["$http", "$scope", "$modal", "Etudiant", "Annee", "Departement", "Niveau", "Option",
+    function ($http, $scope, $modal, Etudiant, Annee, Departement, Niveau, Option) {
         $scope.taille = 15;
         $scope.etudiants = [];
         var etds = Etudiant.query(function () {
-            for (var i = 0; i < $scope.taille; i++) {
-                $scope.etudiants.push(etds[i]);
-            };
-            //$scope.etudiants = etds;
+            $scope.etudiants = etds;
             $scope.totalItems = $scope.etudiants.length;
         });
         var ans = Annee.query(function () {
@@ -36,13 +33,12 @@ angular.module("notesApp.etudiants.controllers", []).controller("EtudiantControl
                 });
             }
         };
+
 // on teste les infitt liste
         $scope.loadMore = function() {
-            console.log('je suis ici' + 'la taille est de '+$scope.taille);
-            for (var i = $scope.taille; i < $scope.taille + 10; i++) {
-                $scope.etudiants.push(etds[i]);
-            };
-            $scope.taille = $scope.taille + 10;
+            if( ($scope.taille + 10) < $scope.totalItems ){
+                $scope.taille = $scope.taille + 10;
+            } 
         };
 
         $scope.filtrer = function () {
@@ -65,6 +61,41 @@ angular.module("notesApp.etudiants.controllers", []).controller("EtudiantControl
             });
         };
 
+    // la modification d'un etudiant
+
+    $scope.afficherFenetre = function (key,item) {
+            var modelInstance = $modal.open({
+                templateUrl: '/modules/etudiant/views/nouveau.html',
+                controller: 'EtudiantFenetreController',
+                controllerAs: 'depart',
+                keyboard: true,
+                backdrop: false,
+                resolve: {
+                    departe: function () {
+                        var ret = {};
+                        ret.key = key;
+                        ret.element = item;
+                        return ret;
+                    }
+                }
+            });
+            
+            modelInstance.result.then(function (departe) {
+                if (departe.element && departe.element.id) {
+                    departe.element.$update(function () {
+                            $scope.etudiants.splice(departe.key, departe.element);
+                    });
+                } else {
+                    var toto = Etudiant.save(departe.element, function () {
+                            $scope.etudiants.push(toto);
+                    });
+                }
+            }, function () {
+
+            });
+        };
+
+
     }]).controller('EtudiantImportController', ["$scope", "$http", "Annee", "$log", "FileUploader", function ($scope, $http, Annee, $log, FileUploader) {
         $scope.fichier = null;
         $scope.annee = null;
@@ -75,9 +106,10 @@ angular.module("notesApp.etudiants.controllers", []).controller("EtudiantControl
         var ans = Annee.query(function () {
             $scope.annees = ans;
         });
+        var fd = new FormData();
         $scope.valider = function () {
             
-            var fd = new FormData();
+            //var fd = new FormData();
             //Take the first selected file
             fd.append("fichier", $scope.files[0]);
             fd.append("annee", $scope.annee);
@@ -96,6 +128,11 @@ angular.module("notesApp.etudiants.controllers", []).controller("EtudiantControl
 
         var uploader = $scope.uploader = new FileUploader({
             url: '/api/etudiants/import'
+            /*url:'/api/etudiants/import', fd, {
+                withCredentials: true,
+                headers: {'Content-Type': undefined},
+                transformRequest: angular.identity
+            }*/
         });
 
         // FILTERS
@@ -147,4 +184,13 @@ angular.module("notesApp.etudiants.controllers", []).controller("EtudiantControl
 
 
         //fin de mes teste
+    }]).controller("EtudiantFenetreController", ["$scope", "$modalInstance", "departe",
+    function ($scope, $modalInstance, departe) {
+        $scope.etudiant = departe;
+        $scope.valider = function () {
+            $modalInstance.close($scope.etudiant);
+        };
+        $scope.cancel = function () {
+            $modalInstance.dismiss("Cancel");
+        };
     }]);

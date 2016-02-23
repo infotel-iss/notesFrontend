@@ -41,7 +41,7 @@
             </tr>
         </thead>
         <tbody infinite-scroll="loadMore()" infinite-scroll-distance='1' infinite-scroll-disabled infinite-scroll-disabled ="false">
-            <tr ng-repeat="etudiant in etudiants track by $index |filter: query">
+            <tr ng-repeat="(key,etudiant) in etudiants  |filter:query |limitTo:taille">
                 <td>{{etudiant.matricule}}</td>
                 <td>{{etudiant.nom}}</td>
                 <td>{{etudiant.dateDeNaissance| date:'dd/MM/yyyy'}}</td>
@@ -49,7 +49,7 @@
                 <td>{{etudiant.email}}</td>
                 <td>{{etudiant.numeroTelephone}}</td>
                 <td>{{etudiant.genre}}</td>
-                <td><a ng-click="afficherFenetre(etudiant)">Modifier</a> | <a ng-click="supprimerEtudiant(etudiant)">Supprimer</a>
+                <td><a ng-click="afficherFenetre(key, etudiant)">Modifier</a> | <a ng-click="supprimerEtudiant(key, etudiant)">Supprimer</a>
                 </td>
             </tr>
         </tbody>
