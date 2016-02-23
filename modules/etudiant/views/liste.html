@@ -42,7 +42,7 @@
         </thead>
         <tbody infinite-scroll="loadMore()" infinite-scroll-distance='1' infinite-scroll-disabled infinite-scroll-disabled ="false">
             <tr ng-repeat="(key,etudiant) in etudiants  |filter:query |limitTo:taille">
-                <td>{{etudiant.matricule}}</td>
+                <td>{{etudiant.matricule }}</td>
                 <td>{{etudiant.nom}}</td>
                 <td>{{etudiant.dateDeNaissance| date:'dd/MM/yyyy'}}</td>
                 <td>{{etudiant.lieuDeNaissance}}</td>

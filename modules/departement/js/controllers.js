@@ -5,6 +5,7 @@ angular.module("notesApp.departements.controllers", []).controller("DepartementC
 
             $scope.departements = deps;
         });
+
         $scope.afficherFenetre = function (key,item) {
             var modelInstance = $modal.open({
                 templateUrl: '/modules/departement/views/nouveau.html',
@@ -21,6 +22,7 @@ angular.module("notesApp.departements.controllers", []).controller("DepartementC
                     }
                 }
             });
+
             modelInstance.result.then(function (departe) {
                 if (departe.element && departe.element.id) {
                     departe.element.$update(function () {
@@ -35,6 +37,7 @@ angular.module("notesApp.departements.controllers", []).controller("DepartementC
 
             });
         };
+        
         $scope.supprimerDepartement = function (key, item) {
             if (confirm("Voulez vous vraiment supprimer ce departement?")) {
                 Departement.remove({

@@ -1,17 +1,21 @@
 <div>
     <h4 class="titre">LA LISTE DES COURS</h4>
+    <label for="search" class="col-sm-1 control-label">Rechercher</label>
+    <div class="col-sm-4">
+        <input placeholder = "la recherche par nom" type="text" id="seach" class="form-control" ng-model="query" class="col-sm-4"></br>
+    </div>
     <table class="table table-bordered table-hover table-condensed table-striped">
         <thead>
             <tr class="success">
                 <th>Numero</th>
 <!--                <th>Credit</th>-->
                 <th>Intitule</th>
-                <th>Type de cours</th>
+                <th>Type de cours </th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="(cle,cour) in cours | orderBy : 'intitule'| offset: (currentPage - 1) * itemsPerPage | limitTo: itemsPerPage" class="inverse">
+            <tr ng-repeat="(cle,cour) in cours | orderBy : 'intitule'| offset: (currentPage - 1) * itemsPerPage | limitTo: itemsPerPage | filter:query" class="inverse">
                 <td>{{(currentPage - 1) * itemsPerPage + $index + 1}}</td>
 <!--                <td>{{cour.credit}}</td>-->
                 <td>{{cour.intitule}}</td>

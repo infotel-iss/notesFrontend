@@ -34,7 +34,7 @@ angular.module("notesApp.etudiants.controllers", []).controller("EtudiantControl
             }
         };
 
-// on teste les infitt liste
+// on teste les infity liste
         $scope.loadMore = function() {
             if( ($scope.taille + 10) < $scope.totalItems ){
                 $scope.taille = $scope.taille + 10;
@@ -186,7 +186,9 @@ angular.module("notesApp.etudiants.controllers", []).controller("EtudiantControl
         //fin de mes teste
     }]).controller("EtudiantFenetreController", ["$scope", "$modalInstance", "departe",
     function ($scope, $modalInstance, departe) {
-        $scope.etudiant = departe;
+        $scope.etudiant = departe.element;
+        $scope.genres = ["masculin", "feminin"];
+        console.log('je suis ici mat'+ $scope.etudiant.matricule);
         $scope.valider = function () {
             $modalInstance.close($scope.etudiant);
         };
