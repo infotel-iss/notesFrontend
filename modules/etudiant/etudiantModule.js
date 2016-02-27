@@ -1,5 +1,6 @@
 angular.module("notesApp.etudiants",['notesApp.etudiants.controllers','notesApp.etudiants.services']);
-angular.module("notesApp.etudiants").config(function($stateProvider,$locationProvider){
+angular.module("notesApp.etudiants")
+.config(function($stateProvider,$locationProvider){
 	$stateProvider.state("eliste", {
 		url:'/etudiants',
 		controller:'EtudiantController',

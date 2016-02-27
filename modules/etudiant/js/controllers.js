@@ -81,13 +81,16 @@ angular.module("notesApp.etudiants.controllers", []).controller("EtudiantControl
             });
             
             modelInstance.result.then(function (departe) {
-                if (departe.element && departe.element.id) {
+                console.log('Matricule : '+ departe.element.id);
+                console.log('Nom :  '+ departe.element.nom);
+
+                if (departe.element && departe.elementid) {
                     departe.element.$update(function () {
-                            $scope.etudiants.splice(departe.key, departe.element);
+                        $scope.etudiants.splice(departe.key, departe.element);
                     });
                 } else {
                     var toto = Etudiant.save(departe.element, function () {
-                            $scope.etudiants.push(toto);
+                        $scope.etudiants.push(toto);
                     });
                 }
             }, function () {
@@ -187,10 +190,15 @@ angular.module("notesApp.etudiants.controllers", []).controller("EtudiantControl
     }]).controller("EtudiantFenetreController", ["$scope", "$modalInstance", "departe",
     function ($scope, $modalInstance, departe) {
         $scope.etudiant = departe.element;
-        $scope.genres = ["masculin", "feminin"];
+        $scope.genres =  [
+            { value: "masculin", label: "Homme" },
+            { value: "feminin", label: "Femme" }
+        ];
         console.log('je suis ici mat'+ $scope.etudiant.matricule);
         $scope.valider = function () {
-            $modalInstance.close($scope.etudiant);
+            console.log('Matricule'+ $scope.etudiant.matricule);
+            console.log('Noms'+ $scope.etudiant.nom);
+            $modalInstance.close(departe);
         };
         $scope.cancel = function () {
             $modalInstance.dismiss("Cancel");
