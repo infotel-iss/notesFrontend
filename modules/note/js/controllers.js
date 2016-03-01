@@ -139,8 +139,9 @@ angular.module("notesApp.notes.controllers", []).controller("NoteController", ["
             });
             
             modelInstance.result.then(function (departe) {
-
-                if (departe.element && departe.elementid) {
+                console.log("je suis deja la" + departe.element.id);
+                if (departe.element.id) {
+                    console.log("je suis deja la");
                     departe.element.$update(function () {
                         $scope.notes.splice(departe.key, departe.element);
                     });

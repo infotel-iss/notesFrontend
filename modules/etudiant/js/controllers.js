@@ -81,8 +81,8 @@ angular.module("notesApp.etudiants.controllers", []).controller("EtudiantControl
             });
             
             modelInstance.result.then(function (departe) {
-
-                if (departe.element && departe.elementid) {
+                console.log('je suis ici mat'+ departe.element.id);
+                if (departe.element.id) {
                     departe.element.$update(function () {
                         $scope.etudiants.splice(departe.key, departe.element);
                     });
@@ -190,7 +190,7 @@ angular.module("notesApp.etudiants.controllers", []).controller("EtudiantControl
             { value: "masculin", label: "Homme" },
             { value: "feminin", label: "Femme" }
         ];
-        console.log('je suis ici mat'+ $scope.etudiant.matricule);
+        
         $scope.valider = function () {
             console.log('Matricule'+ $scope.etudiant.matricule);
             console.log('Noms'+ $scope.etudiant.nom);
