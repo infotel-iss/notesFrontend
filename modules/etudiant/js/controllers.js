@@ -81,8 +81,6 @@ angular.module("notesApp.etudiants.controllers", []).controller("EtudiantControl
             });
             
             modelInstance.result.then(function (departe) {
-                console.log('Matricule : '+ departe.element.id);
-                console.log('Nom :  '+ departe.element.nom);
 
                 if (departe.element && departe.elementid) {
                     departe.element.$update(function () {

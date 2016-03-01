@@ -75,8 +75,8 @@ angular.module("notesApp.notes.controllers", []).controller("NoteController", ["
                 $log.log("Erreur lors de l'importation");
             });
         };
-    }]).controller("NoteModificationController", ["$scope", "$http", "Departement", "Niveau", "Annee","Note",
-    function ($scope, $http, Departement, Niveau, Annee, Note) {
+    }]).controller("NoteModificationController", ["$scope", "$http", "Departement", "Niveau", "Annee","Note", "$modal",
+    function ($scope, $http, Departement, Niveau, Annee, Note, $modal) {
         var deps = Departement.query(function () {
             $scope.departements = deps;
         });
@@ -118,7 +118,57 @@ angular.module("notesApp.notes.controllers", []).controller("NoteController", ["
                 });
             }
         };
-        $scope.modifierNote = function (key, item) {
+
+        // la modification d'une notes
+
+    $scope.afficherFenetre = function (key,item) {
+            var modelInstance = $modal.open({
+                templateUrl: '/modules/note/views/modificationnote.html',
+                controller: 'NotesFenetreController',
+                controllerAs: 'depart',
+                keyboard: true,
+                backdrop: false,
+                resolve: {
+                    departe: function () {
+                        var ret = {};
+                        ret.key = key;
+                        ret.element = item;
+                        return ret;
+                    }
+                }
+            });
             
+            modelInstance.result.then(function (departe) {
+
+                if (departe.element && departe.elementid) {
+                    departe.element.$update(function () {
+                        $scope.notes.splice(departe.key, departe.element);
+                    });
+                } else {
+                    var toto = Note.save(departe.element, function () {
+                        $scope.notes.push(toto);
+                    });
+                }
+            }, function () {
+
+            });
+        };
+
+
+        $scope.modifierNote = function (key, item) {
+            console.log('Matricule'+ $scope.etudiant.matricule);
+            console.log('Noms'+ $scope.etudiant.nom);
+            $modalInstance.close(departe);
+        };
+    }]).controller("NotesFenetreController", ["$scope", "$modalInstance", "departe",
+    function ($scope, $modalInstance, departe) {
+        $scope.note = departe.element;
+
+        $scope.valider = function () {
+            $modalInstance.close(departe);
+        };
+
+        $scope.cancel = function () {
+            $modalInstance.dismiss("Cancel");
         };
     }]);
