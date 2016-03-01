@@ -130,12 +130,10 @@ angular.module("notesApp.etudiants.controllers", []).controller("EtudiantControl
         //je suis en train de tester 
 
         var uploader = $scope.uploader = new FileUploader({
-            url: '/api/etudiants/import'
-            /*url:'/api/etudiants/import', fd, {
-                withCredentials: true,
-                headers: {'Content-Type': undefined},
-                transformRequest: angular.identity
-            }*/
+            url: '/api/etudiants/import',
+            method: 'POST',
+            headers: {'Content-Type': undefined},
+            formData:fd
         });
 
         // FILTERS

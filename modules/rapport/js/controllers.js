@@ -90,8 +90,60 @@ angular.module("notesApp.rapports.controllers", []).controller("ProcesVerbalCont
                 }
             });
         };
-    }]).controller("RelevesNoteController", ["$scope", function () {
+    }]).controller("RelevesNoteController", ["$log","$scope", "$http", "Departement", "Niveau", "Annee",
+    function ($log,$scope, $http, Departement, Niveau, Annee) {
+        var deps = Departement.query(function () {
+            $scope.departements = deps;
+        });
+        var niv = Niveau.query(function () {
+            $scope.niveaux = niv;
+        });
+        var anns = Annee.query(function () {
+            $scope.annees = anns;
+        });
+        $scope.etudiant = undefined;
 
+        $scope.updateOptions = function () {
+            console.log('/api/options/' + $scope.departement.id + '/' + $scope.niveau.id);
+            if (($scope.departement) && ($scope.niveau)) {
+                $http.get('/api/options/' + $scope.departement.id + '/' + $scope.niveau.id).success(function (data, status, config, headers) {
+                    $scope.options = data;
+                });
+            }
+        };
+        $scope.produireReleve = function () {
+            var toto;
+            $log.log($scope.semestre);
+            $log.log($scope.semestre !== undefined);
+            $log.log(!$scope.semestre);
+            if (($scope.etudiant !== undefined) && ($scope.option)) {
+                //le releve de notes de notes de l etudiant
+                toto = "/api/rapport/relevet/";
+                toto = toto + $scope.niveau.id + "/";
+                toto = toto + $scope.option.id + "/";
+                toto = toto + $scope.annee.id + "/";
+                //toto = toto + $scope.etudiant.id;
+            } else {
+                //le releve de notes de notes de l option
+                toto = "/api/rapport/relevet/";
+                toto = toto + $scope.niveau.id + "/";
+                toto = toto + $scope.option.id + "/";
+                toto = toto + $scope.annee;
+
+                console.log('je veux avoir les releves' + toto);
+            }
+
+            $http.get(toto).success(function (data, status, headers, config) {
+                if ((status === 200) && (headers('content-type') === 'text/pdf')) {
+                    var element = angular.element('<a>');
+                    element.attr({
+                        href: config.url,
+                        target: '_blank',
+                        download: 'releve.pdf'
+                    })[0].click();
+                }
+            });
+        };
     }]);
 
 

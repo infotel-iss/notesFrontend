@@ -86,6 +86,7 @@ angular.module("notesApp.notes.controllers", []).controller("NoteController", ["
         var anns = Annee.query(function () {
             $scope.annees = anns;
         });
+        $scope.cours;
         $scope.updateOptions = function () {
             if (($scope.departement) && ($scope.niveau)) {
                 $http.get('/api/options/' + $scope.departement.id + '/' + $scope.niveau.id).success(function (data, status, config, headers) {
@@ -94,6 +95,7 @@ angular.module("notesApp.notes.controllers", []).controller("NoteController", ["
             }
         };
         $scope.changerOption = function () {
+            console.log('/api/cours/' + $scope.niveau.id + '/' + $scope.option.id);
             if (($scope.option) && ($scope.niveau)) {
                 $http.get('/api/cours/' + $scope.niveau.id + '/' + $scope.option.id).success(function (data, status, config, headers) {
                     $scope.cours = data;
