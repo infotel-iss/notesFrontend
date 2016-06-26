@@ -110,7 +110,7 @@ angular.module("notesApp.notes.controllers", []).controller("NoteController", ["
             }
         };
         $scope.supprimerNote = function (key, item) {
-            if (confirm("Voulez vous vraiment supprimer ce departement?")) {
+            if (confirm("Voulez vous vraiment supprimer cette note?")) {
                 Note.remove({
                     id: item.id
                 }, function () {
@@ -139,12 +139,12 @@ angular.module("notesApp.notes.controllers", []).controller("NoteController", ["
             });
             
             modelInstance.result.then(function (departe) {
-                console.log("je suis deja la" + departe.element.id);
                 if (departe.element.id) {
-                    console.log("je suis deja la");
-                    departe.element.$update(function () {
-                        $scope.notes.splice(departe.key, departe.element);
-                    });
+                    Note.update({
+                            id: departe.element.id
+                        }, departe.element, function () {
+                            $scope.notes.splice(departe.key, departe.element);
+                        });
                 } else {
                     var toto = Note.save(departe.element, function () {
                         $scope.notes.push(toto);
@@ -157,8 +157,6 @@ angular.module("notesApp.notes.controllers", []).controller("NoteController", ["
 
 
         $scope.modifierNote = function (key, item) {
-            console.log('Matricule'+ $scope.etudiant.matricule);
-            console.log('Noms'+ $scope.etudiant.nom);
             $modalInstance.close(departe);
         };
     }]).controller("NotesFenetreController", ["$scope", "$modalInstance", "departe",

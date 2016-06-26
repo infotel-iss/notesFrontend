@@ -8,7 +8,7 @@
             </div>
             <label for="annee" class="col-sm-1 control-label">Ann&eacute;e</label>
             <div class="col-sm-2">
-                <select id="annee" class="form-control" ng-model="annee" ng-options="annee.id as ((annee.debut|date:'yyyy') +'-' + (annee.fin|date:'yyyy'))  for annee in annees"></select>
+                <select id="annee" class="form-control" ng-model="annee" ng-options="annee.id as ((annee.debut|date:'yyyy') +'-' + (annee.fin|date:'yyyy'))  for annee in annees | orderBy:'-debut'"></select>
             </div>            
             <label for="niveau" class="col-sm-1 control-label">Niveau</label>
             <div class="col-sm-2">
@@ -25,7 +25,7 @@
     </form>
     <label for="search" class="col-sm-1 control-label">Rechercher</label>
     <div class="col-sm-4">
-        <input placeholder = "la recherche par nom" type="text" id="seach" class="form-control" ng-model="query" class="col-sm-4"></br>
+        <input placeholder = "la recherche par nom" type="text" id="seach" class="form-control" ng-model="query" class="col-sm-4"><br/>
     </div>
     <table class="table table-bordered table-hover table-condensed table-striped">
         <thead>
@@ -34,8 +34,8 @@
                 <th>Nom</th>
                 <th>Date de Naissance</th>
                 <th>Lieu de Naissance</th>
-                <th>Email</th>
-                <th>Num&eacute;ro de T&eacute;l&eacute;phone</th>
+                <!--<th>Email</th>
+                <th>Num&eacute;ro de T&eacute;l&eacute;phone</th>-->
                 <th>Genre</th>
                 <th>Actions</th>
             </tr>
@@ -46,8 +46,8 @@
                 <td>{{etudiant.nom}}</td>
                 <td>{{etudiant.dateDeNaissance| date:'dd/MM/yyyy'}}</td>
                 <td>{{etudiant.lieuDeNaissance}}</td>
-                <td>{{etudiant.email}}</td>
-                <td>{{etudiant.numeroTelephone}}</td>
+                <!--<td>{{etudiant.email}}</td>
+                <td>{{etudiant.numeroTelephone}}</td> -->
                 <td>{{etudiant.genre}}</td>
                 <td><a ng-click="afficherFenetre(key, etudiant)">Modifier</a> | <a ng-click="supprimerEtudiant(key, etudiant)">Supprimer</a>
                 </td>

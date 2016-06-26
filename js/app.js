@@ -9,6 +9,14 @@ angular.module("notesApp").run(function($rootScope) {
         $rootScope.isViewLoading = false;
         $rootScope.isError = false;
     });
+    $rootScope.$on('$viewContentLoading', function () {
+        $rootScope.isViewLoading = true;
+        $rootScope.isError = false;
+    });
+    $rootScope.$on('$viewContentLoaded', function () {
+        $rootScope.isViewLoading = false;
+        $rootScope.isError = false;
+    });
     $rootScope.$on('$stateChangeError', function () {
         $rootScope.isError = true;
         $rootScope.isViewLoading = false;

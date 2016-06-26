@@ -23,6 +23,13 @@ angular.module("notesApp.uniteenseignements.controllers", []).controller("UniteE
                     $scope.unites = data;
                 });
             }
+            
+            if($scope.departement){
+                $http.get("/api/departements/"+ $scope.departement + "/cours").success(function(data){
+                    $scope.cours = data;
+                }
+                        );
+            }
         };
         $scope.departement = null;
         $scope.niveau = null;
@@ -43,6 +50,7 @@ angular.module("notesApp.uniteenseignements.controllers", []).controller("UniteE
                         ret.departement = $scope.departement;
                         ret.option = $scope.option;
                         ret.niveau = $scope.niveau;
+                        ret.cours = $scope.cours;
                         ret.modificationDepartement = $scope.modificationDepartement;
                         return ret;
                     }
@@ -95,9 +103,10 @@ angular.module("notesApp.uniteenseignements.controllers", []).controller("UniteE
         var deps = Departement.query(function () {
             $scope.departements = deps;
         });
-        var cours = Cours.query(function () {
-            $scope.cours = cours;
-        });
+//        var cours = Cours.query(function () {
+//            $scope.cours = cours;
+//        });
+        $scope.cours = valeurs.cours;
         var nivs = Niveau.query(function () {
             $scope.niveaux = nivs;
         });

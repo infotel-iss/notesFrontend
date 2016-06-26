@@ -29,7 +29,7 @@
                 </div>
             </div>
              <div class="form-group">
-                <label for="departement" class="col-sm-2 control-label">Departemen</label>
+                <label for="departement" class="col-sm-2 control-label">Departement</label>
                 <div class="col-sm-8">
                     <select  name="departement"  class="form-control" id="departement" ng-model="element.departement" ng-required="true" ng-options="departe as departe.code  for departe in departements track by departe.id"></select>
                     <span class="error" ng-show="form.departement.code.$dirty && form.departement.code.$error.required">Le departement est obligatoire</span>

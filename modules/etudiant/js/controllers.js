@@ -1,9 +1,9 @@
 angular.module("notesApp.etudiants.controllers", []).controller("EtudiantController", ["$http", "$scope", "$modal", "Etudiant", "Annee", "Departement", "Niveau", "Option",
     function ($http, $scope, $modal, Etudiant, Annee, Departement, Niveau, Option) {
-        $scope.taille = 15;
+        $scope.taille = 30;
         $scope.etudiants = [];
         var etds = Etudiant.query(function () {
-            $scope.etudiants = etds;
+            $scope.etudiants = _.sortBy(etds,'nom');
             $scope.totalItems = $scope.etudiants.length;
         });
         var ans = Annee.query(function () {
